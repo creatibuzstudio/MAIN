@@ -17,7 +17,7 @@ import TestimonialsSection from "../components/landing/testimonials/Testimonials
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen w-full bg-[#080808] text-white flex flex-col justify-between overflow-hidden">
+    <div className="relative min-h-screen w-full bg-background text-white flex flex-col justify-between overflow-hidden">
 
       <Hero />
 

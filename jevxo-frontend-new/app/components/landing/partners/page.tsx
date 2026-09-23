@@ -247,7 +247,7 @@ export default function Partners() {
     <SectionContainer
       id="collaborators"
       className="py-16 sm:py-20 md:py-24"
-      containerClassName="bg-[#080808]"
+      containerClassName="bg-background"
     >
       {/* Top Flex Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-4">
@@ -259,10 +259,10 @@ export default function Partners() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-xl"
         >
-          <h2 className="text-zinc-400 font-medium text-lg sm:text-xl lg:text-[22px] leading-[1.35] tracking-tight">
+          <h2 className="text-zinc-400 font-medium text-lg sm:text-xl lg:text-[22px] leading-[1.35] tracking-tight font-sans">
             Collaborated With 100+ Founders Worldwide
             <br />
-            <span className="text-zinc-300">&amp; Completed 700+ Global Project.</span>
+            <span className="text-zinc-300 font-sans">&amp; Completed 700+ Global Project.</span>
           </h2>
         </motion.div>
 

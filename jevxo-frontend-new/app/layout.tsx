@@ -1,6 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Bai_Jamjuree, DM_Serif_Display, Manrope } from "next/font/google";
+import { Bricolage_Grotesque, DM_Serif_Display, Geist, Geist_Mono, Bai_Jamjuree, Manrope } from "next/font/google";
 import "./globals.css";
+
+const bricolageGrotesque = Bricolage_Grotesque({
+  variable: "--font-bricolage",
+  subsets: ["latin"],
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -145,7 +150,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${baiJamjuree.variable} ${dmSerif.variable} ${manrope.variable} h-full antialiased`}
+      className={`${bricolageGrotesque.variable} ${geistSans.variable} ${geistMono.variable} ${baiJamjuree.variable} ${dmSerif.variable} ${manrope.variable} h-full antialiased`}
     >
       <head>
         <script

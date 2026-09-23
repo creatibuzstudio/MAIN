@@ -7,10 +7,6 @@ import { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { bannerApi } from "@/api/bannerApi";
 
-const GRID_COLS = 24;
-const GRID_ROWS = 16;
-const gridCells = Array.from({ length: GRID_COLS * GRID_ROWS });
-
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: (i: number = 0) => ({
@@ -79,54 +75,48 @@ export default function Hero() {
   const row2List = [...row2, ...row2, ...row2];
 
   return (
-    <div className="w-full flex flex-col bg-[#080808]">
-      {/* Hero + Marquee wrapped together with seamless dark background & grid */}
-      <div className="relative w-full overflow-hidden bg-[#080808]">
-
-        {/* Subtle Tinted Grid Tiles matching Figma aesthetic */}
-        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden [mask-image:radial-gradient(ellipse_75%_65%_at_50%_45%,black_40%,transparent_95%)]">
-          <div className="absolute top-[160px] left-[15%] w-[80px] h-[80px] bg-white/[0.02]" />
-          <div className="absolute top-[240px] left-[22%] w-[80px] h-[80px] bg-white/[0.03]" />
-          <div className="absolute top-[320px] left-[10%] w-[80px] h-[80px] bg-white/[0.015]" />
-          <div className="absolute top-[160px] right-[18%] w-[80px] h-[80px] bg-white/[0.02]" />
-          <div className="absolute top-[240px] right-[12%] w-[80px] h-[80px] bg-white/[0.035]" />
-          <div className="absolute top-[400px] right-[20%] w-[80px] h-[80px] bg-white/[0.02]" />
-          <div className="absolute top-[480px] left-[25%] w-[80px] h-[80px] bg-white/[0.025]" />
-          <div className="absolute top-[560px] right-[28%] w-[80px] h-[80px] bg-white/[0.018]" />
+    <div className="w-full flex flex-col bg-background">
+      {/* Hero Container */}
+      <div className="relative w-full overflow-hidden bg-background">
+        {/* Responsive 75px x 75px Gridlines with Tinted Accent Cells */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none [mask-image:radial-gradient(ellipse_80%_70%_at_50%_42%,black_40%,transparent_90%)]">
+          <div
+            className="absolute inset-0 w-full h-full"
+            style={{
+              backgroundSize: "75px 75px",
+              backgroundImage:
+                "linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px)",
+              /* Perfectly aligns grid intersection to screen center horizontal axis */
+              backgroundPosition: "center top",
+            }}
+          >
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute top-[75px] left-[calc(50%-487.5px)] w-[75px] h-[75px] bg-white/[0.04]" />{" "}
+              <div className="absolute top-[150px] left-[calc(50%-262.5px)] w-[75px] h-[75px] bg-white/[0.025]" />{" "}
+              <div className="absolute top-[225px] left-[calc(50%-562.5px)] w-[75px] h-[75px] bg-white/[0.05]" />{" "}
+              <div className="absolute top-[225px] left-[calc(50%-112.5px)] w-[75px] h-[75px] bg-white/[0.02]" />{" "}
+              <div className="absolute top-[300px] left-[calc(50%-412.5px)] w-[75px] h-[75px] bg-white/[0.035]" />{" "}
+              <div className="absolute top-[375px] left-[calc(50%-487.5px)] w-[75px] h-[75px] bg-white/[0.045]" />{" "}
+              <div className="absolute top-[450px] left-[calc(50%-187.5px)] w-[75px] h-[75px] bg-white/[0.025]" />{" "}
+              <div className="absolute top-[525px] left-[calc(50%-337.5px)] w-[75px] h-[75px] bg-white/[0.03]" />{" "}
+              <div className="absolute top-[75px] left-[calc(50%+187.5px)] w-[75px] h-[75px] bg-white/[0.03]" />{" "}
+              <div className="absolute top-[150px] left-[calc(50%+412.5px)] w-[75px] h-[75px] bg-white/[0.025]" />{" "}
+              <div className="absolute top-[150px] left-[calc(50%+112.5px)] w-[75px] h-[75px] bg-white/[0.04]" />{" "}
+              <div className="absolute top-[225px] left-[calc(50%+262.5px)] w-[75px] h-[75px] bg-white/[0.05]" />{" "}
+              <div className="absolute top-[300px] left-[calc(50%+487.5px)] w-[75px] h-[75px] bg-white/[0.035]" />{" "}
+              <div className="absolute top-[375px] left-[calc(50%+187.5px)] w-[75px] h-[75px] bg-white/[0.045]" />{" "}
+              <div className="absolute top-[450px] left-[calc(50%+337.5px)] w-[75px] h-[75px] bg-white/[0.02]" />{" "}
+              <div className="absolute top-[525px] left-[calc(50%+112.5px)] w-[75px] h-[75px] bg-white/[0.035]" />{" "}
+            </div>
+          </div>
         </div>
 
-        {/* Dark Grid Background Pattern with subtle radial mask */}
-        <div
-          className="absolute inset-0 opacity-40 pointer-events-none z-[1] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_45%,black_45%,transparent_95%)] bg-[length:75px_75px] sm:bg-[length:80px_80px]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px)",
-          }}
-        />
+        {/* Center ambient radial light for depth */}
+        <div className="absolute inset-x-0 top-0 h-[800px] bg-[radial-gradient(ellipse_950px_500px_at_50%_40%,rgba(255,255,255,0.025)_0%,rgba(8,8,8,0)_80%)] pointer-events-none z-0" />
 
-        {/* Interactive grid cells with soft warm hover blooms */}
-        <div
-          className="absolute inset-0 z-[2] grid pointer-events-none grid-cols-[repeat(24,75px)] auto-rows-[75px] sm:grid-cols-[repeat(24,80px)] sm:auto-rows-[80px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_45%,black_40%,transparent_95%)]"
-        >
-          {gridCells.map((_, i) => (
-            <div
-              key={i}
-              className="pointer-events-auto transition-[background-size] duration-500 ease-out [background-repeat:no-repeat] [background-position:center] [background-size:0%_0%] hover:[background-size:160%_160%]"
-              style={{
-                backgroundImage:
-                  "radial-gradient(circle at center, rgba(248,88,0,0.18) 0%, rgba(255,255,255,0.03) 50%, transparent 75%)",
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Subtle center ambient radial light */}
-        <div className="absolute inset-x-0 top-0 h-[700px] bg-[radial-gradient(ellipse_900px_450px_at_50%_35%,rgba(255,255,255,0.035)_0%,rgba(8,8,8,0)_80%)] pointer-events-none z-0" />
-
-        {/* Top Hero Section */}
+        {/* Main Hero Content */}
         <section className="relative z-10 w-full">
-          <main className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 pt-32 sm:pt-40 md:pt-44 pb-20 sm:pb-24 w-full max-w-[95%] lg:max-w-6xl mx-auto">
-            
+          <main className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 pt-42.5 pb-16 md:pb-20 lg:pb-24 w-full max-w-6xl mx-auto">
             {/* Top Social Proof Pill Badge */}
             <motion.div
               variants={fadeUp}
@@ -134,7 +124,7 @@ export default function Hero() {
               animate="visible"
               custom={0}
               whileHover={{ scale: 1.02 }}
-              className="inline-flex items-center gap-2.5 sm:gap-3 rounded-full border border-white/10 bg-white/[0.05] backdrop-blur-md px-3.5 sm:px-4 py-1.5 mb-8 sm:mb-10 cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.5)] group transition-all duration-300 hover:border-white/20"
+              className="inline-flex items-center gap-2.5 sm:gap-3 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-md px-4 py-1.5 mb-8 sm:mb-10 cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.5)] group transition-all duration-300 hover:border-white/20"
             >
               <Image
                 src="/hero1.png"
@@ -143,26 +133,30 @@ export default function Hero() {
                 height={22}
                 className="h-4 sm:h-[18px] w-auto object-contain shrink-0 brightness-95"
               />
-              <span className="text-[12px] sm:text-[13px] font-normal text-gray-300 tracking-tight">
+              <span className="text-[12px] sm:text-[13px] font-normal text-gray-300 tracking-tight font-sans">
                 Helped 50+ SaaS founders &amp; startup
               </span>
             </motion.div>
 
-            {/* Main Headline (H1) */}
+            {/* Main Headline (H1) - Medium Weight Typography with Italic Serif Ampersands */}
             <motion.h1
               variants={fadeUp}
               initial="hidden"
               animate="visible"
               custom={1}
-              className="text-3xl sm:text-5xl md:text-[64px] lg:text-[74px] font-bold text-white text-center leading-[1.12] sm:leading-[1.14] tracking-[-0.03em] max-w-4xl mx-auto"
+              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal md:font-medium font-sans text-white text-center leading-[1.12] sm:leading-[1.14] tracking-[-0.03em] max-w-5xl mx-auto"
             >
               We Are UI/UX Design{" "}
-              <span className="font-serif italic font-normal text-white">&amp;</span>
+              <span className="font-serif italic font-normal text-white">
+                &amp;
+              </span>
               <br />
               Development Partner For SaaS
               <br />
               Founders{" "}
-              <span className="font-serif italic font-normal text-white">&amp;</span>{" "}
+              <span className="font-serif italic font-normal text-white">
+                &amp;
+              </span>{" "}
               Startups
             </motion.h1>
 
@@ -172,9 +166,11 @@ export default function Hero() {
               initial="hidden"
               animate="visible"
               custom={2}
-              className="mt-6 text-gray-400 text-center font-normal text-sm sm:text-base md:text-[18px] lg:text-[19px] leading-[1.6] max-w-2xl mx-auto"
+              className="mt-6 text-zinc-400 text-center font-normal text-base sm:text-lg md:text-[18px] lg:text-[19px] leading-[1.6] max-w-2xl mx-auto font-sans"
             >
-              A full-service UI/UX and development agency helping startups and businesses create fast, scalable, and user-focused digital products.
+              A full-service UI/UX and development agency helping startups and
+              businesses create fast, scalable, and user-focused digital
+              products.
             </motion.p>
 
             {/* Primary CTA Button */}
@@ -189,16 +185,16 @@ export default function Hero() {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                className="relative group"
+                className="relative group inline-flex items-center justify-center"
               >
-                {/* Ambient luminous glow halo behind CTA matching Figma */}
-                <div className="absolute -inset-3 sm:-inset-4 bg-[#F85800]/45 rounded-full blur-2xl group-hover:bg-[#F85800]/70 group-hover:blur-3xl transition-all duration-500 pointer-events-none" />
+                {/* Ambient luminous warm orange glow halo behind CTA matching Figma */}
+                <div className="absolute -inset-3 sm:-inset-4 bg-[#F85800]/50 rounded-full blur-2xl group-hover:bg-[#F85800]/75 group-hover:blur-3xl transition-all duration-500 pointer-events-none" />
 
                 <Link
                   href="https://calendly.com/jevxo-info/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative z-10 inline-flex items-center gap-3.5 bg-[#F85800] hover:bg-[#ff6814] text-white pl-6 sm:pl-7 pr-2 sm:pr-2.5 py-3 sm:py-3.5 rounded-full font-medium text-[15px] sm:text-[16px] shadow-[0_0_30px_rgba(248,88,0,0.35)] transition-all duration-300"
+                  className="relative z-10 inline-flex items-center gap-3.5 bg-[#F85800] hover:bg-[#ff6814] text-white pl-6 sm:pl-7 pr-2 sm:pr-2.5 py-3 sm:py-3.5 rounded-full font-medium text-[15px] sm:text-[16px] shadow-[0_0_30px_rgba(248,88,0,0.35)] transition-all duration-300 font-sans"
                 >
                   <span className="tracking-tight">Schedule a Meeting</span>
                   <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white flex items-center justify-center text-[#F85800] shrink-0 shadow-sm group-hover:rotate-45 transition-transform duration-300">
@@ -211,7 +207,7 @@ export default function Hero() {
         </section>
 
         {/* Hero Bottom Showcase Marquee Section - Dual Infinite Marquee */}
-        <section className="relative z-10 w-full pt-4 pb-16 sm:pb-20 overflow-hidden">
+        <section className="relative z-10 w-full pt-8 pb-16 sm:pb-20 overflow-hidden">
           {/* Edge fade gradient mask for ultra smooth seamless scrolling */}
           <div className="relative w-full [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
             <div className="flex flex-col gap-4 sm:gap-5 w-full">

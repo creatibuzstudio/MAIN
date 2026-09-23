@@ -1,5 +1,18 @@
 import React from "react";
 
+export function GridSpark({ className = "w-6 h-6 text-zinc-500" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      className={`pointer-events-none select-none ${className}`}
+    >
+      <path d="M12 0 C12 7 7 12 0 12 C7 12 12 17 12 24 C12 17 17 12 24 12 C17 12 12 7 12 0 Z" />
+    </svg>
+  );
+}
+
 interface SectionContainerProps {
   children: React.ReactNode;
   id?: string;
@@ -8,26 +21,6 @@ interface SectionContainerProps {
   crossMarkers?: boolean;
   showTopBorder?: boolean;
   showBottomBorder?: boolean;
-}
-
-export function CornerCross({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 11 11"
-      width="11"
-      height="11"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={`absolute pointer-events-none select-none text-white/30 z-20 ${className}`}
-    >
-      <path
-        d="M5.5 0V11M0 5.5H11"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="square"
-      />
-    </svg>
-  );
 }
 
 export default function SectionContainer({
@@ -42,40 +35,51 @@ export default function SectionContainer({
   return (
     <section
       id={id}
-      className={`relative w-full overflow-visible ${containerClassName}`}
+      className={`relative w-full max-w-[1440px] mx-auto overflow-visible ${containerClassName}`}
     >
-      {/* Full width top guideline */}
+      {/* Full width top divider line */}
       {showTopBorder && (
-        <div className="w-full h-px bg-white/[0.08] absolute top-0 inset-x-0 pointer-events-none" />
+        <div className="w-full h-px bg-white/[0.12] absolute top-0 inset-x-0 pointer-events-none z-0" />
       )}
 
-      {/* Main framed inner container */}
-      <div className="relative w-full max-w-7xl mx-auto border-x border-white/[0.08]">
-        {/* Corner markers on top */}
-        {crossMarkers && showTopBorder && (
-          <>
-            <CornerCross className="-top-[5.5px] -left-[5.5px]" />
-            <CornerCross className="-top-[5.5px] -right-[5.5px]" />
-          </>
-        )}
+      {/* Vertical boundary lines positioned at 10% and 90% (framing the central 80% container) */}
+      <div className="absolute -top-20 bottom-0 left-[10%] w-px bg-white/[0.12] z-0 pointer-events-none" />
+      <div className="absolute -top-20 bottom-0 right-[10%] w-px bg-white/[0.12] z-0 pointer-events-none" />
 
-        {/* Content area */}
-        <div className={`relative px-4 sm:px-8 md:px-12 ${className}`}>
+      {/* Corner 4-point concave diamond sparks at the top intersections */}
+      {crossMarkers && showTopBorder && (
+        <>
+          <div className="absolute top-0 left-[10%] -translate-x-1/2 -translate-y-1/2 z-10">
+            <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-zinc-500 hover:text-[#F85800] transition-colors" />
+          </div>
+          <div className="absolute top-0 right-[10%] translate-x-1/2 -translate-y-1/2 z-10">
+            <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-zinc-500 hover:text-[#F85800] transition-colors" />
+          </div>
+        </>
+      )}
+
+      {/* Inner content container: Strict 80% width centered block */}
+      <div className="w-full max-w-[80%] mx-auto relative z-[1] px-4 sm:px-6 md:px-8">
+        <div className={className}>
           {children}
         </div>
-
-        {/* Corner markers on bottom */}
-        {crossMarkers && showBottomBorder && (
-          <>
-            <CornerCross className="-bottom-[5.5px] -left-[5.5px]" />
-            <CornerCross className="-bottom-[5.5px] -right-[5.5px]" />
-          </>
-        )}
       </div>
 
-      {/* Full width bottom guideline */}
+      {/* Corner 4-point concave diamond sparks at the bottom intersections */}
+      {crossMarkers && showBottomBorder && (
+        <>
+          <div className="absolute bottom-0 left-[10%] -translate-x-1/2 translate-y-1/2 z-10">
+            <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-zinc-500 hover:text-[#F85800] transition-colors" />
+          </div>
+          <div className="absolute bottom-0 right-[10%] translate-x-1/2 translate-y-1/2 z-10">
+            <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-zinc-500 hover:text-[#F85800] transition-colors" />
+          </div>
+        </>
+      )}
+
+      {/* Full width bottom divider line */}
       {showBottomBorder && (
-        <div className="w-full h-px bg-white/[0.08] absolute bottom-0 inset-x-0 pointer-events-none" />
+        <div className="w-full h-px bg-white/[0.12] absolute bottom-0 inset-x-0 pointer-events-none z-0" />
       )}
     </section>
   );
