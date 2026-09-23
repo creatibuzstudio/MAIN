@@ -36,7 +36,7 @@ const manrope = Manrope({
   variable: "--font-manrope",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://jevxo.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://localhost:3000";
 
 export const viewport: Viewport = {
   themeColor: "#F85800",
@@ -47,14 +47,14 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "JEVXO - AI Software & Digital Product Studio | B2B SaaS & Web Development",
-    template: "%s | JEVXO - Digital Product Studio",
+    default: "Creatibuz Studio | B2B SaaS & Web Development",
+    template: "%s | Creatibuz Studio - Digital Product Studio",
   },
   description:
-    "JEVXO is a premier AI-native software studio. We design, train, and ship intelligent digital products, Next.js web applications, and B2B SaaS platforms in days, not months.",
+    "Creatibuz Studio is a premier AI-native software studio. We design, train, and ship intelligent digital products, Next.js web applications, and B2B SaaS platforms in days, not months.",
   keywords: [
-    "JEVXO",
-    "JEVXO Agency",
+    "Creatibuz Studio",
+    "Creatibuz Studio Agency",
     "AI Software Company",
     "Digital Product Agency",
     "UI/UX Design Agency",
@@ -65,9 +65,9 @@ export const metadata: Metadata = {
     "Mobile App Development",
     "Automation Workflows",
   ],
-  authors: [{ name: "JEVXO Engineering Team", url: siteUrl }],
-  creator: "JEVXO Software Studio",
-  publisher: "JEVXO",
+  authors: [{ name: "Creatibuz Studio Engineering Team", url: siteUrl }],
+  creator: "Creatibuz Studio Software Studio",
+  publisher: "Creatibuz Studio",
   formatDetection: {
     email: false,
     address: false,
@@ -78,35 +78,35 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/fab.jpeg", type: "image/jpeg" },
+      { url: "/fav.jpg", type: "image/jpg" },
     ],
-    shortcut: "/fab.jpeg",
-    apple: "/fab.jpeg",
+    shortcut: "/fav.jpg",
+    apple: "/fav.jpg",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    title: "JEVXO - AI Software & Digital Product Studio",
+    title: "Creatibuz Studio - AI Software & Digital Product Studio",
     description:
       "Full-service UI/UX and development agency helping startups and businesses create fast, scalable, and user-focused digital products.",
-    siteName: "JEVXO",
+    siteName: "Creatibuz Studio",
     images: [
       {
-        url: "/logo1.jpeg",
+        url: "/logo.jpg",
         width: 1200,
         height: 630,
-        alt: "JEVXO Software Studio",
+        alt: "Creatibuz Studio Software Studio",
       }, 
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "JEVXO - AI Software & Digital Product Studio",
+    title: "Creatibuz Studio - AI Software & Digital Product Studio",
     description:
       "Full-service UI/UX and development agency helping startups and businesses create fast, scalable, and user-focused digital products.",
-    images: ["/logo1.jpeg"],
-    creator: "@jevxo",
+    images: ["/logo.jpg"],
+    creator: "@Creatibuz Studio",
   },
   robots: {
     index: true,
@@ -129,16 +129,16 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "JEVXO",
+    name: "Creatibuz Studio",
     url: siteUrl,
-    logo: `${siteUrl}/logo1.jpeg`,
+    logo: `${siteUrl}/logo.jpg`,
     description:
-      "JEVXO is an AI software company and digital product studio that designs, builds, and deploys scalable web, mobile, and B2B SaaS solutions.",
+      "Creatibuz Studio is an AI software company and digital product studio that designs, builds, and deploys scalable web, mobile, and B2B SaaS solutions.",
     sameAs: [
-      "https://facebook.com/jevxo",
-      "https://linkedin.com/company/jevxo",
-      "https://twitter.com/jevxo",
-      "https://instagram.com/jevxo",
+      "https://facebook.com/Creatibuz Studio",
+      "https://linkedin.com/company/Creatibuz Studio",
+      "https://twitter.com/Creatibuz Studio",
+      "https://instagram.com/Creatibuz Studio",
     ],
     contactPoint: {
       "@type": "ContactPoint",

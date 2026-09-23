@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronRight, ArrowUpRight, Code2, Layers, Cpu, CreditCard, Sparkles } from "lucide-react";
+import Image from "next/image";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -109,46 +110,15 @@ export default function Navbar() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className={`pointer-events-auto w-full max-w-[1040px] rounded-full transition-all duration-300 flex items-center justify-between px-3 sm:px-5 py-2 sm:py-2.5 ${
+        className={`pointer-events-auto w-full max-w-7xl rounded-full transition-all duration-300 flex items-center justify-between px-3 sm:px-5 py-2 sm:py-2.5 ${
           isScrolled
-            ? "bg-[#121214]/90 backdrop-blur-xl border border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.7)]"
-            : "bg-[#121214]/80 backdrop-blur-lg border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+            ? "bg-[#191919]/90 backdrop-blur-xl border border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.7)]"
+            : "bg-[#191919] backdrop-blur-lg border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
         }`}
       >
         {/* Left: Creatibuz Studio Logo */}
         <Link href="/" className="flex items-center gap-3 group shrink-0">
-          <div className="relative flex items-center justify-center">
-            {/* Ambient orange glow behind the logo */}
-            <div className="absolute -inset-2 bg-[#F85800]/40 rounded-2xl blur-md pointer-events-none group-hover:bg-[#F85800]/60 transition-all duration-300" />
-            
-            {/* Orange squircle icon container */}
-            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#FF6B26] via-[#F85800] to-[#DF4500] flex items-center justify-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)] border border-white/20 shrink-0">
-              <svg className="w-5 h-5 relative z-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Stylized circular arc "C" */}
-                <path
-                  d="M17.5 7.5C16.1 5.4 13.7 4 11 4C6.58172 4 3 7.58172 3 12C3 16.4183 6.58172 20 11 20C14.2 20 17 18.1 18.2 15.5"
-                  stroke="white"
-                  strokeWidth="2.6"
-                  strokeLinecap="round"
-                />
-                {/* 4-point sparkle inside */}
-                <path
-                  d="M16 8C16 9.3 17 10 18.5 10C17 10 16 10.7 16 12C16 10.7 15 10 13.5 10C15 10 16 9.3 16 8Z"
-                  fill="white"
-                />
-              </svg>
-            </div>
-          </div>
-
-          {/* Logo Typography */}
-          <div className="flex flex-col text-left">
-            <span className="text-white font-semibold text-[15px] sm:text-[16px] tracking-tight leading-tight">
-              Creatibuz Studio
-            </span>
-            <span className="text-[8px] sm:text-[9px] font-medium tracking-[0.2em] text-gray-400 uppercase leading-none mt-0.5">
-              DESIGN, DEVELOP, TRANSFORM.
-            </span>
-          </div>
+          <Image src="/logo.jpg" width={100} height={50} alt="logo" />
         </Link>
 
         {/* Center: Desktop Navigation Links */}
@@ -221,7 +191,12 @@ export default function Navbar() {
               <div className="flex items-center justify-between pb-3 border-b border-white/10">
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-lg bg-[#F85800] flex items-center justify-center">
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg
+                      className="w-4 h-4"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
                       <path
                         d="M17.5 7.5C16.1 5.4 13.7 4 11 4C6.58172 4 3 7.58172 3 12C3 16.4183 6.58172 20 11 20C14.2 20 17 18.1 18.2 15.5"
                         stroke="white"
@@ -231,8 +206,12 @@ export default function Navbar() {
                     </svg>
                   </div>
                   <div className="flex flex-col text-left">
-                    <span className="text-white font-semibold text-sm">Creatibuz Studio</span>
-                    <span className="text-[8px] tracking-[0.16em] text-gray-400">DESIGN, DEVELOP, TRANSFORM</span>
+                    <span className="text-white font-semibold text-sm">
+                      Creatibuz Studio
+                    </span>
+                    <span className="text-[8px] tracking-[0.16em] text-gray-400">
+                      DESIGN, DEVELOP, TRANSFORM
+                    </span>
                   </div>
                 </div>
 

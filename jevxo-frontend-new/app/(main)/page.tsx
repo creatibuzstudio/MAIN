@@ -14,15 +14,20 @@ import FaqSection from "../components/landing/faq/FaqSection";
 import BlogSection from "../components/landing/blog/BlogSection";
 import ContactSection from "../components/landing/contact/ContactSection";
 import TestimonialsSection from "../components/landing/testimonials/TestimonialsSection";
+import SectionContainer from "../components/ui/SectionContainer";
 
 export default function Home() {
   return (
     <div className="relative min-h-screen w-full bg-background text-white flex flex-col justify-between overflow-hidden">
-
       <Hero />
 
-      <Partners />
-      
+      <SectionContainer
+        extendTopBorder={true}
+        className="py-16 md:py-20 lg:py-24"
+      >
+        <Partners />
+      </SectionContainer>
+
       <AboutUs />
 
       <div className="py-8 md:py-[30px]">

@@ -244,10 +244,9 @@ export default function Partners() {
   ];
 
   return (
-    <SectionContainer
+    <main
       id="collaborators"
-      className="py-16 sm:py-20 md:py-24"
-      containerClassName="bg-background"
+      className="lg:px-16"
     >
       {/* Top Flex Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-4">
@@ -370,6 +369,6 @@ export default function Partners() {
           </div>
         )}
       </motion.div>
-    </SectionContainer>
+    </main>
   );
 }
