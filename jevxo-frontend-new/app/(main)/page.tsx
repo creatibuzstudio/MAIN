@@ -17,13 +17,11 @@ import TestimonialsSection from "../components/landing/testimonials/Testimonials
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen w-full bg-[#F2F2F2] text-[#0a0c16] flex flex-col justify-between overflow-hidden">
+    <div className="relative min-h-screen w-full bg-[#080808] text-white flex flex-col justify-between overflow-hidden">
 
       <Hero />
 
-      <div className="py-8 md:py-[30px]">
-        <Partners />
-      </div>
+      <Partners />
       
       <AboutUs />
 

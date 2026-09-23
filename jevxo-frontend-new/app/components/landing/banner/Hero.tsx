@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 import { useEffect, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { bannerApi } from "@/api/bannerApi";
 
 const GRID_COLS = 24;
@@ -15,7 +16,11 @@ const fadeUp: Variants = {
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+    transition: { 
+      duration: 0.8, 
+      delay: i * 0.14, 
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number] 
+    },
   }),
 };
 
@@ -42,7 +47,6 @@ export default function Hero() {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-
         const data = await bannerApi.getAllBanners();
 
         let fetchedBanners: any[] = [];
@@ -75,108 +79,91 @@ export default function Hero() {
   const row2List = [...row2, ...row2, ...row2];
 
   return (
-    <div className="w-full flex flex-col">
-      {/* Hero + Marquee wrapped together so the background gradient and grid pattern
-          are ONE continuous layer — no seam at the old section boundary. */}
-      <div className="relative w-full overflow-hidden bg-[#F3F3F3]">
+    <div className="w-full flex flex-col bg-[#080808]">
+      {/* Hero + Marquee wrapped together with seamless dark background & grid */}
+      <div className="relative w-full overflow-hidden bg-[#080808]">
 
-        {/* Decorative Shadow Boxes (Grid Blocks) - Placed before grid lines so lines stay visible */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          {/* Top White Area Shadow Boxes (Left) */}
-          <div className="absolute top-[75px] sm:top-[120px] left-0 sm:left-[120px]">
-            <div className="absolute top-[2px] left-[2px] w-[73px] h-[73px] sm:w-[118px] sm:h-[118px] bg-[#DEDEDE4D]" />
-            <div className="absolute top-[77px] sm:top-[122px] left-[77px] sm:left-[122px] w-[73px] h-[73px] sm:w-[118px] sm:h-[118px] bg-[#DEDEDE4D]" />
-          </div>
-
-          {/* Top White Area Shadow Boxes (Right) */}
-          <div className="absolute top-[75px] sm:top-[120px] left-[225px] sm:left-[480px] md:left-[600px] lg:left-[840px] xl:left-[1080px] 2xl:left-[1320px]">
-            <div className="absolute top-[2px] left-[77px] sm:left-[122px] w-[73px] h-[73px] sm:w-[118px] sm:h-[118px] bg-[#DEDEDE4D]" />
-            <div className="absolute top-[77px] sm:top-[122px] left-[2px] w-[73px] h-[73px] sm:w-[118px] sm:h-[118px] bg-[#DEDEDE4D]" />
-          </div>
-
-          {/* Lower Blue Transition Area Shadow Boxes */}
-          {/* Left Side Shadow Boxes */}
-          <div className="absolute top-[300px] sm:top-[480px] left-[75px] sm:left-[240px]">
-            <div className="absolute top-[2px] left-[2px] w-[73px] h-[73px] sm:w-[118px] sm:h-[118px] bg-[#DEDEDE4D]" />
-            <div className="absolute top-[77px] sm:top-[122px] left-[77px] sm:left-[122px] w-[73px] h-[73px] sm:w-[118px] sm:h-[118px] bg-[#DEDEDE4D]" />
-          </div>
-
-          {/* Right Side Shadow Boxes */}
-          <div className="absolute top-[300px] sm:top-[480px] left-[225px] sm:left-[480px] md:left-[600px] lg:left-[840px] xl:left-[1080px] 2xl:left-[1320px]">
-            <div className="absolute top-[2px] left-[77px] sm:left-[122px] w-[73px] h-[73px] sm:w-[118px] sm:h-[118px] bg-[#DEDEDE4D]" />
-            <div className="absolute top-[77px] sm:top-[122px] left-[2px] w-[73px] h-[73px] sm:w-[118px] sm:h-[118px] bg-[#DEDEDE4D]" />
-          </div>
+        {/* Subtle Tinted Grid Tiles matching Figma aesthetic */}
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden [mask-image:radial-gradient(ellipse_75%_65%_at_50%_45%,black_40%,transparent_95%)]">
+          <div className="absolute top-[160px] left-[15%] w-[80px] h-[80px] bg-white/[0.02]" />
+          <div className="absolute top-[240px] left-[22%] w-[80px] h-[80px] bg-white/[0.03]" />
+          <div className="absolute top-[320px] left-[10%] w-[80px] h-[80px] bg-white/[0.015]" />
+          <div className="absolute top-[160px] right-[18%] w-[80px] h-[80px] bg-white/[0.02]" />
+          <div className="absolute top-[240px] right-[12%] w-[80px] h-[80px] bg-white/[0.035]" />
+          <div className="absolute top-[400px] right-[20%] w-[80px] h-[80px] bg-white/[0.02]" />
+          <div className="absolute top-[480px] left-[25%] w-[80px] h-[80px] bg-white/[0.025]" />
+          <div className="absolute top-[560px] right-[28%] w-[80px] h-[80px] bg-white/[0.018]" />
         </div>
 
-        {/* Single Grid Background Pattern spanning the whole hero + marquee area */}
+        {/* Dark Grid Background Pattern with subtle radial mask */}
         <div
-          className="absolute inset-0 opacity-30 pointer-events-none z-[1] bg-[length:75px_75px] sm:bg-[length:120px_120px]"
+          className="absolute inset-0 opacity-40 pointer-events-none z-[1] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_45%,black_45%,transparent_95%)] bg-[length:75px_75px] sm:bg-[length:80px_80px]"
           style={{
             backgroundImage:
-              "linear-gradient(to right, #B3B3B34D 2px, transparent 2px), linear-gradient(to bottom, #B3B3B34D 2px, transparent 2px)",
+              "linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px)",
           }}
         />
 
-        {/* Interactive grid — hovering a cell blooms a soft white glow, matching the grid above */}
+        {/* Interactive grid cells with soft warm hover blooms */}
         <div
-          className="absolute inset-0 z-[2] grid pointer-events-none grid-cols-[repeat(24,75px)] auto-rows-[75px] sm:grid-cols-[repeat(24,120px)] sm:auto-rows-[120px]"
+          className="absolute inset-0 z-[2] grid pointer-events-none grid-cols-[repeat(24,75px)] auto-rows-[75px] sm:grid-cols-[repeat(24,80px)] sm:auto-rows-[80px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_45%,black_40%,transparent_95%)]"
         >
           {gridCells.map((_, i) => (
             <div
               key={i}
-              className="pointer-events-auto transition-[background-size] duration-500 ease-out [background-repeat:no-repeat] [background-position:center] [background-size:0%_0%] hover:[background-size:170%_170%]"
+              className="pointer-events-auto transition-[background-size] duration-500 ease-out [background-repeat:no-repeat] [background-position:center] [background-size:0%_0%] hover:[background-size:160%_160%]"
               style={{
                 backgroundImage:
-                  "radial-gradient(circle at center, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 70%)",
+                  "radial-gradient(circle at center, rgba(248,88,0,0.18) 0%, rgba(255,255,255,0.03) 50%, transparent 75%)",
               }}
             />
           ))}
         </div>
 
-        {/* Radial glow, only near the top, to keep the headline readable against the grid */}
-        <div className="absolute inset-x-0 top-0 h-[750px] bg-[radial-gradient(ellipse_950px_480px_at_50%_25%,rgba(255,255,255,0.9)_0%,rgba(255,255,255,0)_75%)] pointer-events-none z-0" />
+        {/* Subtle center ambient radial light */}
+        <div className="absolute inset-x-0 top-0 h-[700px] bg-[radial-gradient(ellipse_900px_450px_at_50%_35%,rgba(255,255,255,0.035)_0%,rgba(8,8,8,0)_80%)] pointer-events-none z-0" />
 
         {/* Top Hero Section */}
         <section className="relative z-10 w-full">
-          <main className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 pt-20 pb-24 w-full max-w-[95%] lg:max-w-6xl mx-auto">
-            {/* Startup Badge */}
+          <main className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 pt-32 sm:pt-40 md:pt-44 pb-20 sm:pb-24 w-full max-w-[95%] lg:max-w-6xl mx-auto">
+            
+            {/* Top Social Proof Pill Badge */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
               animate="visible"
               custom={0}
-              className="p-[1px] rounded-full shadow-[0px_8px_24px_rgba(0,63,234,0.15)] mb-8 group hover:scale-[1.02] hover:shadow-[0px_12px_28px_rgba(0,63,234,0.2)] transition-all duration-300 cursor-pointer w-[338px] h-[46px]"
-              style={{
-                background: 'linear-gradient(90.22deg, rgba(0, 63, 234, 0.5) -0.29%, rgba(227, 234, 251, 0.751522) 49.74%, #003FEA 99.17%)'
-              }}
+              whileHover={{ scale: 1.02 }}
+              className="inline-flex items-center gap-2.5 sm:gap-3 rounded-full border border-white/10 bg-white/[0.05] backdrop-blur-md px-3.5 sm:px-4 py-1.5 mb-8 sm:mb-10 cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.5)] group transition-all duration-300 hover:border-white/20"
             >
-              <div className="flex items-center justify-center gap-3 bg-white w-full h-full rounded-full">
-                <Image
-                  src="/hero1.png"
-                  alt="Startup logos"
-                  width={110}
-                  height={22}
-                  className="h-5 sm:h-6 w-auto object-contain"
-                />
-                <span className="text-xs sm:text-sm font-normal text-gray-900 tracking-tight">
-                  50+ startup &amp; founders
-                </span>
-              </div>
+              <Image
+                src="/hero1.png"
+                alt="SaaS Tool Stack"
+                width={100}
+                height={22}
+                className="h-4 sm:h-[18px] w-auto object-contain shrink-0 brightness-95"
+              />
+              <span className="text-[12px] sm:text-[13px] font-normal text-gray-300 tracking-tight">
+                Helped 50+ SaaS founders &amp; startup
+              </span>
             </motion.div>
 
-            {/* Main Headline */}
+            {/* Main Headline (H1) */}
             <motion.h1
               variants={fadeUp}
               initial="hidden"
               animate="visible"
               custom={1}
-              className="text-4xl md:text-[80px] font-medium font-helvetica text-[#000] text-center leading-[1.2] tracking-[-2.4px] capitalize max-w-4xl"
+              className="text-3xl sm:text-5xl md:text-[64px] lg:text-[74px] font-bold text-white text-center leading-[1.12] sm:leading-[1.14] tracking-[-0.03em] max-w-4xl mx-auto"
             >
-              We Design &amp; Dev Agency <br className="hidden sm:inline" />
-              For B2B{" "}
-              <span className="font-dm italic font-normal text-[#000] capitalize">
-                SaaS Companies
-              </span>
+              We Are UI/UX Design{" "}
+              <span className="font-serif italic font-normal text-white">&amp;</span>
+              <br />
+              Development Partner For SaaS
+              <br />
+              Founders{" "}
+              <span className="font-serif italic font-normal text-white">&amp;</span>{" "}
+              Startups
             </motion.h1>
 
             {/* Subtitle */}
@@ -185,97 +172,87 @@ export default function Hero() {
               initial="hidden"
               animate="visible"
               custom={2}
-              className="mt-7 text-[#08080C] text-center font-manrope text-[20px] font-normal leading-[30px] max-w-3xl"
+              className="mt-6 text-gray-400 text-center font-normal text-sm sm:text-base md:text-[18px] lg:text-[19px] leading-[1.6] max-w-2xl mx-auto"
             >
               A full-service UI/UX and development agency helping startups and businesses create fast, scalable, and user-focused digital products.
             </motion.p>
 
-            {/* Action Button */}
+            {/* Primary CTA Button */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
               animate="visible"
               custom={3}
-              className="mt-16 flex justify-center w-full sm:w-auto"
+              className="mt-10 sm:mt-12 flex justify-center w-full"
             >
               <motion.div
-                whileHover={{ scale: 1.03 }}
+                whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                className="w-auto"
+                className="relative group"
               >
+                {/* Ambient luminous glow halo behind CTA matching Figma */}
+                <div className="absolute -inset-3 sm:-inset-4 bg-[#F85800]/45 rounded-full blur-2xl group-hover:bg-[#F85800]/70 group-hover:blur-3xl transition-all duration-500 pointer-events-none" />
+
                 <Link
                   href="https://calendly.com/jevxo-info/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative group w-[325px] h-[60px] flex items-center justify-center gap-3.5 rounded-full text-white backdrop-blur-xl bg-[radial-gradient(68.28%_92.86%_at_50.28%_92.86%,#727272_0%,#282828_49.68%,#111_100%)] shadow-[inset_0_8px_18px_-2px_rgba(255,255,255,0.50)] transition-all duration-300 overflow-hidden"
+                  className="relative z-10 inline-flex items-center gap-3.5 bg-[#F85800] hover:bg-[#ff6814] text-white pl-6 sm:pl-7 pr-2 sm:pr-2.5 py-3 sm:py-3.5 rounded-full font-medium text-[15px] sm:text-[16px] shadow-[0_0_30px_rgba(248,88,0,0.35)] transition-all duration-300"
                 >
-                  {/* Curved top glass glare / sheen reflection line */}
-                  <div className="absolute inset-x-3 top-0 h-[45%] bg-gradient-to-b from-white/25 via-white/5 to-transparent rounded-t-full pointer-events-none" />
-
-                  <Image
-                    src="/meet.png"
-                    alt="Google Meet"
-                    width={28}
-                    height={28}
-                    className="w-6 sm:w-7 h-6 sm:h-7 object-contain relative z-10 drop-shadow-md"
-                  />
-                  <span className="font-normal font-helvetica text-white text-[20px] leading-[1.2] relative z-10">
-                    Book Free Consultation
-                  </span>
+                  <span className="tracking-tight">Schedule a Meeting</span>
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white flex items-center justify-center text-[#F85800] shrink-0 shadow-sm group-hover:rotate-45 transition-transform duration-300">
+                    <ArrowUpRight className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.5]" />
+                  </div>
                 </Link>
               </motion.div>
             </motion.div>
           </main>
         </section>
 
-        {/* Hero Bottom Showcase Marquee Section */}
-        <section className="relative z-10 w-full  pb-16 md:pb-24">
-          {/* Side Fade Gradient Overlays - reduced intensity and width as requested */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-24 bg-gradient-to-r from-[#5A87F2]/30 to-transparent z-20" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-24 bg-gradient-to-l from-[#5A87F2]/30 to-transparent z-20" />
-
-          {/* Bottom Fade Gradient Overlay */}
-          <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 sm:h-48 md:h-[280px] bg-gradient-to-b from-transparent via-[#F2F2F2]/30 via-50% via-[#F2F2F2]/80 via-80% to-[#F2F2F2] z-20" />
-
-          <div className="relative z-10 flex flex-col gap-1 sm:gap-2 w-full">
-            {/* Row 1: Right to Left (animate-marquee) */}
-            <div className="overflow-hidden w-full flex">
-              <div className="flex items-center gap-1 sm:gap-2 animate-marquee">
-                {row1List.map((src, index) => (
-                  <div
-                    key={`row1-${index}`}
-                    className="relative flex-shrink-0 w-[320px] sm:w-[440px] md:w-[540px] h-[220px] sm:h-[300px] md:h-[360px] rounded-none overflow-hidden border border-white/80 shadow-[0_12px_30px_rgba(20,30,80,0.18)] bg-white group hover:shadow-[0_16px_36px_rgba(20,30,80,0.24)] transition-all duration-300"
-                  >
-                    <Image
-                      src={src}
-                      alt={`Portfolio showcase ${index + 1}`}
-                      fill
-                      sizes="(max-width: 768px) 480px, 580px"
-                      className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                    />
-                  </div>
-                ))}
+        {/* Hero Bottom Showcase Marquee Section - Dual Infinite Marquee */}
+        <section className="relative z-10 w-full pt-4 pb-16 sm:pb-20 overflow-hidden">
+          {/* Edge fade gradient mask for ultra smooth seamless scrolling */}
+          <div className="relative w-full [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+            <div className="flex flex-col gap-4 sm:gap-5 w-full">
+              {/* Row 1: Right to Left (animate-marquee) */}
+              <div className="overflow-hidden w-full flex group">
+                <div className="flex items-center gap-4 sm:gap-5 animate-marquee group-hover:[animation-play-state:paused] will-change-transform">
+                  {row1List.map((src, index) => (
+                    <div
+                      key={`row1-${index}`}
+                      className="relative flex-shrink-0 w-[300px] sm:w-[420px] md:w-[480px] lg:w-[520px] h-[200px] sm:h-[270px] md:h-[310px] lg:h-[330px] rounded-2xl overflow-hidden border border-white/10 shadow-[0_16px_36px_rgba(0,0,0,0.7)] bg-[#101012] transition-all duration-300 hover:border-white/25 hover:shadow-[0_20px_45px_rgba(0,0,0,0.9)]"
+                    >
+                      <Image
+                        src={src}
+                        alt={`Portfolio showcase ${index + 1}`}
+                        fill
+                        sizes="(max-width: 768px) 420px, 520px"
+                        className="object-cover transition-transform duration-500 hover:scale-[1.03]"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            {/* Row 2: Left to Right (animate-marquee-reverse) */}
-            <div className="overflow-hidden w-full flex">
-              <div className="flex items-center gap-1 sm:gap-2 animate-marquee-reverse">
-                {row2List.map((src, index) => (
-                  <div
-                    key={`row2-${index}`}
-                    className="relative flex-shrink-0 w-[320px] sm:w-[440px] md:w-[540px] h-[220px] sm:h-[300px] md:h-[360px] rounded-none overflow-hidden border border-white/80 shadow-[0_12px_30px_rgba(20,30,80,0.18)] bg-white group hover:shadow-[0_16px_36px_rgba(20,30,80,0.24)] transition-all duration-300"
-                  >
-                    <Image
-                      src={src}
-                      alt={`Portfolio showcase ${index + 6}`}
-                      fill
-                      sizes="(max-width: 768px) 480px, 580px"
-                      className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                    />
-                  </div>
-                ))}
+              {/* Row 2: Left to Right (animate-marquee-reverse) */}
+              <div className="overflow-hidden w-full flex group">
+                <div className="flex items-center gap-4 sm:gap-5 animate-marquee-reverse group-hover:[animation-play-state:paused] will-change-transform">
+                  {row2List.map((src, index) => (
+                    <div
+                      key={`row2-${index}`}
+                      className="relative flex-shrink-0 w-[300px] sm:w-[420px] md:w-[480px] lg:w-[520px] h-[200px] sm:h-[270px] md:h-[310px] lg:h-[330px] rounded-2xl overflow-hidden border border-white/10 shadow-[0_16px_36px_rgba(0,0,0,0.7)] bg-[#101012] transition-all duration-300 hover:border-white/25 hover:shadow-[0_20px_45px_rgba(0,0,0,0.9)]"
+                    >
+                      <Image
+                        src={src}
+                        alt={`Portfolio showcase ${index + 6}`}
+                        fill
+                        sizes="(max-width: 768px) 420px, 520px"
+                        className="object-cover transition-transform duration-500 hover:scale-[1.03]"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

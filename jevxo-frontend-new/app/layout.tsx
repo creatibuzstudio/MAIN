@@ -34,7 +34,7 @@ const manrope = Manrope({
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://jevxo.com";
 
 export const viewport: Viewport = {
-  themeColor: "#0052FF",
+  themeColor: "#F85800",
   width: "device-width",
   initialScale: 1,
 };
@@ -153,7 +153,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col justify-between bg-[#f6f8fc] text-[#0a0c16] font-sans">
+      <body className="min-h-full flex flex-col justify-between bg-[#080808] text-white font-sans selection:bg-[#F85800] selection:text-white">
         {children}
       </body>
     </html>
