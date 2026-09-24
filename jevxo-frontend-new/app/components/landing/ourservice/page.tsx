@@ -1,235 +1,230 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion, AnimatePresence } from "framer-motion";
+import { GridSpark } from "@/app/components/ui/SectionContainer";
 
-const services = [
+interface ServiceData {
+  id: string;
+  index: string;
+  displayTitle: string;
+  title: string;
+  description: string;
+  tags: string[];
+  img: string;
+}
+
+const services: ServiceData[] = [
   {
-    tag: "UI/UX DESIGN",
-    title: "UI/UX Design",
-    description: "We design intuitive interfaces that make websites and apps seamless and delightful to use daily.",
-    bg: "bg-gradient-to-b from-white to-[#E9EFFF]",
-    img: "/Jevxo/01.png",
-  },
-  {
-    tag: "SAAS PRODUCT",
-    title: "SaaS Product Design",
-    description: "Architecting scalable web applications & SaaS dashboards built for high retention & growth.",
-    bg: "bg-gradient-to-b from-white to-[#FFE3F1]",
-    img: "/Jevxo/02.png",
-  },
-  {
-    tag: "BRANDING",
-    title: "Logo & Branding Design",
-    description: "Creating distinctive visual identities and brand assets that command attention and trust.",
-    bg: "bg-gradient-to-b from-white to-[#F9E3FF]",
+    id: "branding",
+    index: "01",
+    displayTitle: "Branding Design",
+    title: "Branding",
+    description:
+      "Strategic brand identities that help businesses establish credibility, differentiate themselves, and create lasting impressions.",
+    tags: [
+      "Brand Strategy",
+      "Visual Identity",
+      "Logo Design",
+      "Creative Direction",
+      "Strategy",
+    ],
     img: "/Jevxo/03.png",
   },
   {
-    tag: "ENGINEERING",
-    title: "Full Stack Development",
-    description: "Building fast, secure, scalable modern web platforms engineered for heavy traffic & performance.",
-    bg: "bg-gradient-to-b from-white to-[#FFEBE0]",
+    id: "uiux",
+    index: "02",
+    displayTitle: "UI/UX Design",
+    title: "UI/UX Design",
+    description:
+      "User-centric interfaces and intuitive digital experiences engineered for maximum engagement and seamless usability.",
+    tags: [
+      "User Research",
+      "Wireframing",
+      "Prototyping",
+      "Design System",
+    ],
+    img: "/Jevxo/13.png",
+  },
+  {
+    id: "research",
+    index: "03",
+    displayTitle: "UX Research & Strategy",
+    title: "UX Research & Strategy",
+    description:
+      "Deep-dive user interviews, competitor auditing, and heuristic analysis to validate digital product decisions.",
+    tags: [
+      "Auditing",
+      "User Journey",
+      "Market Research",
+      "Product Strategy",
+    ],
+    img: "/mockups/Mockup 15.png",
+  },
+  {
+    id: "saas",
+    index: "04",
+    displayTitle: "SaaS Product Design",
+    title: "SaaS Product Design",
+    description:
+      "High-converting dashboards, complex data visualizations, and scalable SaaS workflows crafted for growth.",
+    tags: [
+      "B2B SaaS",
+      "Design Systems",
+      "Web App UI",
+      "Analytics UI",
+    ],
+    img: "/Jevxo/09.png",
+  },
+  {
+    id: "app",
+    index: "05",
+    displayTitle: "App Development",
+    title: "App Development",
+    description:
+      "Native and cross-platform mobile applications engineered with high performance, fluid animations, and robust code.",
+    tags: [
+      "React Native",
+      "iOS & Android",
+      "API Integration",
+      "Performance",
+    ],
+    img: "/mockups/Mobile app 04 1.png",
+  },
+  {
+    id: "web",
+    index: "06",
+    displayTitle: "Web Development",
+    title: "Web Development",
+    description:
+      "Pixel-perfect, ultra-fast Jamstack and full-stack web applications built with Next.js, Tailwind, and cutting-edge tech.",
+    tags: [
+      "Next.js",
+      "Full Stack",
+      "Framer Motion",
+      "SEO & Speed",
+    ],
     img: "/Jevxo/04.png",
-  },
-  {
-    tag: "MOBILE APPS",
-    title: "Mobile App Development",
-    description: "Developing cross-platform native iOS & Android applications with fluid animations & offline support.",
-    bg: "bg-gradient-to-b from-[#F4F4F4] to-[#EBE3FF]",
-    img: "/Jevxo/05.png",
-  },
-  {
-    tag: "AI & AUTOMATION",
-    title: "AI & Automation Tools",
-    description: "Integrating intelligent workflow automations and custom generative AI models into products.",
-    bg: "bg-gradient-to-b from-[#F4F4F4] to-[#F7E5EA]",
-    img: "/Jevxo/06.png",
-  },
-  {
-    tag: "CLOUD INFRASTRUCTURE",
-    title: "Cloud & DevOps Architecture",
-    description: "Deploying high-availability infrastructure with 99.9% uptime and enterprise security compliance.",
-    bg: "bg-gradient-to-br from-white to-[#fdf2f8]",
-    img: "/Jevxo/07.png",
-  },
-  {
-    tag: "GROWTH & MARKETING",
-    title: "Digital Marketing & SEO",
-    description: "Data-driven organic growth strategies to maximize conversions, revenue, and customer loyalty.",
-    bg: "bg-gradient-to-br from-white to-[#eff6ff]",
-    img: "/Jevxo/01.png",
   },
 ];
 
 export default function OurService() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
+  const [activeService, setActiveService] = useState<number>(0);
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      if (!sectionRef.current || !trackRef.current) return;
-
-      const getScrollAmount = () => {
-        const trackWidth = trackRef.current?.scrollWidth || 0;
-        const containerWidth = trackRef.current?.parentElement?.offsetWidth || window.innerWidth;
-        return trackWidth - containerWidth + 80;
-      };
-
-      // Single-direction entrance reveal for Service Cards (plays once on scroll down, no reverse on bottom-up scroll)
-      gsap.fromTo(
-        ".service-card",
-        { opacity: 0, y: 25, scale: 0.98, filter: "blur(2px)" },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          filter: "blur(0px)",
-          duration: 0.4,
-          stagger: 0.05,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: trackRef.current,
-            start: "top 88%",
-            toggleActions: "play none none none",
-            once: true,
-          },
-        }
-      );
-
-      gsap.to(trackRef.current, {
-        x: () => -getScrollAmount(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          pin: true,
-          pinSpacing: true,
-          scrub: 1,
-          start: "top top",
-          end: () => `+=${getScrollAmount()}`,
-          invalidateOnRefresh: true,
-          anticipatePin: 1,
-        },
-      });
-    }, sectionRef);
-
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 200);
-
-    return () => {
-      clearTimeout(timer);
-      ctx.revert();
-    };
-  }, []);
+  const current = services[activeService];
 
   return (
-    <section
-      ref={sectionRef}
-      id="service"
-      className="relative z-10 w-full py-6 md:py-8 bg-[#F2F2F2] flex flex-col justify-center items-center border-t border-gray-100 overflow-hidden"
-    >
-      <div className="w-full max-w-[95%] lg:max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 flex flex-col justify-center">
-
-        {/* Header Section */}
-
-        <div
-          className="flex items-center mb-7 justify-center gap-1.5 bg-transparent border border-[#003FEA4D] text-[#252323] w-[126px] h-[40px] rounded-full text-[14px] leading-none font-normal tracking-normal shadow-2xs"
-          style={{ fontFamily: '"Helvetica Now Display", sans-serif' }}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#3b82f6]" />
-          Our Service
+    <div id="service">
+      {/* Middle Divider: Static & perfectly anchored from top-0 to bottom-0 of the section */}
+      <div className="hidden lg:block absolute left-[41.666667%] top-0 bottom-0 w-px bg-white/[0.12] pointer-events-none z-10">
+        {/* Top intersection spark: Centered directly on top-0, aligned with top section divider */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+          <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-zinc-500 hover:text-[#F85800] transition-colors" />
         </div>
-        <div className="flex flex-col lg:flex-row lg:items-start ite justify-between gap-8 mb-10 md:mb-12">
-
-
-          {/* Left Title Area */}
-          <div className="flex flex-col pt-5 items-start gap-3.5 lg:w-1/2">
-
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-medium text-[#0f172a] tracking-tight leading-[1.15]">
-              <span
-                className="block text-[#0f172a] text-[40px] font-bold leading-[1.2] tracking-[-0.02em] text-center"
-                style={{ fontFamily: '"Helvetica Now Display", sans-serif' }}
-              >
-                High-Impact Value.
-              </span>
-              <span className="block mt-1 text-[#0f172a]">
-                <span
-                  className="font-semibold italic text-[40px] leading-[1.2] tracking-[-0.02em] text-[#0f172a]"
-                  style={{ fontFamily: '"DM Serif Text", serif' }}
-                >
-                  World-Class
-                </span> <span className="font-medium text-[#0f172a]">Quality.</span>
-              </span>
-            </h2>
-          </div>
-
-          {/* Right Description Text */}
-          <div className="lg:w-[46%] pt-1 lg:pt-6">
-            <p
-              className="text-[#64748b] font-light text-[18px] leading-[1.5] tracking-normal"
-              style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
-            >
-              We're here to create digital experiences that your customers will love from websites and apps to seamless interfaces, our creations drive stronger engagement and foster lasting loyalty.
-            </p>
-          </div>
+        {/* Bottom intersection spark: Centered directly on bottom-0, aligned with bottom section divider */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10">
+          <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-zinc-500 hover:text-[#F85800] transition-colors" />
         </div>
+      </div>
 
-        {/* Dynamic Horizontal Pinned Track clipped within max-w-9/12 bounds */}
-        <div className="w-full pt-8 ">
-          <div
-            ref={trackRef}
-            className="flex flex-nowrap lg:flex-nowrap gap-6 w-max lg:w-max min-w-full"
-          >
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className={`service-card w-[321px] shrink-0 rounded-[20px] ${service.bg} pt-8 px-6 pb-6 flex flex-col items-start text-left h-[432px] relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1`}
+      <div className="relative w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0 items-start">
+        {/* Left Column: Dynamic Preview Area (lg:col-span-5) */}
+        <div className="relative lg:col-span-5 lg:pr-10 xl:pr-14">
+          <div className="lg:sticky lg:top-28">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col"
               >
-                <h3 className="text-2xl font-medium text-[#000000] tracking-tight pb-4">
-                  {service.title}
-                </h3>
-                <p
-                  className="text-[#717171] text-[14px] leading-[1.2] mb-10 tracking-normal  font-normal max-w-[260px] min-h-[40px]"
-                  style={{ fontFamily: '"Manrope", sans-serif' }}
-                >
-                  {service.description}
-                </p>
-
-                {/* Pill Action Button */}
-                <Link
-                  href="#contact"
-                  className="self-center inline-flex items-center bg-[#2d3139] hover:bg-[#1a1c21] text-white rounded-full pl-5 pr-1 py-1 text-sm font-normal transition-all shadow-sm mb-6 group"
-                >
-                  <span className="mr-3 text-xs tracking-tight">View Service</span>
-                  <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center transition-colors">
-                    <ArrowUpRight className="w-3.5 h-3.5 text-black" />
-                  </div>
-                </Link>
-
-                <div className="mt-auto w-full flex-1 relative min-h-[150px]">
+                {/* Image Container: Aspect ratio ~ 4:3 with rounded corners and border */}
+                <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-[#121214] shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
                   <Image
-                    src={service.img}
-                    alt={service.title}
+                    src={current.img}
+                    alt={current.title}
                     fill
-                    sizes="(max-width: 768px) 100vw, 321px"
-                    className="object-contain object-bottom"
-                    unoptimized={true}
+                    sizes="(max-width: 1024px) 100vw, 480px"
+                    className="object-cover"
+                    priority
                   />
                 </div>
 
-              </div>
-            ))}
+                {/* Title */}
+                <h3 className="text-white font-semibold text-xl sm:text-2xl mt-6 font-sans">
+                  {current.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-md mt-2 font-sans min-h-[48px]">
+                  {current.description}
+                </p>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {current.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="bg-zinc-900/90 border border-white/10 text-zinc-300 text-xs px-3.5 py-1.5 rounded-full font-medium font-sans"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
 
+        {/* Right Column: Section Header & Service List (lg:col-span-7) */}
+        <div className="lg:col-span-7 lg:pl-10 xl:pl-14 flex flex-col justify-center">
+          {/* Section Pill */}
+          <div className="mb-6 sm:mb-8">
+            <span className="text-[#F85800] text-lg md:text-xl lg:text-2xl font-semibold tracking-wide font-sans inline-block">
+              [ Our Services ]
+            </span>
+          </div>
+
+          {/* Service List */}
+          <div className="flex flex-col w-full divide-y divide-white/[0.08]">
+            {services.map((service, index) => {
+              const isActive = activeService === index;
+              return (
+                <div
+                  key={service.id}
+                  onMouseEnter={() => setActiveService(index)}
+                  onClick={() => setActiveService(index)}
+                  className="group cursor-pointer py-4 sm:py-5 md:py-6 transition-colors duration-200"
+                >
+                  <div className="flex items-baseline gap-3.5 sm:gap-5">
+                    <span
+                      className={`font-mono text-sm sm:text-base md:text-lg font-medium transition-colors duration-200 shrink-0 ${
+                        isActive
+                          ? "text-[#F85800]"
+                          : "text-zinc-600 group-hover:text-zinc-400"
+                      }`}
+                    >
+                      [{service.index}]
+                    </span>
+                    <h3
+                      className={`text-2xl sm:text-3xl md:text-4xl lg:text-[40px] xl:text-[44px] font-bold tracking-tight font-sans transition-colors duration-200 ${
+                        isActive
+                          ? "text-[#F85800]"
+                          : "text-zinc-600 group-hover:text-zinc-400"
+                      }`}
+                    >
+                      {service.displayTitle}
+                    </h3>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
   );
 }

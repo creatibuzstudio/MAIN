@@ -33,13 +33,13 @@ export default function Home() {
         <AboutUs />
       </SectionContainer>
 
-      <div className="py-8 md:py-[30px]">
-        <OurService />
-      </div>
+      <SectionContainer extendTopBorder={false}>
+        <OurService/>
+      </SectionContainer>
 
-      <div className="py-10 md:py-[50px]">
+      {/* <div className="py-10 md:py-[50px]">
         <CaseStudies />
-      </div>
+      </div> */}
 
       <ProcessSection />
 
