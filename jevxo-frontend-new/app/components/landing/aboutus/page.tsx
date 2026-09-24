@@ -19,10 +19,10 @@ export default function AboutUs() {
   const [countPartners, setCountPartners] = useState(0);
 
   const [targetStats, setTargetStats] = useState({
-    projectDeliveries: 250,
-    inHouseExperts: 45,
-    satisfiedClients: 99,
-    businessPartners: 18
+    projectDeliveries: 700,
+    inHouseExperts: 15,
+    satisfiedClients: 90,
+    businessPartners: 50
   });
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function AboutUs() {
   }, []);
 
   const fullText =
-    "As a leading UX/UI Design & software Development Agency, we prioritize user-centric design in every project. Our commitment to established design principles and best practices ensures that our solutions are not only intuitive and user-friendly design but also aesthetically pleasing and functionally exceptional. At Jevxo, we blend creativity with technology to craft digital experiences that truly resonate with users and drive business success.";
+    "Creatibuz Studio helps founders turn ideas into products people love to use. From strategy and UX to design and development, we work as an extension of your team to launch faster, reduce costly iterations, and create products built for growth. Trusted by SaaS, Fintech, B2B & Healthcare companies worldwide, we deliver experiences that attract users, increase conversions, & scale with your business from day one.";
 
   const words = fullText.split(" ");
 
@@ -187,7 +187,7 @@ export default function AboutUs() {
   }, [targetStats]);
 
   return (
-    <section ref={sectionRef} className="w-full py-12 md:py-16 lg:py-20 bg-[#F2F2F2] flex justify-center border-t border-gray-100">
+    <section ref={sectionRef} className="w-full bg-background flex justify-center">
       {/* Self-contained gradient border animation — doesn't depend on whatever
           "animate-border-spin" is defined as globally, so it renders the same
           smooth blue -> indigo -> pink loop everywhere, every time */}
@@ -203,19 +203,12 @@ export default function AboutUs() {
 
       <div className="w-full max-w-[95%] lg:max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 flex flex-col items-start">
         {/* About Us Pill */}
-        <div
-          className="text-[#252323] text-[14px] font-normal leading-normal inline-flex items-center h-[40px] pt-[9px] pb-[10px] pr-[25px] pl-[20px] gap-2 rounded-full border border-[rgba(0,63,234,0.30)] backdrop-blur-[2.5px] mb-6 sm:mb-8"
-          style={{ fontFamily: '"Helvetica Now Display", sans-serif' }}
-        >
-          <span className="w-2 h-2 rounded-full bg-[#1B64FF] animate-pulse" />
-          About Us
-        </div>
+        <h1 className="text-primary text-2xl mb-8">[About Us]</h1>
 
         {/* Scroll Reveal Main Paragraph — premium blur + lift reveal per word */}
         <p
           ref={textRef}
-          className="text-2xl sm:text-3xl md:text-[32px] leading-[1.3] font-light tracking-[-1px] text-[#1E1E1E] mb-10 sm:mb-12 text-justify hyphens-auto"
-          style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
+          className="text-2xl md:text-3xl lg:text-[32px] -leading-[2.5] tracking-[-1px] text-primary-text text-justify hyphens-auto"
         >
           {words.map((word, i) => {
             const targetProgress = (i + 1) / words.length;
@@ -228,7 +221,7 @@ export default function AboutUs() {
                   transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
                 }}
                 className={`inline-block mr-[0.25em] transition-all duration-500 ${isRevealed
-                  ? "text-[#1E1E1E] font-light opacity-100 blur-none translate-y-0"
+                  ? "text-primary-text font-light opacity-100 blur-none translate-y-0"
                   : "text-gray-400 font-light opacity-40 blur-[3px] translate-y-1"
                   }`}
               >
@@ -238,79 +231,47 @@ export default function AboutUs() {
           })}
         </p>
 
-        {/* Mission & Vision Cards */}
-        <div className="about-cards-grid grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 w-full mb-12 pt-10 sm:mb-16">
-          {/* Our Mission Card with Animated Gradient Border */}
-          <div className="about-card relative rounded-xl p-[2px] overflow-hidden shadow-sm">
-            <div className="absolute inset-[-200%] jevxo-gradient-border" />
-            <div className="relative bg-[#f8f9fa] rounded-xl p-7 sm:p-9 h-full flex flex-col justify-start z-10">
-              <h3 className="text-[32px] font-medium font-helvetica text-black/70 leading-normal tracking-[-0.64px] mb-4">
-                Our Mission
-              </h3>
-              <p className="text-black/50 text-[20px] leading-[30px] font-light tracking-[-0.5px]" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
-                We blend strategy, creativity, production, media and AI technology to transform ambition into execution. From breaking silos to building scalable systems,<br /> we design growth that is both meaningful and measurable.
-              </p>
-            </div>
-          </div>
-
-          {/* Our Vision Card with Animated Gradient Border */}
-          <div className="about-card relative rounded-xl p-[2px] overflow-hidden ">
-            <div className="absolute inset-[-200%] jevxo-gradient-border" />
-            <div className="relative bg-[#f8f9fa] rounded-xl p-7 sm:p-9 h-full flex flex-col justify-start z-10">
-              <h3 className="text-[32px] font-medium font-helvetica text-black/70 leading-normal tracking-[-0.64px] mb-4">
-                Our Vision
-              </h3>
-              <p className="text-black/50 text-[20px] leading-[30px] font-light tracking-[-0.5px]" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
-                We believe the future belongs to brands that move first, think differently, and build beyond conventions. Our vision: to shape that future by transforming how brands compete, connect, and endure,<br /> across every sectors.
-              </p>
-            </div>
-          </div>
-        </div>
-
         {/* Stats Row */}
         <div
           ref={statsRef}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 items-center justify-between w-full pt-4"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 items-center justify-between w-full pt-16 md:pt-20 lg:pt-24"
         >
           {/* Stat 1 */}
           <div className="about-stat flex flex-col items-center text-center relative py-2 px-4">
-            <span className="text-5xl md:text-[80px] font-light font-helvetica text-[#1D1D1D] leading-[100px]">
+            <span className="text-5xl md:text-[80px] font-light font-helvetica text-primary-text leading-[100px]">
               {countDeliveries}+
             </span>
-            <span className="mt-3 text-[#1D1D1D] font-helvetica text-[20px] font-normal leading-[38px]">
+            <span className="mt-3 text-primary-text font-helvetica text-[20px] font-normal leading-[38px]">
               Project Deliveries
             </span>
-            <div className="about-divider hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-[1px] h-16 sm:h-20 bg-[#3b82f6]/40" />
           </div>
 
           {/* Stat 2 */}
           <div className="about-stat flex flex-col items-center text-center relative py-2 px-4">
-            <span className="text-5xl md:text-[80px] font-light font-helvetica text-[#1D1D1D] leading-[100px]">
+            <span className="text-5xl md:text-[80px] font-light font-helvetica text-primary-text leading-[100px]">
               {countExperts}+
             </span>
-            <span className="mt-3 text-[#1D1D1D] font-helvetica text-[20px] font-normal leading-[38px]">
+            <span className="mt-3 text-primary-text font-helvetica text-[20px] font-normal leading-[38px]">
               In-House Experts
             </span>
-            <div className="about-divider hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-[1px] h-16 sm:h-20 bg-[#3b82f6]/40" />
           </div>
 
           {/* Stat 3 */}
           <div className="about-stat flex flex-col items-center text-center relative py-2 px-4">
-            <span className="text-5xl md:text-[80px] font-light font-helvetica text-[#1D1D1D] leading-[100px]">
+            <span className="text-5xl md:text-[80px] font-light font-helvetica text-primary-text leading-[100px]">
               {countClients}%
             </span>
-            <span className="mt-3 text-[#1D1D1D] font-helvetica text-[20px] font-normal leading-[38px]">
+            <span className="mt-3 text-primary-text font-helvetica text-[20px] font-normal leading-[38px]">
               Satisfied Clients
             </span>
-            <div className="about-divider hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-[1px] h-16 sm:h-20 bg-[#3b82f6]/40" />
           </div>
 
           {/* Stat 4 */}
           <div className="about-stat flex flex-col items-center text-center py-2 px-4">
-            <span className="text-5xl md:text-[80px] font-light font-helvetica text-[#1D1D1D] leading-[100px]">
+            <span className="text-5xl md:text-[80px] font-light font-helvetica text-primary-text leading-[100px]">
               {countPartners}+
             </span>
-            <span className="mt-3 text-[#1D1D1D] font-helvetica text-[20px] font-normal leading-[38px]">
+            <span className="mt-3 text-primary-text font-helvetica text-[20px] font-normal leading-[38px]">
               Business Partner
             </span>
           </div>

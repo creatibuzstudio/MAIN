@@ -22,19 +22,17 @@ const fadeUp: Variants = {
 
 export default function Hero() {
   const defaultRow1 = [
-    "/Jevxo/01.png",
-    "/Jevxo/02.png",
-    "/Jevxo/03.png",
-    "/Jevxo/04.png",
-    "/Jevxo/05.png",
+    "/mockups/Mockup Ribbon 1.png",
+    "/mockups/ChatGPT Image Aug 23, 2026, 06_06_54 PM 1.png",
+    "/mockups/Mockup 15.png",
+    "/mockups/Mockup 3 1.png",
   ];
 
   const defaultRow2 = [
-    "/Jevxo/06.png",
-    "/Jevxo/07.png",
-    "/Jevxo/08.png",
-    "/Jevxo/09.png",
-    "/Jevxo/10.png",
+    "/mockups/Mobile app 04 1.png",
+    "/mockups/ChatGPT Image Aug 22, 2026, 10_11_18 PM 1.png",
+    "/mockups/Jul 21, 2026, 03_47_59 PM 1.png",
+    "/mockups/ChatGPT Image Aug 22, 2026, 08_54_48 PM 1.png",
   ];
 
   const [row1, setRow1] = useState<string[]>(defaultRow1);
@@ -124,7 +122,7 @@ export default function Hero() {
               animate="visible"
               custom={0}
               whileHover={{ scale: 1.02 }}
-              className="inline-flex items-center gap-2.5 sm:gap-3 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-md px-4 py-1.5 mb-8 sm:mb-10 cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.5)] group transition-all duration-300 hover:border-white/20"
+              className="inline-flex items-center gap-2.5 sm:gap-3 px-4 py-1.5 mb-8 sm:mb-10 cursor-pointer group transition-all duration-300 hover:border-white/20"
             >
               <Image
                 src="/hero1.png"
@@ -207,7 +205,7 @@ export default function Hero() {
         </section>
 
         {/* Hero Bottom Showcase Marquee Section - Dual Infinite Marquee */}
-        <section className="relative z-10 w-full pt-8 pb-16 sm:pb-20 overflow-hidden">
+        <section className="relative z-10 w-full pt-8 pb-16 md:pb-24 lg:pb-32 overflow-hidden">
           {/* Edge fade gradient mask for ultra smooth seamless scrolling */}
           <div className="relative w-full [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
             <div className="flex flex-col gap-4 sm:gap-5 w-full">

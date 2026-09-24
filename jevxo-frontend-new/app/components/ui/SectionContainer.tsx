@@ -81,7 +81,9 @@ export default function SectionContainer({
         )}
 
         {/* Content area */}
-        <div className={`relative px-4 sm:px-6 md:px-8 ${className}`}>
+        <div
+          className={`relative px-4 sm:px-6 md:px-8 py-16 md:py-24 lg:py-32 ${className}`}
+        >
           {children}
         </div>
 

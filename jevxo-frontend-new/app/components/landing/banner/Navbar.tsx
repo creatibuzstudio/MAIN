@@ -85,7 +85,7 @@ export default function Navbar() {
       icon: Layers 
     },
     { 
-      name: "Process", 
+      name: "Design Process", 
       href: "#process", 
       desc: "Agile 6-Step Engineering Workflow",
       icon: Cpu 
@@ -112,13 +112,21 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`pointer-events-auto w-full max-w-7xl rounded-full transition-all duration-300 flex items-center justify-between px-3 sm:px-5 py-2 sm:py-2.5 ${
           isScrolled
-            ? "bg-[#191919]/90 backdrop-blur-xl border border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.7)]"
+            ? "bg-[#191919] backdrop-blur-xl border border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.7)]"
             : "bg-[#191919] backdrop-blur-lg border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
         }`}
       >
         {/* Left: Creatibuz Studio Logo */}
-        <Link href="/" className="flex items-center gap-3 group shrink-0">
-          <Image src="/logo.jpg" width={100} height={50} alt="logo" />
+        <Link href="/" className="relative inline-flex items-center shrink-0">
+          <div className="absolute left-[12%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#F85800]/80 blur-md shadow-[0_0_40px_8px_rgba(248,88,0,0.9)] pointer-events-none z-0" />
+          <Image
+            src="/logo.png"
+            className="relative z-10 w-[140px] sm:w-[175px] h-auto object-contain"
+            width={175}
+            height={42}
+            alt="Creatibuz Studio"
+            priority
+          />
         </Link>
 
         {/* Center: Desktop Navigation Links */}
@@ -141,9 +149,9 @@ export default function Navbar() {
             href="https://calendly.com/jevxo-info/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2.5 sm:gap-3 bg-white/[0.06] hover:bg-white/[0.1] border border-white/10 rounded-full pl-4 sm:pl-5 pr-1.5 py-1.5 transition-all duration-300 group"
+            className="flex items-center gap-2.5 bg-white/[0.06] hover:bg-white/[0.1] border border-white/10 rounded-full p-1 md:py-1 md:pl-4.5 md:pr-1 transition-all duration-300 group"
           >
-            <span className="text-white text-[13px] sm:text-[14px] font-medium tracking-tight">
+            <span className="hidden md:inline text-white text-[13px] sm:text-[14px] font-medium tracking-tight whitespace-nowrap">
               Free Audit
             </span>
             <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#F85800] group-hover:bg-[#ff6914] flex items-center justify-center text-white shrink-0 shadow-[0_0_15px_rgba(248,88,0,0.4)] group-hover:shadow-[0_0_20px_rgba(248,88,0,0.6)] transition-all duration-300">

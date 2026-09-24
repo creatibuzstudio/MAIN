@@ -23,12 +23,15 @@ export default function Home() {
 
       <SectionContainer
         extendTopBorder={true}
-        className="py-16 md:py-20 lg:py-24"
       >
         <Partners />
       </SectionContainer>
 
-      <AboutUs />
+      <SectionContainer
+        extendTopBorder={false}
+      >
+        <AboutUs />
+      </SectionContainer>
 
       <div className="py-8 md:py-[30px]">
         <OurService />

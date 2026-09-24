@@ -4,17 +4,23 @@
 :root {
   --background: #0C0E12;
   --foreground: #ffffff;
-  --primary: #F85800;
-  --color-primary: #F85800;
-  --color-muted: #9CA3AF;
+  --primary: #FE5A00;
+  --color-text: #767676;
+  --color-muted: #303235;
+  --primary-gradient: linear-gradient(to right, #FE5A00, #1B0900);
+  --color-nav: #191919;
+  --color-card: #181A1E;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
-  --color-brand: #F85800;
-  --color-muted: #9CA3AF;
+  --color-primary-text: var(--color-text);
+  --color-muted: var(--color-muted);
+  --primary-gradient: var(--primary-gradient);
+  --color-nav: var(--color-nav);
+  --color-card: var(--color-card);
   --font-sans: var(--font-bricolage), "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-display: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
   --font-serif: var(--font-dm-serif), "DM Serif Display", Georgia, serif;
@@ -22,27 +28,10 @@
   --font-dm: var(--font-dm-serif), "DM Serif Display", Georgia, serif;
   --font-helvetica: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
   --font-manrope: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
-  --container-8xl: 90rem;
-}
-
-@utility max-w-8xl {
-  max-width: 90rem;
-}
-
-.max-w-8xl {
-  max-width: 90rem;
-}
-
-@utility max-w-8/12 {
-  max-width: 66.666667%;
-}
-
-.max-w-8\/12 {
-  max-width: 66.666667%;
 }
 
 body {
-  background: #0C0E12;
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-bricolage), "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow-x: hidden;
