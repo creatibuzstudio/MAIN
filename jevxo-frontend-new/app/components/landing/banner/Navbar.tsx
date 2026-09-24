@@ -154,7 +154,7 @@ export default function Navbar() {
             <span className="hidden md:inline text-white text-[13px] sm:text-[14px] font-medium tracking-tight whitespace-nowrap">
               Free Audit
             </span>
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#F85800] group-hover:bg-[#ff6914] flex items-center justify-center text-white shrink-0 shadow-[0_0_15px_rgba(248,88,0,0.4)] group-hover:shadow-[0_0_20px_rgba(248,88,0,0.6)] transition-all duration-300">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary group-hover:bg-[#ff6914] flex items-center justify-center text-white shrink-0 animate-heartbeat-glow transition-all duration-300">
               <ArrowUpRight className="w-4 h-4 text-white stroke-[2.5] group-hover:rotate-45 transition-transform duration-300" />
             </div>
           </Link>

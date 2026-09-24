@@ -15,6 +15,7 @@ import BlogSection from "../components/landing/blog/BlogSection";
 import ContactSection from "../components/landing/contact/ContactSection";
 import TestimonialsSection from "../components/landing/testimonials/TestimonialsSection";
 import SectionContainer from "../components/ui/SectionContainer";
+import FeatureWorks from "../components/sections/FeatureWorks";
 
 export default function Home() {
   return (
@@ -40,6 +41,8 @@ export default function Home() {
       {/* <div className="py-10 md:py-[50px]">
         <CaseStudies />
       </div> */}
+
+      {/* <FeatureWorks/> */}
 
       <ProcessSection />
 

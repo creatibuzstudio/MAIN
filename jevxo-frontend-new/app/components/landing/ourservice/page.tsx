@@ -30,7 +30,7 @@ const services: ServiceData[] = [
       "Creative Direction",
       "Strategy",
     ],
-    img: "/Jevxo/03.png",
+    img: "/services/01.png",
   },
   {
     id: "uiux",
@@ -117,7 +117,7 @@ export default function OurService() {
   return (
     <div id="service">
       {/* Middle Divider: Static & perfectly anchored from top-0 to bottom-0 of the section */}
-      <div className="hidden lg:block absolute left-[41.666667%] top-0 bottom-0 w-px bg-white/[0.12] pointer-events-none z-10">
+      <div className="hidden lg:block absolute left-[35%] top-0 bottom-0 w-px bg-white/[0.12] pointer-events-none z-10">
         {/* Top intersection spark: Centered directly on top-0, aligned with top section divider */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
           <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-zinc-500 hover:text-[#F85800] transition-colors" />
@@ -130,7 +130,7 @@ export default function OurService() {
 
       <div className="relative w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0 items-start">
         {/* Left Column: Dynamic Preview Area (lg:col-span-5) */}
-        <div className="relative lg:col-span-5 lg:pr-10 xl:pr-14">
+        <div className="relative lg:col-span-4 lg:pr-5">
           <div className="lg:sticky lg:top-28">
             <AnimatePresence mode="wait">
               <motion.div
@@ -142,7 +142,7 @@ export default function OurService() {
                 className="flex flex-col"
               >
                 {/* Image Container: Aspect ratio ~ 4:3 with rounded corners and border */}
-                <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-[#121214] shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
+                <div className="relative w-full aspect-[5/3] rounded-xl overflow-hidden border border-white/10 bg-background shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
                   <Image
                     src={current.img}
                     alt={current.title}
@@ -154,21 +154,21 @@ export default function OurService() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-white font-semibold text-xl sm:text-2xl mt-6 font-sans">
+                <h3 className="text-primary-text font-semibold text-xl sm:text-2xl mt-13 font-sans">
                   {current.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-md mt-2 font-sans min-h-[48px]">
+                <p className="text-primary-text text-sm sm:text-base leading-relaxed max-w-md mt-3 font-sans min-h-[48px]">
                   {current.description}
                 </p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2 mt-4">
+                <div className="flex flex-wrap gap-2 mt-8">
                   {current.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="bg-zinc-900/90 border border-white/10 text-zinc-300 text-xs px-3.5 py-1.5 rounded-full font-medium font-sans"
+                      className="bg-card text-primary-text text-xs px-3.5 py-1.5 rounded-full font-medium font-sans"
                     >
                       {tag}
                     </span>
@@ -189,7 +189,7 @@ export default function OurService() {
           </div>
 
           {/* Service List */}
-          <div className="flex flex-col w-full divide-y divide-white/[0.08]">
+          <div className="flex flex-col w-full">
             {services.map((service, index) => {
               const isActive = activeService === index;
               return (
@@ -197,7 +197,7 @@ export default function OurService() {
                   key={service.id}
                   onMouseEnter={() => setActiveService(index)}
                   onClick={() => setActiveService(index)}
-                  className="group cursor-pointer py-4 sm:py-5 md:py-6 transition-colors duration-200"
+                  className="group cursor-pointer py-2 md:py-4 transition-colors duration-200"
                 >
                   <div className="flex items-baseline gap-3.5 sm:gap-5">
                     <span
@@ -210,7 +210,7 @@ export default function OurService() {
                       [{service.index}]
                     </span>
                     <h3
-                      className={`text-2xl sm:text-3xl md:text-4xl lg:text-[40px] xl:text-[44px] font-bold tracking-tight font-sans transition-colors duration-200 ${
+                      className={`text-2xl sm:text-3xl md:text-4xl lg:text-[40px] xl:text-[50px] font-bold tracking-tight font-sans transition-colors duration-200 ${
                         isActive
                           ? "text-[#F85800]"
                           : "text-zinc-600 group-hover:text-zinc-400"
