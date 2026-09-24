@@ -2,7 +2,7 @@ import Hero from "../components/landing/banner/Hero";
 import Cta from "../components/landing/banner/Cta";
 import Partners from "../components/landing/partners/page";
 import AboutUs from "../components/landing/aboutus/page";
-import OurService from "../components/landing/ourservice/page";
+import OurService from "../components/landing/ourService/page";
 import ProcessSection from "../components/landing/process/ProcessSection";
 import AiSection from "../components/landing/ai/AiSection";
 import ComparisonSection from "../components/landing/comparison/ComparisonSection";
@@ -15,34 +15,31 @@ import BlogSection from "../components/landing/blog/BlogSection";
 import ContactSection from "../components/landing/contact/ContactSection";
 import TestimonialsSection from "../components/landing/testimonials/TestimonialsSection";
 import SectionContainer from "../components/ui/SectionContainer";
-import FeatureWorks from "../components/sections/FeatureWorks";
+import FeatureWorks from "../components/featureWork/page";
 
 export default function Home() {
   return (
     <div className="relative min-h-screen w-full bg-background text-white flex flex-col justify-between overflow-hidden">
       <Hero />
 
-      <SectionContainer
-        extendTopBorder={true}
-      >
+      <SectionContainer extendTopBorder={true}>
         <Partners />
       </SectionContainer>
 
-      <SectionContainer
-        extendTopBorder={false}
-      >
+      <SectionContainer extendTopBorder={false}>
         <AboutUs />
       </SectionContainer>
 
       <SectionContainer extendTopBorder={false}>
-        <OurService/>
+        <OurService />
       </SectionContainer>
 
       {/* <div className="py-10 md:py-[50px]">
         <CaseStudies />
       </div> */}
-
-      {/* <FeatureWorks/> */}
+      <SectionContainer extendTopBorder={false}>
+        <FeatureWorks />
+      </SectionContainer>
 
       <ProcessSection />
 

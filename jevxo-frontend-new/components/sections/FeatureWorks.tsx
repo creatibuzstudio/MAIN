@@ -1,2 +1,2 @@
-export * from "@/app/components/sections/FeatureWorks";
-export { default } from "@/app/components/sections/FeatureWorks";
+export * from "@/app/components/featureWork/page";
+export { default } from "@/app/components/featureWork/page";
