@@ -1,306 +1,451 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Workflow,
+  Sparkles,
+  PencilRuler,
+  FileText,
+  UserCheck,
+  Rocket,
+  type LucideIcon,
+} from "lucide-react";
+import SectionContainer, { GridSpark } from "@/app/components/ui/SectionContainer";
 
-gsap.registerPlugin(ScrollTrigger);
+interface AiFeatureCard {
+  id: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+}
+
+const LEFT_CARDS: AiFeatureCard[] = [
+  {
+    id: "workflows",
+    title: "Agent-Powered Workflows",
+    description:
+      "Turn repetitive tasks into autonomous flows: agents plan, execute, and report with guardrails, audit trails, and clear handoff to humans.",
+    icon: Workflow,
+  },
+  {
+    id: "visual-direction",
+    title: "AI Visual Direction",
+    description:
+      "Visual direction using AI-generated imagery, refined color palettes, clean compositions, and consistent visual elements.",
+    icon: Sparkles,
+  },
+  {
+    id: "wireframing",
+    title: "Faster Wireframing",
+    description:
+      "Wireframing process with AI-assisted ideas, layouts, and user flows. Quickly turn concepts into clear, structured wireframes.",
+    icon: PencilRuler,
+  },
+];
+
+const RIGHT_CARDS: AiFeatureCard[] = [
+  {
+    id: "ux-copy",
+    title: "UX Copy That Converts",
+    description:
+      "Generate strategic UX copy, Craft clear, and user-focused copy, and messaging designed to improve clarity and engagement.",
+    icon: FileText,
+  },
+  {
+    id: "human-ux",
+    title: "Human-Centered AI UX",
+    description:
+      "Use AI-powered insights to understand user behavior, identify friction points, and uncover opportunities for improvement.",
+    icon: UserCheck,
+  },
+  {
+    id: "launches",
+    title: "AI-Assisted Launches",
+    description:
+      "Product launches with AI-assisted workflows that Reduce repetitive tasks and launch digital products more efficiently with faster execution.",
+    icon: Rocket,
+  },
+];
 
 export default function AiSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const hubRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const [paths, setPaths] = useState<string[]>([]);
+  const [junctions, setJunctions] = useState<{
+    left: { x: number; y: number };
+    right: { x: number; y: number };
+  } | null>(null);
+
+  const [pulseActive, setPulseActive] = useState(false);
+  const [isEnergized, setIsEnergized] = useState(false);
+
+  // Dynamic layout & SVG connector calculation
+  const updatePaths = useCallback(() => {
+    if (!containerRef.current || !hubRef.current) return;
+    const cRect = containerRef.current.getBoundingClientRect();
+    const hRect = hubRef.current.getBoundingClientRect();
+
+    const hubCenterY = hRect.top + hRect.height / 2 - cRect.top;
+    const hubLeft = hRect.left - cRect.left;
+    const hubRight = hRect.right - cRect.left;
+
+    // Get 6 card edge attachment coordinates
+    // Indices 0, 1, 2 are Left cards -> attach to their right edge
+    // Indices 3, 4, 5 are Right cards -> attach to their left edge
+    const points = cardRefs.current.map((card, i) => {
+      if (!card) return null;
+      const rect = card.getBoundingClientRect();
+      const centerY = rect.top + rect.height / 2 - cRect.top;
+      const edgeX = i < 3 ? rect.right - cRect.left : rect.left - cRect.left;
+      return { x: edgeX, y: centerY };
+    });
+
+    if (points.some((p) => p === null)) return;
+
+    // Junctions halfway between hub and middle cards
+    const p1 = points[1]!;
+    const p4 = points[4]!;
+    const junctionLeftX = (hubLeft + p1.x) / 2;
+    const junctionRightX = (hubRight + p4.x) / 2;
+
+    setJunctions({
+      left: { x: junctionLeftX, y: hubCenterY },
+      right: { x: junctionRightX, y: hubCenterY },
+    });
+
+    const r = 16; // corner radius for orthogonal routing
+
+    const newPaths: string[] = [
+      // Card 1 (Top Left)
+      `M ${hubLeft} ${hubCenterY} L ${junctionLeftX} ${hubCenterY} L ${junctionLeftX} ${points[0]!.y + r} Q ${junctionLeftX} ${points[0]!.y} ${junctionLeftX - r} ${points[0]!.y} L ${points[0]!.x} ${points[0]!.y}`,
+      // Card 2 (Middle Left)
+      `M ${hubLeft} ${hubCenterY} L ${points[1]!.x} ${hubCenterY}`,
+      // Card 3 (Bottom Left)
+      `M ${hubLeft} ${hubCenterY} L ${junctionLeftX} ${hubCenterY} L ${junctionLeftX} ${points[2]!.y - r} Q ${junctionLeftX} ${points[2]!.y} ${junctionLeftX - r} ${points[2]!.y} L ${points[2]!.x} ${points[2]!.y}`,
+      // Card 4 (Top Right)
+      `M ${hubRight} ${hubCenterY} L ${junctionRightX} ${hubCenterY} L ${junctionRightX} ${points[3]!.y + r} Q ${junctionRightX} ${points[3]!.y} ${junctionRightX + r} ${points[3]!.y} L ${points[3]!.x} ${points[3]!.y}`,
+      // Card 5 (Middle Right)
+      `M ${hubRight} ${hubCenterY} L ${points[4]!.x} ${hubCenterY}`,
+      // Card 6 (Bottom Right)
+      `M ${hubRight} ${hubCenterY} L ${junctionRightX} ${hubCenterY} L ${junctionRightX} ${points[5]!.y - r} Q ${junctionRightX} ${points[5]!.y} ${junctionRightX + r} ${points[5]!.y} L ${points[5]!.x} ${points[5]!.y}`,
+    ];
+
+    setPaths(newPaths);
+  }, []);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Bi-directional GSAP Entrance Reveal for AI Powered Design Cards (Ultra-fast 0.2s blur clear)
-      gsap.fromTo(
-        ".ai-card",
-        { opacity: 0, y: 25, scale: 0.98, filter: "blur(2px)" },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          filter: "blur(0px)",
-          duration: 0.4,
-          stagger: 0.05,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 85%",
-            end: "bottom 15%",
-            toggleActions: "play reverse play reverse",
-          },
-        }
-      );
-    }, sectionRef);
+    updatePaths();
+    window.addEventListener("resize", updatePaths);
+    const ro = new ResizeObserver(updatePaths);
+    if (containerRef.current) ro.observe(containerRef.current);
 
-    return () => ctx.revert();
+    const timer1 = setTimeout(updatePaths, 300);
+    const timer2 = setTimeout(updatePaths, 1000);
+
+    return () => {
+      window.removeEventListener("resize", updatePaths);
+      ro.disconnect();
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, [updatePaths]);
+
+  // Automated 4-second pulse cycle
+  useEffect(() => {
+    let isMounted = true;
+
+    const triggerCycle = () => {
+      if (!isMounted) return;
+      // 1. Fire energetic pulse from center orb
+      setPulseActive(true);
+
+      // 2. Pulse travels along connector lines and reaches cards at 800ms
+      const t1 = setTimeout(() => {
+        if (isMounted) setIsEnergized(true);
+      }, 800);
+
+      // 3. Cards hold glow for ~1.1s, then smoothly transition back
+      const t2 = setTimeout(() => {
+        if (isMounted) {
+          setIsEnergized(false);
+          setPulseActive(false);
+        }
+      }, 1900);
+    };
+
+    const initialTimer = setTimeout(triggerCycle, 600);
+    const interval = setInterval(triggerCycle, 4000);
+
+    return () => {
+      isMounted = false;
+      clearTimeout(initialTimer);
+      clearInterval(interval);
+    };
   }, []);
 
   return (
-    <section ref={sectionRef} id="ai-section" className="relative z-10 w-full py-6 md:py-8 bg-[#F2F2F2] flex justify-center border-t border-gray-100 overflow-hidden">
-      <div className="w-full max-w-[95%] lg:max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 flex flex-col">
-
-        {/* Header Area */}
-        <div
-          className="bg-transparent border mb-10 border-[#003FEA4D] text-[#252323] w-[160px] h-[40px] rounded-full text-[14px] font-normal leading-none tracking-normal inline-flex justify-center items-center gap-1.5 shadow-2xs"
-          style={{ fontFamily: '"Helvetica Now Display", sans-serif' }}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#3b82f6]" />
-          AI Powered Design
-        </div>
-        <div className="flex flex-col pb-8 lg:flex-row lg:items-start justify-between gap-8 mb-10 md:mb-12 w-full">
-          {/* Left Title Area */}
-          <div className="flex flex-col items-start gap-3.5 lg:w-1/2">
-
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[32px] font-medium text-[#0f172a] tracking-tight leading-[1.15]">
-              <span className="block text-[#0f172a]">Smarter Design,</span>
-              <span className="block mt-1 text-[#0f172a]">
-                <span className="font-serif italic font-normal text-[#0f172a]">Supercharged by</span> <span className="font-medium text-[#0f172a]">AI.</span>
-              </span>
-            </h2>
-          </div>
-
-          {/* Right Description Text */}
-          <div className="md:w-[42%] pt-1 md:pt-6">
-            <p
-              className="text-[#000000] text-[20px] font-normal leading-[24px] tracking-[0px]"
-              style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
-            >
-              From wireframes to launch, we blend AI tools with strategy to deliver faster, sharper, and data-led design results.
-            </p>
-          </div>
+      <div id="ai-section" className="w-full flex flex-col items-center">
+        {/* Section Header */}
+        <div className="flex flex-col items-center text-center mb-14 md:mb-20">
+          <span className="text-primary text-sm font-semibold tracking-wide mb-3 block font-sans">
+            [ AI Powered Design ]
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-bold text-white tracking-tight leading-[1.15] text-center font-sans">
+            Smarter Design,{" "}
+            <span className="font-serif italic font-normal text-white">
+              Supercharged by AI.
+            </span>
+          </h2>
+          <p className="text-muted-foreground text-sm md:text-base text-center max-w-xl mx-auto mt-4 font-sans leading-relaxed">
+            From wireframes to launch, we blend AI tools with strategy to
+            deliver faster, sharper, and data-led design results.
+          </p>
         </div>
 
-        {/* Top 2 Cards Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-15  mb-8 md:mb-10 w-full">
-
-          {/* Card 1: UX Copy That Converts */}
-          <div className="ai-card bg-gradient-to-b from-[#FFD7C2] to-white rounded-[22px] p-6 md:p-7 flex flex-col justify-between shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-orange-200/50 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(249,115,22,0.08)] hover:-translate-y-1 min-h-[380px]">
-            {/* Top 8 Dark AI Tool Icons Grid - Balanced Tiles */}
-            <div className="w-full flex justify-center pt-1 pb-4 my-auto">
-              <div className="grid grid-cols-4 gap-2.5 sm:gap-3 max-w-[320px]">
-                <div className="w-[62px] h-[62px] sm:w-[68px] sm:h-[68px] rounded-[16px] bg-[#080d1a] flex items-center justify-center p-2.5 shadow-[0_6px_18px_rgba(0,0,0,0.18)] border border-gray-800/80 hover:scale-105 transition-transform duration-300">
-                  <Image src="/AIPoweredDesign/chgpt.png" alt="ChatGPT" width={38} height={38} className="object-contain" />
-                </div>
-                <div className="w-[62px] h-[62px] sm:w-[68px] sm:h-[68px] rounded-[16px] bg-[#080d1a] flex items-center justify-center p-2.5 shadow-[0_6px_18px_rgba(0,0,0,0.18)] border border-gray-800/80 hover:scale-105 transition-transform duration-300">
-                  <Image src="/AIPoweredDesign/junery.png" alt="Midjourney" width={38} height={38} className="object-contain" />
-                </div>
-                <div className="w-[62px] h-[62px] sm:w-[68px] sm:h-[68px] rounded-[16px] bg-[#080d1a] flex items-center justify-center p-2.5 shadow-[0_6px_18px_rgba(0,0,0,0.18)] border border-gray-800/80 hover:scale-105 transition-transform duration-300">
-                  <Image src="/AIPoweredDesign/figma.png" alt="Figma" width={38} height={38} className="object-contain" />
-                </div>
-                <div className="w-[62px] h-[62px] sm:w-[68px] sm:h-[68px] rounded-[16px] bg-[#080d1a] flex items-center justify-center p-2.5 shadow-[0_6px_18px_rgba(0,0,0,0.18)] border border-gray-800/80 hover:scale-105 transition-transform duration-300">
-                  <Image src="/AIPoweredDesign/figma 2.png" alt="Miro" width={38} height={38} className="object-contain" />
-                </div>
-                <div className="w-[62px] h-[62px] sm:w-[68px] sm:h-[68px] rounded-[16px] bg-[#080d1a] flex items-center justify-center p-2.5 shadow-[0_6px_18px_rgba(0,0,0,0.18)] border border-gray-800/80 hover:scale-105 transition-transform duration-300">
-                  <Image src="/AIPoweredDesign/cloud.png" alt="Claude" width={38} height={38} className="object-contain" />
-                </div>
-                <div className="w-[62px] h-[62px] sm:w-[68px] sm:h-[68px] rounded-[16px] bg-[#080d1a] flex items-center justify-center p-2.5 shadow-[0_6px_18px_rgba(0,0,0,0.18)] border border-gray-800/80 hover:scale-105 transition-transform duration-300">
-                  <Image src="/AIPoweredDesign/loveable 2.png" alt="Framer" width={38} height={38} className="object-contain" />
-                </div>
-                <div className="w-[62px] h-[62px] sm:w-[68px] sm:h-[68px] rounded-[16px] bg-[#080d1a] flex items-center justify-center p-2.5 shadow-[0_6px_18px_rgba(0,0,0,0.18)] border border-gray-800/80 hover:scale-105 transition-transform duration-300">
-                  <Image src="/AIPoweredDesign/cloud2.png" alt="Bolt" width={38} height={38} className="object-contain" />
-                </div>
-                <div className="w-[62px] h-[62px] sm:w-[68px] sm:h-[68px] rounded-[16px] bg-[#080d1a] flex items-center justify-center p-2.5 shadow-[0_6px_18px_rgba(0,0,0,0.18)] border border-gray-800/80 hover:scale-105 transition-transform duration-300">
-                  <Image src="/AIPoweredDesign/yellow.png" alt="Firefly" width={38} height={38} className="object-contain" />
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-1 flex flex-col items-start text-left">
-              <h3
-                className="text-[#000000] pb-2 text-[28px] font-medium leading-[1] tracking-[0px] mb-2"
-                style={{ fontFamily: '"Helvetica Now Display", sans-serif' }}
+        {/* Relative Canvas Area (6 Cards + Center Hub + Circuit) */}
+        <div ref={containerRef} className="relative w-full max-w-6xl mx-auto">
+          {/* Dynamic SVG Connector Lines Overlay (Desktop) */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none z-10 hidden lg:block overflow-visible">
+            <defs>
+              <filter
+                id="ai-pulse-glow"
+                x="-20%"
+                y="-20%"
+                width="140%"
+                height="140%"
               >
-                UX Copy That Converts
-              </h3>
-              <p
-                className="text-[16px] font-normal leading-[1] tracking-[0px] max-w-md"
-                style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
-              >
-                Generate strategic UX copy, CTAs, and messaging designed to improve clarity and engagement.
-              </p>
-            </div>
-          </div>
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
 
-          {/* Card 2: AI Visual Direction */}
-          <div className="ai-card bg-gradient-to-b from-[#FCD6FE] via-[#FAEEFF] to-[#FFF8FE] rounded-[22px] p-6 md:p-7 flex flex-col justify-between shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-purple-200/50 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(236,72,153,0.08)] hover:-translate-y-1 min-h-[380px]">
-            {/* Centered Rows Container */}
-            <div className="w-full flex justify-center items-center my-auto pt-2 pb-4">
-              <div className="flex flex-col space-y-2.5 w-full max-w-[340px]">
-                {/* Row 1 */}
-                <div className="bg-white p-3 rounded-[16px] border border-gray-100/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-center gap-3 hover:shadow-md transition-shadow">
-                  <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center p-2 border border-gray-100 shrink-0">
-                    <Image src="/AIPoweredDesign/figma.png" alt="Figma" width={28} height={28} className="object-contain" />
-                  </div>
-                  <div className="flex-1 space-y-1.5">
-                    <div className="text-[#0a0c16] font-medium text-xs sm:text-sm tracking-tight">Figma Make - Wireframe</div>
-                    <div className="w-36 sm:w-44 h-1.5 bg-gray-100 rounded-full" />
-                  </div>
-                </div>
-
-                {/* Row 2 */}
-                <div className="bg-white p-3 rounded-[16px] border border-gray-100/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-center gap-3 hover:shadow-md transition-shadow">
-                  <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center p-2 border border-gray-100 shrink-0">
-                    <Image src="/AIPoweredDesign/junery.png" alt="Claude" width={28} height={28} className="object-contain" />
-                  </div>
-                  <div className="flex-1 space-y-1.5">
-                    <div className="text-[#0a0c16] font-medium text-xs sm:text-sm tracking-tight">Claude - Research</div>
-                    <div className="w-40 sm:w-48 h-1.5 bg-gray-100 rounded-full" />
-                  </div>
-                </div>
-
-                {/* Row 3 */}
-                <div className="bg-white p-3 rounded-[16px] border border-gray-100/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-center gap-3 hover:shadow-md transition-shadow">
-                  <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center p-2 border border-gray-100 shrink-0">
-                    <Image src="/AIPoweredDesign/loveable 2.png" alt="Loveable" width={28} height={28} className="object-contain" />
-                  </div>
-                  <div className="flex-1 space-y-1.5">
-                    <div className="text-[#0a0c16] font-medium text-xs sm:text-sm tracking-tight">Loveable - Ideation</div>
-                    <div className="w-36 sm:w-44 h-1.5 bg-gray-100 rounded-full" />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-1 flex flex-col items-start text-left">
-              <h3
-                className="text-[#000000] pb-2 text-[28px] font-medium leading-[1] tracking-[0px] mb-2"
-                style={{ fontFamily: '"Helvetica Now Display", sans-serif' }}
-              >
-                AI Visual Direction
-              </h3>
-              <p
-                className="text-[16px] font-normal leading-[1] tracking-[0px] max-w-md"
-                style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
-              >
-                Create faster visual concepts, UI inspirations, &amp; brand-ready creative assets with AI workflows.
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Bottom 3 Cards Row */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-13 w-full">
-
-          {/* Bottom Card 1: Smarter UX Insights */}
-          <div className="ai-card bg-gradient-to-b from-[#DCDCFE] via-[#ECECFF] to-white rounded-[22px] p-6 md:p-7 flex flex-col justify-between h-[380px] shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-indigo-100/80 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(99,102,241,0.08)] hover:-translate-y-1">
-            {/* Centered White Row Badges */}
-            <div className="w-full flex justify-center items-center my-auto pt-1 pb-3">
-              <div className="flex flex-col space-y-2.5 w-full">
-                {/* Row 1 */}
-                <div className="bg-white p-3 rounded-[16px] border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-center gap-3 hover:shadow-md transition-shadow">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-b from-[#f0f4ff] to-[#e6edff] flex items-center justify-center p-1.5 border border-blue-100/60 shrink-0">
-                    <Image src="/AIPoweredDesign/data.png" alt="Data Insights" width={24} height={24} className="object-contain" />
-                  </div>
-                  <div className="flex-1 space-y-1">
-                    <div className="text-[#0a0c16] font-medium text-xs sm:text-sm tracking-tight">Data Insights</div>
-                    <div className="w-24 sm:w-32 h-1 bg-gray-100/90 rounded-full" />
-                  </div>
-                </div>
-
-                {/* Row 2 */}
-                <div className="bg-white p-3 rounded-[16px] border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-center gap-3 hover:shadow-md transition-shadow">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-b from-[#fdf0f5] to-[#fce4ee] flex items-center justify-center p-1.5 border border-pink-100/60 shrink-0">
-                    <Image src="/AIPoweredDesign/sketh.png" alt="Sketch & Wireframe" width={24} height={24} className="object-contain" />
-                  </div>
-                  <div className="flex-1 space-y-1">
-                    <div className="text-[#0a0c16] font-medium text-xs sm:text-sm tracking-tight">Sketch &amp; Wireframe</div>
-                    <div className="w-20 sm:w-28 h-1 bg-gray-100/90 rounded-full" />
-                  </div>
-                </div>
-
-                {/* Row 3 */}
-                <div className="bg-white p-3 rounded-[16px] border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-center gap-3 hover:shadow-md transition-shadow">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-b from-[#eefbf6] to-[#dcf6ec] flex items-center justify-center p-1.5 border border-emerald-100/60 shrink-0">
-                    <Image src="/AIPoweredDesign/cloud2.png" alt="Journey Analysis" width={24} height={24} className="object-contain" />
-                  </div>
-                  <div className="flex-1 space-y-1">
-                    <div className="text-[#0a0c16] font-medium text-xs sm:text-sm tracking-tight">Journey Analysis</div>
-                    <div className="w-28 sm:w-36 h-1 bg-gray-100/90 rounded-full" />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-1 flex flex-col items-start text-left">
-              <h3
-                className="text-[#000000] pb-2 text-[28px] font-medium leading-[1] tracking-[0px] mb-2"
-                style={{ fontFamily: '"Helvetica Now Display", sans-serif' }}
-              >
-                Smarter UX Insights
-              </h3>
-              <p
-                className="text-[16px] font-normal leading-[1] tracking-[0px] max-w-md"
-                style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
-              >
-                Use AI-powered analytics and heatmaps to understand user behavior before launch.
-              </p>
-            </div>
-          </div>
-
-          {/* Bottom Card 2: Faster Wireframing */}
-          <div className="ai-card bg-gradient-to-b from-[#FFEBD9] via-[#FFF3E8] to-[#FFF9F2] rounded-[22px] p-6 md:p-7 flex flex-col justify-between h-[380px] shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-amber-200/50 relative overflow-hidden transition-all duration-300 hover:shadow-[0_12px_40px_rgba(245,158,11,0.08)] hover:-translate-y-1">
-            {/* Centered Mockup Image */}
-            <div className="w-full flex justify-center items-center my-auto pt-1 pb-3">
-              <Image
-                src="/AIPoweredDesign/faster.png"
-                alt="Faster Wireframing Mockups"
-                width={280}
-                height={180}
-                className="object-contain"
+            {/* Base Connector Lines */}
+            {paths.map((p, idx) => (
+              <path
+                key={`base-${idx}`}
+                d={p}
+                fill="none"
+                stroke="rgba(255, 255, 255, 0.12)"
+                strokeWidth="1.5"
               />
+            ))}
+
+            {/* Energetic Outward Traveling Pulse Beams */}
+            {pulseActive &&
+              paths.map((p, idx) => (
+                <motion.path
+                  key={`pulse-${idx}`}
+                  d={p}
+                  fill="none"
+                  stroke="#FE5A00"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  filter="url(#ai-pulse-glow)"
+                  initial={{ pathLength: 0, pathOffset: 0, opacity: 0 }}
+                  animate={{
+                    pathLength: [0, 0.32, 0.32, 0],
+                    pathOffset: [0, 0.2, 0.75, 1],
+                    opacity: [0, 1, 1, 0],
+                  }}
+                  transition={{
+                    duration: 0.82,
+                    ease: "easeInOut",
+                  }}
+                />
+              ))}
+          </svg>
+
+          {/* Branch Junction Diamond Sparks */}
+          {junctions && (
+            <div className="hidden lg:block pointer-events-none">
+              {/* Left Junction Spark */}
+              <div
+                className="absolute -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none"
+                style={{ left: junctions.left.x, top: junctions.left.y }}
+              >
+                <motion.div
+                  animate={
+                    pulseActive
+                      ? {
+                          scale: [1, 1.45, 1],
+                          filter: [
+                            "drop-shadow(0 0 2px rgba(248,88,0,0.4))",
+                            "drop-shadow(0 0 10px rgba(248,88,0,1))",
+                            "drop-shadow(0 0 2px rgba(248,88,0,0.4))",
+                          ],
+                        }
+                      : { scale: 1 }
+                  }
+                  transition={{ duration: 0.45, delay: 0.35 }}
+                >
+                  <GridSpark className="w-3.5 h-3.5 text-primary" />
+                </motion.div>
+              </div>
+
+              {/* Right Junction Spark */}
+              <div
+                className="absolute -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none"
+                style={{ left: junctions.right.x, top: junctions.right.y }}
+              >
+                <motion.div
+                  animate={
+                    pulseActive
+                      ? {
+                          scale: [1, 1.45, 1],
+                          filter: [
+                            "drop-shadow(0 0 2px rgba(248,88,0,0.4))",
+                            "drop-shadow(0 0 10px rgba(248,88,0,1))",
+                            "drop-shadow(0 0 2px rgba(248,88,0,0.4))",
+                          ],
+                        }
+                      : { scale: 1 }
+                  }
+                  transition={{ duration: 0.45, delay: 0.35 }}
+                >
+                  <GridSpark className="w-3.5 h-3.5 text-primary" />
+                </motion.div>
+              </div>
+            </div>
+          )}
+
+          {/* Responsive Layout: 3 Columns on desktop, stacked on mobile */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-0 items-center">
+            {/* Left Column: 3 Cards */}
+            <div className="lg:col-span-5 flex flex-col gap-5 sm:gap-6 z-20">
+              {LEFT_CARDS.map((card, idx) => (
+                <motion.div
+                  key={card.id}
+                  ref={(el) => {
+                    cardRefs.current[idx] = el;
+                  }}
+                  animate={{
+                    borderColor: isEnergized
+                      ? "var(--color-primary, #FE5A00)"
+                      : "rgba(255, 255, 255, 0.1)",
+                    boxShadow: isEnergized
+                      ? "0 0 32px rgba(248, 88, 0, 0.28)"
+                      : "0 0 0px rgba(0, 0, 0, 0)",
+                  }}
+                  transition={{ duration: 0.45 }}
+                  className="bg-card rounded-2xl p-6 border border-border transition-colors duration-500 relative flex flex-col justify-center min-h-[160px] sm:min-h-[175px]"
+                >
+                  {/* Badge Icon */}
+                  <div className="w-11 h-11 rounded-xl bg-primary flex items-center justify-center text-white shrink-0 shadow-[0_0_20px_rgba(248,88,0,0.35)]">
+                    <card.icon className="w-5 h-5 stroke-[2]" />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-white font-semibold text-lg sm:text-xl font-sans mt-4 mb-2 tracking-tight">
+                    {card.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed font-sans font-normal">
+                    {card.description}
+                  </p>
+                </motion.div>
+              ))}
             </div>
 
-            <div className="pt-1 flex flex-col items-start text-left">
-              <h3
-                className="text-[#000000] pb-2 text-[28px] font-medium leading-[1] tracking-[0px] mb-2"
-                style={{ fontFamily: '"Helvetica Now Display", sans-serif' }}
+            {/* Center Column: Glowing Central Hub */}
+            <div className="lg:col-span-2 flex items-center justify-center py-8 lg:py-0 z-30">
+              <div
+                ref={hubRef}
+                className="relative flex items-center justify-center"
               >
-                Faster Wireframing
-              </h3>
-              <p
-                className="text-[16px] font-normal leading-[1] tracking-[0px] max-w-md"
-                style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
-              >
-                Rapidly transform ideas into wireframes and structured product flows with AI-assisted systems.
-              </p>
+                {/* Outward Expanding Energy Ripple Ring */}
+                <AnimatePresence>
+                  {pulseActive && (
+                    <motion.div
+                      initial={{ scale: 0.85, opacity: 0.9 }}
+                      animate={{ scale: 1.55, opacity: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.85, ease: "easeOut" }}
+                      className="absolute inset-0 rounded-full border-2 border-primary pointer-events-none"
+                    />
+                  )}
+                </AnimatePresence>
+
+                {/* Soft Outer Ambient Glow */}
+                <div className="absolute inset-0 rounded-full bg-primary/25 blur-2xl pointer-events-none scale-125" />
+
+                {/* Central Orb with Creatibuz Symbol */}
+                <motion.div
+                  animate={
+                    pulseActive
+                      ? {
+                          scale: [1, 1.08, 1],
+                          boxShadow: [
+                            "0 0 50px rgba(248,88,0,0.55)",
+                            "0 0 90px rgba(248,88,0,0.9)",
+                            "0 0 50px rgba(248,88,0,0.55)",
+                          ],
+                        }
+                      : {
+                          scale: 1,
+                          boxShadow: "0 0 50px rgba(248,88,0,0.55)",
+                        }
+                  }
+                  transition={{ duration: 0.8, ease: "easeInOut" }}
+                  className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-38 lg:h-38 rounded-full bg-primary flex items-center justify-center p-6 shadow-[0_0_60px_rgba(248,88,0,0.55)] cursor-pointer select-none"
+                >
+                  <Image
+                    src="/creatibuz-symbol.png"
+                    alt="Creatibuz Studio"
+                    width={84}
+                    height={84}
+                    className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]"
+                    priority
+                  />
+                </motion.div>
+              </div>
+            </div>
+
+            {/* Right Column: 3 Cards */}
+            <div className="lg:col-span-5 flex flex-col gap-5 sm:gap-6 z-20">
+              {RIGHT_CARDS.map((card, idx) => (
+                <motion.div
+                  key={card.id}
+                  ref={(el) => {
+                    cardRefs.current[idx + 3] = el;
+                  }}
+                  animate={{
+                    borderColor: isEnergized
+                      ? "var(--color-primary, #FE5A00)"
+                      : "rgba(255, 255, 255, 0.1)",
+                    boxShadow: isEnergized
+                      ? "0 0 32px rgba(248, 88, 0, 0.28)"
+                      : "0 0 0px rgba(0, 0, 0, 0)",
+                  }}
+                  transition={{ duration: 0.45 }}
+                  className="bg-card rounded-2xl p-6 border border-border transition-colors duration-500 relative flex flex-col justify-center min-h-[160px] sm:min-h-[175px]"
+                >
+                  {/* Badge Icon */}
+                  <div className="w-11 h-11 rounded-xl bg-primary flex items-center justify-center text-white shrink-0 shadow-[0_0_20px_rgba(248,88,0,0.35)]">
+                    <card.icon className="w-5 h-5 stroke-[2]" />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-white font-semibold text-lg sm:text-xl font-sans mt-4 mb-2 tracking-tight">
+                    {card.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed font-sans font-normal">
+                    {card.description}
+                  </p>
+                </motion.div>
+              ))}
             </div>
           </div>
-
-          {/* Bottom Card 3: AI-Assisted Launches */}
-          <div className="ai-card bg-gradient-to-b from-[#FFD5DC] via-[#FFEBEF] to-[#FFF5F7] rounded-[22px] p-6 md:p-7 flex flex-col justify-between h-[380px] shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-rose-200/50 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(244,63,94,0.08)] hover:-translate-y-1">
-            {/* Centered Graphic */}
-            <div className="w-full flex justify-center items-center my-auto pt-1 pb-3">
-              <Image
-                src="/AIPoweredDesign/Group 1707480850.png"
-                alt="AI-Assisted Launches Graphic"
-                width={300}
-                height={130}
-                className="object-contain"
-              />
-            </div>
-
-            <div className="pt-1 flex flex-col items-start text-left">
-              <h3
-                className="text-[#000000] pb-2 text-[28px] font-medium leading-[1] tracking-[0px] mb-2"
-                style={{ fontFamily: '"Helvetica Now Display", sans-serif' }}
-              >
-                AI-Assisted Launches
-              </h3>
-              <p
-                className="text-[16px] font-normal leading-[1] tracking-[0px] max-w-md"
-                style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
-              >
-                Reduce repetitive tasks and launch digital products more efficiently with faster execution workflows.
-              </p>
-            </div>
-          </div>
-
         </div>
-
       </div>
-    </section>
   );
 }

@@ -94,3 +94,21 @@ body {
   animation: border-spin 6s linear infinite;
 }
 
+@layer utilities {
+  @keyframes heartbeatGlow {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 0 15px rgba(248, 88, 0, 0.4);
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(248, 88, 0, 0.8);
+    }
+  }
+
+  .animate-heartbeat-glow {
+    animation: heartbeatGlow 2s ease-in-out infinite;
+  }
+}
+
+

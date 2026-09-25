@@ -19,7 +19,7 @@ import FeatureWorks from "../components/featureWork/page";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen w-full bg-background text-white flex flex-col justify-between overflow-hidden">
+    <div className="relative min-h-screen w-full bg-background text-primary-text flex flex-col justify-between overflow-hidden">
       <Hero />
 
       <SectionContainer extendTopBorder={true}>
@@ -34,18 +34,18 @@ export default function Home() {
         <OurService />
       </SectionContainer>
 
-      {/* <div className="py-10 md:py-[50px]">
-        <CaseStudies />
-      </div> */}
       <SectionContainer extendTopBorder={false}>
         <FeatureWorks />
       </SectionContainer>
 
+      {/* <div className="py-10 md:py-[50px]">
+        <CaseStudies />
+      </div> */}
       <ProcessSection />
 
-      <div className="pt-16 pb-10 md:pt-[100px] md:pb-[50px]">
+      <SectionContainer extendTopBorder={false}>
         <AiSection />
-      </div>
+      </SectionContainer>
 
       <ComparisonSection />
 
