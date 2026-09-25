@@ -2,67 +2,52 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SectionContainer from "@/app/components/ui/SectionContainer";
 
 const steps = [
   {
     step: "Step 01",
     title: "Understand",
-    description: "Business goals and strategy, user persona and pinpoints, competitors analysis.",
-    icon: "/DesignProcess/Understand.png",
-    img: "/Jevxo/01.png",
-    bg: "bg-[#eef2ff]",
+    description: "Business goals and strategy, persona and pinpoints, competitors analysis.",
+    icon: "/designprocess/Understand.png",
   },
   {
     step: "Step 02",
     title: "Define",
     description: "UX Strategy, information architecture, userflows, moodboard, visual direction.",
-    icon: "/DesignProcess/Define.png",
-    img: "/Jevxo/02.png",
-    bg: "bg-[#fff1f2]",
+    icon: "/designprocess/Define.png",
   },
   {
     step: "Step 03",
     title: "Ideate",
-    description: "Brainstorming, problem solution propose, sketches, wireframing.",
-    icon: "/DesignProcess/Ideate.png",
-    img: "/Jevxo/03.png",
-    bg: "bg-[#ecfdf5]",
+    description: "Brainstorming, problem solution propose, sketching, wireframing.",
+    icon: "/designprocess/Ideate.png",
   },
   {
     step: "Step 04",
     title: "Design",
-    description: "Brand Style guide, Final design, design system, interface design.",
-    icon: "/DesignProcess/Design.png",
-    img: "/Jevxo/04.png",
-    bg: "bg-[#f5f3ff]",
+    description: "Brand Style guide, Final ui design, design system, interface design.",
+    icon: "/designprocess/Design.png",
   },
   {
     step: "Step 05",
     title: "Testing",
-    description: "Interactive Prototyping, testing, feedback collection and implementation.",
-    icon: "/DesignProcess/Testing.png",
-    img: "/Jevxo/05.png",
-    bg: "bg-[#fefce8]",
+    description: "Interactive Prototyping, Usability testing, feedback collection, and implementation.",
+    icon: "/designprocess/Testing.png",
   },
   {
     step: "Step 06",
     title: "Approval",
     description: "Submission, Asset preparation, exports.",
-    icon: "/DesignProcess/Approval.png",
-    img: "/Jevxo/06.png",
-    bg: "bg-[#f0fdf4]",
+    icon: "/designprocess/Approval.png",
   },
   {
     step: "Step 07",
     title: "Final Delivery",
     description: "Dev handoff, documentation, organize Figma file.",
-    icon: "/DesignProcess/Final Delivery.png",
-    img: "/Jevxo/07.png",
-    bg: "bg-[#eef9ff]",
+    icon: "/designprocess/Final Delivery.png",
   },
 ];
 
@@ -91,9 +76,9 @@ export default function ProcessSection() {
           trigger: sectionRef.current,
           pin: true,
           pinSpacing: true,
-          scrub: 2.5, // Increased scrub for smoother, floatier momentum
+          scrub: 2.5, // Smooth momentum
           start: "top top",
-          end: () => `+=${(cards.length - 1) * 700}`, // Increased scroll distance to make the animation slower
+          end: () => `+=${(cards.length - 1) * 700}`, // Scroll distance for card stacking
           invalidateOnRefresh: true,
           anticipatePin: 1,
         },
@@ -106,10 +91,10 @@ export default function ProcessSection() {
           cards[i],
           {
             x: targetX,
-            ease: "power2.inOut", 
-            duration: 1, 
+            ease: "power2.inOut",
+            duration: 1,
           },
-          (i - 1) * 0.4 // Reduced this value so the next card starts moving much sooner, closing the visual gap
+          (i - 1) * 0.4
         );
       }
     }, sectionRef);
@@ -128,85 +113,56 @@ export default function ProcessSection() {
     <section
       ref={sectionRef}
       id="process"
-      className="relative z-10 w-full py-12 md:py-16 flex justify-center overflow-hidden"
-      style={{
-        background:
-          "radial-gradient(76.69% 76.69% at 48.99% 95.89%, #000921 0%, #156FFF 54.67%, #000B27 99.85%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))",
-      }}
+      className="relative z-10 w-full overflow-hidden bg-background flex justify-center"
     >
-      {/* Local keyframes for the ambient animated background + stacked-card hover priority */}
+      {/* Background Image Asset */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <Image
+          src="/designprocess/designProcess-bg.png"
+          alt="Design Process Background"
+          fill
+          priority
+          className="object-cover object-center select-none"
+        />
+      </div>
+
+      {/* Local style for stacking hover priority */}
       <style>{`
-        @keyframes floatBlobOne {
-          0%, 100% { transform: translate(0px, 0px) scale(1); }
-          50% { transform: translate(50px, 35px) scale(1.18); }
-        }
-        @keyframes floatBlobTwo {
-          0%, 100% { transform: translate(0px, 0px) scale(1); }
-          50% { transform: translate(-45px, -35px) scale(1.12); }
-        }
-        @keyframes floatBlobThree {
-          0%, 100% { transform: translate(0px, 0px) scale(1); opacity: 0.22; }
-          50% { transform: translate(20px, -25px) scale(1.08); opacity: 0.32; }
-        }
-        @keyframes gridDrift {
-          0% { background-position: 0px 0px, 0px 0px; }
-          100% { background-position: 60px 60px, 60px 60px; }
-        }
         .process-card:hover {
           z-index: 50 !important;
         }
       `}</style>
 
-      {/* Ambient animated glow blobs */}
-      <div
-        className="absolute -top-32 -left-16 w-[440px] h-[440px] rounded-full bg-[#2563eb] opacity-30 blur-[110px] pointer-events-none z-0"
-        style={{ animation: "floatBlobOne 14s ease-in-out infinite" }}
-      />
-      <div
-        className="absolute top-1/4 -right-20 w-[380px] h-[380px] rounded-full bg-[#4f46e5] opacity-25 blur-[100px] pointer-events-none z-0"
-        style={{ animation: "floatBlobTwo 18s ease-in-out infinite" }}
-      />
-      <div
-        className="absolute bottom-0 left-1/3 w-[320px] h-[320px] rounded-full bg-[#3b82f6] opacity-20 blur-[100px] pointer-events-none z-0"
-        style={{ animation: "floatBlobThree 16s ease-in-out infinite" }}
-      />
-
-      {/* Grid pattern overlay (slow drift) */}
-      <div
-        className="absolute inset-0 opacity-20 pointer-events-none z-0 bg-[length:60px_60px]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(255, 255, 255, 0.25) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.25) 1px, transparent 1px)",
-          animation: "gridDrift 20s linear infinite",
-        }}
-      />
-
-      <div className="relative z-10 w-full max-w-[95%] lg:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col">
-
-        {/* Header Area */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-12 md:mb-16 w-full">
-          {/* Left Title Area */}
-          <div className="flex flex-col items-start gap-4 lg:w-1/2">
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-1.5 rounded-full text-xs font-medium tracking-wide inline-flex items-center gap-2 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#3b82f6]" />
-              Design Process
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[44px] font-bold text-white tracking-tight leading-[1.12]">
+      {/* SectionContainer Wrapper */}
+      <div className="relative z-10 w-full max-w-[95%] lg:max-w-7xl mx-auto flex flex-col px-4 sm:px-6 md:px-8 py-16 md:py-24 lg:py-32">
+        {/* Header Area (Split 2-Column) */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12 md:mb-16 w-full">
+          {/* Left Column Headline */}
+          <div className="flex flex-col items-start lg:w-1/2">
+            <span className="text-[#F85800] text-base md:text-xl mb-4">
+              [ Design Process ]
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-foreground tracking-tight leading-[1.15] font-sans max-w-lg">
               A Faster Way To Design <br className="hidden sm:block" />
-              And Build <span className="font-serif italic font-normal text-white">SaaS Products.</span>
+              And Build{" "}
+              <span className="font-serif italic font-normal text-foreground">
+                SaaS Products.
+              </span>
             </h2>
           </div>
 
-          {/* Right Description Text */}
-          <div className="lg:w-[40%] pt-1">
-            <p className="text-sm sm:text-base text-gray-300 font-normal leading-relaxed">
-              We simplify the product creation process for SaaS companies by combining strategy, design, and development into one efficient workflow focused on faster launches.
+          {/* Right Column Description */}
+          <div className="lg:w-[45%] flex items-end">
+            <p className="text-foreground text-sm md:text-base leading-relaxed font-sans max-w-md lg:ml-auto">
+              We simplify the product creation process for SaaS companies by
+              combining strategy, design, &amp; development into one efficient
+              workflow focused on faster launches.
             </p>
           </div>
         </div>
 
         {/* Dynamic Horizontal Pinned Track — smooth 1/3 card stacking on scroll */}
-        <div className="w-full py-4 ">
+        <div className="w-full py-4">
           <div
             ref={trackRef}
             className="flex flex-nowrap gap-6 w-max min-w-full"
@@ -215,49 +171,44 @@ export default function ProcessSection() {
               <div
                 key={index}
                 style={{ zIndex: index + 1 }}
-                className="process-card relative w-[270px] sm:w-[290px] lg:w-[310px] shrink-0 rounded-[28px] bg-white p-6 sm:p-7 flex flex-col items-start text-left h-[370px] sm:h-[390px] overflow-hidden will-change-transform shadow-[-12px_0_30px_rgba(0,0,0,0.15),0_20px_45px_rgba(0,0,0,0.25)] hover:-translate-y-2.5 hover:shadow-[0_30px_60px_rgba(0,0,0,0.35)] transition-shadow duration-300"
+                className="process-card group relative flex w-70 shrink-0 flex-col items-start overflow-hidden rounded-2xl bg-white px-6 py-10 text-left shadow-[-16px_0_35px_rgba(0,0,0,0.12),0_20px_45px_rgba(0,0,0,0.22)] transition-all duration-300 will-change-transform hover:-translate-y-2 hover:shadow-[-20px_0_40px_rgba(0,0,0,0.16),0_30px_60px_rgba(0,0,0,0.3)] md:px-8 md:py-10
+  after:absolute after:-bottom-16 after:-left-16 after:-z-10 after:h-50 after:w-50 after:rounded-full after:bg-primary after:opacity-0 after:blur-3xl after:transition-all after:duration-500
+  hover:after:opacity-50 hover:after:scale-110"
               >
-                {/* Icon Box */}
-                <div className="mb-6">
-                  <div className="w-14 h-14 flex items-center justify-center bg-transparent">
-                    <Image
-                      src={item.icon}
-                      alt={`${item.title} icon`}
-                      width={44}
-                      height={44}
-                      className="object-contain"
-                    />
+                {/* Content Wrapper to stay above the ambient glow */}
+                <div className="relative z-10 w-full flex flex-col items-start">
+                  {/* Icon Box */}
+                  <div className="mb-10">
+                    <div className="flex h-12 w-12 items-center justify-center bg-transparent">
+                      <Image
+                        src={item.icon}
+                        alt={`${item.title} icon`}
+                        width={44}
+                        height={44}
+                        className="object-contain"
+                      />
+                    </div>
                   </div>
+
+                  {/* Step Badge Pill */}
+                  <span className="mb-4 inline-block rounded-full bg-[#F2F2F2] px-3.5 py-1 font-sans text-xs font-semibold text-zinc-600">
+                    {item.step}
+                  </span>
+
+                  {/* Title */}
+                  <h3 className="mb-4 font-sans text-2xl font-bold tracking-tight text-zinc-950 lg:text-[28px]">
+                    {item.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="font-sans text-sm leading-relaxed text-zinc-800 sm:text-[15px]">
+                    {item.description}
+                  </p>
                 </div>
-
-                {/* Step Badge */}
-                <span 
-                  className="bg-[#E1E0E24D] text-[#475569] w-[77px] h-[28px] rounded-[25px] flex items-center justify-center text-[14px] font-normal leading-[1.4] tracking-[0px] mb-3"
-                  style={{ fontFamily: '"Helvetica Now Display", sans-serif' }}
-                >
-                  {item.step}
-                </span>
-
-                {/* Title */}
-                <h3 
-                  className="text-[#0f172a] text-[36px] font-medium leading-[1.2] tracking-[-1px] mb-2.5"
-                  style={{ fontFamily: '"Helvetica Now Display", sans-serif' }}
-                >
-                  {item.title}
-                </h3>
-
-                {/* Description */}
-                <p 
-                  className="text-[#64748b] text-[20px] font-normal leading-[1.4] tracking-[0px]"
-                  style={{ fontFamily: '"Helvetica Now Display", sans-serif' }}
-                >
-                  {item.description}
-                </p>
               </div>
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );

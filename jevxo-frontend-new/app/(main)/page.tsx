@@ -47,7 +47,9 @@ export default function Home() {
         <AiSection />
       </SectionContainer>
 
-      <ComparisonSection />
+      <SectionContainer extendTopBorder={false}>
+        <ComparisonSection />
+      </SectionContainer>
 
       <div className="pt-12 pb-16 md:pt-[50px] md:pb-[120px]">
         <PricingSection />

@@ -131,7 +131,12 @@ export default function Partners() {
 
             {/* Avatar 4: Glowing Brand Orange Avatar */}
             <div className="flex justify-center items-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-primary shadow-[0_0_50px_rgba(248,88,0,150)] -ml-2.5 z-30">
-              <Image src="/logo-skeleton.png" alt="logo skeleton" width={20} height={10} />
+              <Image
+                src="/creatibuz-symbol.png"
+                alt="logo skeleton"
+                width={20}
+                height={10}
+              />
             </div>
           </div>
 

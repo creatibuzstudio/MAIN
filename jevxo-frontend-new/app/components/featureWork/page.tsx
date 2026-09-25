@@ -93,7 +93,7 @@ export default function FeatureWorksPage({
     <div id="feature-works" className={`relative w-full ${className}`}>
       {/* Header Area */}
       <div className="flex flex-col items-center text-center mb-12 sm:mb-16 md:mb-20">
-        <span className="text-[#F85800] text-lg md:text-xl lg:text-2xl font-semibold tracking-wider font-sans mb-3 block">
+        <span className="text-[#F85800] text-lg md:text-xl font-semibold tracking-wider font-sans mb-3 block">
           [ Feature Work ]
         </span>
         <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-primary-text tracking-tight leading-[1.18] max-w-5xl mx-auto">
