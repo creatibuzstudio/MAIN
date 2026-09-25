@@ -16,7 +16,6 @@ import ContactSection from "../components/landing/contact/ContactSection";
 import TestimonialsSection from "../components/landing/testimonials/TestimonialsSection";
 import SectionContainer from "../components/ui/SectionContainer";
 import FeatureWorks from "../components/featureWork/page";
-import Feature from "../components/landing/feature/feature";
 
 export default function Home() {
   return (
@@ -75,8 +74,6 @@ export default function Home() {
       <div className="pb-16 md:pb-[80px]">
         <TestimonialsSection />
       </div>
-
-      <Feature />
     </div>
   );
 }
