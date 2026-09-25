@@ -16,6 +16,7 @@ import ContactSection from "../components/landing/contact/ContactSection";
 import TestimonialsSection from "../components/landing/testimonials/TestimonialsSection";
 import SectionContainer from "../components/ui/SectionContainer";
 import FeatureWorks from "../components/featureWork/page";
+import WorkMarqueeSection from "../components/landing/marquee/WorkMarqueeSection";
 
 export default function Home() {
   return (
@@ -34,13 +35,11 @@ export default function Home() {
         <OurService />
       </SectionContainer>
 
-      <SectionContainer extendTopBorder={false}>
+      {/* <SectionContainer extendTopBorder={false}> */}
         <FeatureWorks />
-      </SectionContainer>
+      {/* </SectionContainer> */}
 
-      {/* <div className="py-10 md:py-[50px]">
-        <CaseStudies />
-      </div> */}
+
       <ProcessSection />
 
       <SectionContainer extendTopBorder={false}>
@@ -50,6 +49,8 @@ export default function Home() {
       <SectionContainer extendTopBorder={false}>
         <ComparisonSection />
       </SectionContainer>
+      
+      <WorkMarqueeSection />
 
       <div className="pt-12 pb-16 md:pt-[50px] md:pb-[120px]">
         <PricingSection />

@@ -114,26 +114,38 @@ export default function Hero() {
 
         {/* Main Hero Content */}
         <section className="relative z-10 w-full">
-          <main className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 pt-42.5 pb-16 md:pb-20 lg:pb-24 w-full max-w-6xl mx-auto">
-            {/* Top Social Proof Pill Badge */}
+          <main className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 pt-41.5 pb-16 md:pb-20 lg:pb-24 w-full max-w-6xl mx-auto">
             <motion.div
               variants={fadeUp}
               initial="hidden"
               animate="visible"
               custom={0}
-              whileHover={{ scale: 1.02 }}
-              className="inline-flex items-center gap-2.5 sm:gap-3 px-4 py-1.5 mb-8 sm:mb-10 cursor-pointer group transition-all duration-300 hover:border-white/20"
+              whileHover={{ scale: 1.04 }}
+              className="relative p-[1px] inline-flex items-center justify-center overflow-hidden rounded-full mb-8 sm:mb-10 cursor-pointer group transition-all duration-300 shadow-[0_0_15px_rgba(254,90,0,0.05)] hover:shadow-[0_0_25px_rgba(254,90,0,0.35)]"
             >
-              <Image
-                src="/hero1.png"
-                alt="SaaS Tool Stack"
-                width={100}
-                height={22}
-                className="h-4 sm:h-[18px] w-auto object-contain shrink-0 brightness-95"
+              {/* 1. Continuous Spinning Brand Border */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 3.5, 
+                  ease: "linear",
+                }}
+                className="absolute inset-0 w-[200%] h-[200%] top-[-50%] left-[-50%] origin-center bg-[conic-gradient(from_0deg,transparent_30%,#FE5A00_50%,transparent_70%,#FE5A00_100%)] opacity-60 group-hover:opacity-100 transition-opacity duration-500"
               />
-              <span className="text-[12px] sm:text-[13px] font-normal text-gray-300 tracking-tight font-sans">
-                Helped 50+ SaaS founders &amp; startup
-              </span>
+
+              <div className="relative z-10 flex items-center gap-2.5 sm:gap-3 bg-[#1F1F1F] hover:bg-[#141414] px-2.5  pr-4 py-2 rounded-full transition-colors duration-300">
+                <Image
+                  src="/hero1.png"
+                  alt="SaaS Tool Stack"
+                  width={150}
+                  height={22}
+                  className="h-4 sm:h-[25px] w-auto object-contain shrink-0 brightness-110"
+                />
+                <span className="text-[12px] sm:text-[13px] font-medium text-gray-200 tracking-tight font-sans">
+                  Helped 50+ SaaS founders & startups
+                </span>
+              </div>
             </motion.div>
 
             {/* Main Headline (H1) - Medium Weight Typography with Italic Serif Ampersands */}
@@ -215,7 +227,7 @@ export default function Hero() {
                   {row1List.map((src, index) => (
                     <div
                       key={`row1-${index}`}
-                      className="relative flex-shrink-0 w-[300px] sm:w-[420px] md:w-[480px] lg:w-[520px] h-[200px] sm:h-[270px] md:h-[310px] lg:h-[330px] rounded-2xl overflow-hidden border border-white/10 shadow-[0_16px_36px_rgba(0,0,0,0.7)] bg-[#101012] transition-all duration-300 hover:border-white/25 hover:shadow-[0_20px_45px_rgba(0,0,0,0.9)]"
+                      className="relative flex-shrink-0 w-[300px] sm:w-[420px] md:w-[480px] lg:w-[520px] h-[200px] sm:h-[270px] md:h-[310px] lg:h-[330px] rounded-lg overflow-hidden border border-white/10 shadow-[0_16px_36px_rgba(0,0,0,0.7)] bg-[#101012] transition-all duration-300 hover:border-white/25 hover:shadow-[0_20px_45px_rgba(0,0,0,0.9)]"
                     >
                       <Image
                         src={src}
@@ -235,7 +247,7 @@ export default function Hero() {
                   {row2List.map((src, index) => (
                     <div
                       key={`row2-${index}`}
-                      className="relative flex-shrink-0 w-[300px] sm:w-[420px] md:w-[480px] lg:w-[520px] h-[200px] sm:h-[270px] md:h-[310px] lg:h-[330px] rounded-2xl overflow-hidden border border-white/10 shadow-[0_16px_36px_rgba(0,0,0,0.7)] bg-[#101012] transition-all duration-300 hover:border-white/25 hover:shadow-[0_20px_45px_rgba(0,0,0,0.9)]"
+                      className="relative flex-shrink-0 w-[300px] sm:w-[420px] md:w-[480px] lg:w-[520px] h-[200px] sm:h-[270px] md:h-[310px] lg:h-[330px] rounded-lg overflow-hidden border border-white/10 shadow-[0_16px_36px_rgba(0,0,0,0.7)] bg-[#101012] transition-all duration-300 hover:border-white/25 hover:shadow-[0_20px_45px_rgba(0,0,0,0.9)]"
                     >
                       <Image
                         src={src}

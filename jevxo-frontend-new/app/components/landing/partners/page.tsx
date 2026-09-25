@@ -134,7 +134,7 @@ export default function Partners() {
               <Image
                 src="/creatibuz-symbol.png"
                 alt="logo skeleton"
-                width={20}
+                width={35}
                 height={10}
               />
             </div>
@@ -143,7 +143,7 @@ export default function Partners() {
           {/* Social Proof Text & 5 Stars */}
           <div className="flex flex-col items-center justify-center">
             <span className="text-[11px] sm:text-xs text-[#D9D9D9] font-medium tracking-tight">
-              90% Customer Satisfactions
+              90% Client Satisfactions
             </span>
             <div className="flex items-center gap-1 mt-0.5 text-[#F85800]">
               {[...Array(5)].map((_, i) => (

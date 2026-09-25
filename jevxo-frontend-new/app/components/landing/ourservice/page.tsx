@@ -183,7 +183,7 @@ export default function OurService() {
         <div className="lg:col-span-7 lg:pl-10 xl:pl-14 flex flex-col justify-center">
           {/* Section Pill */}
           <div className="mb-6 sm:mb-8">
-            <span className="text-[#F85800] text-lg md:text-xl lg:text-2xl font-semibold tracking-wide font-sans inline-block">
+            <span className="text-primary text-lg md:text-xl lg:text-2xl tracking-wide font-sans inline-block">
               [ Our Services ]
             </span>
           </div>
@@ -201,9 +201,9 @@ export default function OurService() {
                 >
                   <div className="flex items-baseline gap-3.5 sm:gap-5">
                     <span
-                      className={`font-mono text-sm sm:text-base md:text-lg font-medium transition-colors duration-200 shrink-0 ${
+                      className={`text-sm sm:text-base md:text-lg font-medium transition-colors duration-200 shrink-0 ${
                         isActive
-                          ? "text-[#F85800]"
+                          ? "text-primary"
                           : "text-zinc-600 group-hover:text-zinc-400"
                       }`}
                     >
@@ -212,7 +212,7 @@ export default function OurService() {
                     <h3
                       className={`text-2xl sm:text-3xl md:text-4xl lg:text-[40px] xl:text-[50px] font-bold tracking-tight font-sans transition-colors duration-200 ${
                         isActive
-                          ? "text-[#F85800]"
+                          ? "text-primary"
                           : "text-zinc-600 group-hover:text-zinc-400"
                       }`}
                     >

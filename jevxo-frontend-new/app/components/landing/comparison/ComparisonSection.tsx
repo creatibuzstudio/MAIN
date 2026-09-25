@@ -27,8 +27,8 @@ export default function ComparisonSection() {
       {/* Bento Grid: 8-Column Layout */}
       <div className="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-8 gap-6 items-stretch">
         {/* CARD 1: Flexible Payment Plans (col-span-3) */}
-        <div className="md:col-span-3 relative p-[1px] rounded-[28px] overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col">
-          <div className="w-full h-full rounded-[27px] overflow-hidden p-6 sm:p-7 relative flex flex-col justify-between min-h-[440px] md:min-h-[470px] bg-gradient-to-br from-[#191919] via-[#090909] to-primary">
+        <div className="md:col-span-3 relative p-[1px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col">
+          <div className="w-full h-full rounded-2xl overflow-hidden p-6 sm:p-7 relative flex flex-col justify-between min-h-[440px] md:min-h-[470px] bg-gradient-to-br from-[#191919] via-[#090909] to-primary">
             {/* Ambient warm glow at bottom right */}
             <div className="absolute -bottom-14 -right-14 w-72 h-72 rounded-full bg-[#FE5A00]/25 blur-[75px] pointer-events-none" />
 
@@ -108,8 +108,8 @@ export default function ComparisonSection() {
         </div>
 
         {/* CARD 2: Visual Center Showcase - Cap (col-span-2) */}
-        <div className="md:col-span-2 relative p-[1px] rounded-[28px] overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col min-h-[440px] md:min-h-[470px]">
-          <div className="w-full h-full rounded-[27px] overflow-hidden relative group bg-[#0B0B0B]">
+        <div className="md:col-span-2 relative p-[1px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col min-h-[440px] md:min-h-[470px]">
+          <div className="w-full h-full rounded-2xl overflow-hidden relative group bg-[#0B0B0B]">
             <Image
               src="/whyChooseUs/Card 02.png"
               alt="Creatibuz Studio Cap"
@@ -121,8 +121,8 @@ export default function ComparisonSection() {
         </div>
 
         {/* CARD 3: Unlimited revision (col-span-3) */}
-        <div className="md:col-span-3 relative p-[1px] rounded-[28px] overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col">
-          <div className="w-full h-full rounded-[27px] overflow-hidden p-6 sm:p-7 relative flex flex-col justify-between min-h-[440px] md:min-h-[470px] bg-[#0E0E0E]">
+        <div className="md:col-span-3 relative p-[1px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col">
+          <div className="w-full h-full rounded-2xl overflow-hidden p-6 sm:p-7 relative flex flex-col justify-between min-h-[440px] md:min-h-[470px] bg-[#0E0E0E]">
             {/* Subtle ambient amber warmth */}
             <div className="absolute -bottom-12 -left-12 w-56 h-56 bg-primary/10 blur-[60px] rounded-full pointer-events-none" />
 
@@ -270,8 +270,8 @@ export default function ComparisonSection() {
         </div>
 
         {/* CARD 4: Lifetime Support (col-span-3) */}
-        <div className="md:col-span-3 relative p-[1px] rounded-[28px] overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col">
-          <div className="w-full h-full rounded-[27px] overflow-hidden p-6 sm:p-7 relative flex flex-col justify-between min-h-[440px] md:min-h-[470px] bg-[#0E0E0E]">
+        <div className="md:col-span-3 relative p-[1px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col">
+          <div className="w-full h-full rounded-2xl overflow-hidden p-6 sm:p-7 relative flex flex-col justify-between min-h-[440px] md:min-h-[470px] bg-[#0E0E0E]">
             {/* Content Top */}
             <div>
               <h3 className="text-white text-xl sm:text-2xl font-bold font-sans tracking-tight">
@@ -356,8 +356,8 @@ export default function ComparisonSection() {
         </div>
 
         {/* CARD 5: Diverse Skill Set & AI-Assisted Launches (col-span-5) */}
-        <div className="md:col-span-5 relative p-[1px] rounded-[28px] overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col">
-          <div className="w-full h-full rounded-[27px] overflow-hidden relative min-h-[440px] md:min-h-[470px] bg-gradient-to-br from-[#191919] via-[#1a0c03] to-[#FE5A00]/65">
+        <div className="md:col-span-5 relative p-[1px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col">
+          <div className="w-full h-full rounded-2xl overflow-hidden relative min-h-[440px] md:min-h-[470px] bg-gradient-to-br from-[#191919] via-[#1a0c03] to-[#FE5A00]/65">
             {/* Warm rich radial gradient glow matching Figma screenshot */}
             <div className="absolute -bottom-16 -right-16 w-80 h-80 rounded-full bg-[#FE5A00]/45 blur-[85px] pointer-events-none" />
             <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-[#FE5A00]/20 blur-[70px] pointer-events-none" />
