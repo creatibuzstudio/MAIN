@@ -17,6 +17,8 @@ import TestimonialsSection from "../components/landing/testimonials/Testimonials
 import SectionContainer from "../components/ui/SectionContainer";
 import FeatureWorks from "../components/featureWork/page";
 import WorkMarqueeSection from "../components/landing/marquee/WorkMarqueeSection";
+import Feature from "../components/landing/feature/feature";
+
 
 export default function Home() {
   return (
@@ -36,7 +38,7 @@ export default function Home() {
       </SectionContainer>
 
       {/* <SectionContainer extendTopBorder={false}> */}
-        <FeatureWorks />
+      <FeatureWorks />
       {/* </SectionContainer> */}
 
 
@@ -49,7 +51,7 @@ export default function Home() {
       <SectionContainer extendTopBorder={false}>
         <ComparisonSection />
       </SectionContainer>
-      
+
       <WorkMarqueeSection />
 
       <div className="pt-12 pb-16 md:pt-[50px] md:pb-[120px]">
@@ -75,6 +77,8 @@ export default function Home() {
       <div className="pb-16 md:pb-[80px]">
         <TestimonialsSection />
       </div>
+
+      <Feature />
     </div>
   );
 }

@@ -4,19 +4,16 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Star, User as UserIcon } from "lucide-react";
+import { User as UserIcon } from "lucide-react";
 import { userApi, User } from "../../../../api/userApi";
 
 const defaultBgClasses = [
-  "bg-[#FFE8A3]", // Soft Warm Yellow
-  "bg-[#A7F3D0]", // Soft Mint Cyan
-  "bg-[#BAE6FD]", // Soft Sky Blue
-  "bg-[#D1FAE5]", // Soft Sage Green
-  "bg-[#FED7AA]", // Soft Peach Orange
-  "bg-[#FBCFE8]", // Soft Rose Pink
-  "bg-[#DDD6FE]", // Soft Lavender Purple
-  "bg-[#FEF08A]", // Soft Lemon Yellow
-  "bg-[#C7D2FE]", // Soft Indigo Tint
+  "bg-[#F7E19C]", // Soft Yellow
+  "bg-[#A7F3D8]", // Soft Mint
+  "bg-[#DFEFF8]", // Soft Light Blue
+  "bg-[#A7C898]", // Soft Olive Green
+  "bg-[#FED7AA]", // Soft Peach
+  "bg-[#FBCFE8]", // Soft Pink
 ];
 
 export default function MeetSpecialistSection() {
@@ -92,63 +89,29 @@ export default function MeetSpecialistSection() {
     <section
       ref={sectionRef}
       id="specialist"
-      className="relative z-10 w-full p py-6 md:py-8  flex flex-col justify-center items-center border-t border-gray-100 overflow-hidden"
+      className="relative z-10 w-full py-20 md:py-28 flex flex-col justify-center items-center bg-[#0a0a0a] border-t border-gray-900 overflow-hidden"
     >
-      <div className="w-full  max-w-[95%] lg:max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 flex flex-col justify-center">
+      {/* Subtle Background Grid Lines mimicking the Figma design */}
+      <div className="absolute inset-0 pointer-events-none opacity-20">
+        <div className="absolute top-0 left-[10%] bottom-0 border-l border-white/20"></div>
+        <div className="absolute top-0 right-[10%] bottom-0 border-r border-white/20"></div>
+        <div className="absolute top-[20%] left-0 right-0 border-t border-white/20"></div>
+      </div>
 
-        {/* Header Row: Title & Customer Satisfactions */}
-        <div
-          className="bg-transparent mb- border border-[#003FEA4D] text-[#252323] w-[160px] h-[40px] rounded-full text-[14px] font-normal leading-none tracking-normal inline-flex justify-center items-center gap-1.5 shadow-2xs"
-          style={{ fontFamily: '"Helvetica Now Display", sans-serif' }}
-        >
-          <span className="w-1.5 h-1.5  rounded-full bg-[#3b82f6] animate-pulse" />
-          Our House Expertize
-        </div>
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-10 md:mb-12 w-full">
-          {/* Left Title Area */}
-          <div className="flex flex-col items-start gap-3.5">
-            {/* Pill Badge */}
+      <div className="w-full max-w-[95%] lg:max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center relative z-10">
 
-
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[32px] font-medium text-[#0f172a] tracking-tight leading-[1.15]">
-              Meet Our Specialist
-            </h2>
-          </div>
-
-          {/* Right Customer Satisfactions Widget */}
-          <div className="flex items-center gap-4 bg-white/60 p-2.5 px-4 rounded-2xl border border-gray-100 shadow-2xs backdrop-blur-xs">
-            {/* Avatars Stack */}
-            <div className="flex items-center -space-x-3">
-              {[0, 1, 2].map((i) => (
-                <div key={i} className="w-10 h-10 rounded-full border-2 border-white overflow-hidden relative shadow-xs bg-gray-200 flex items-center justify-center">
-                  {specialists[i]?.picture ? (
-                    <Image src={specialists[i].picture!} alt="Client" fill className="object-cover" />
-                  ) : (
-                    <UserIcon className="w-5 h-5 text-gray-400" />
-                  )}
-                </div>
-              ))}
-              <div className="w-10 h-10 rounded-full border-2 border-white bg-[#3b82f6] text-white font-bold text-xs flex items-center justify-center shadow-xs">
-                2k
-              </div>
-            </div>
-
-            {/* Rating Stars & Text */}
-            <div className="flex flex-col">
-              <span className="text-xs text-[#64748b] font-medium">Customer Satisfactions</span>
-              <div className="flex items-center gap-1 text-amber-400 mt-0.5">
-                <Star className="w-4 h-4 fill-amber-400 stroke-amber-400" />
-                <Star className="w-4 h-4 fill-amber-400 stroke-amber-400" />
-                <Star className="w-4 h-4 fill-amber-400 stroke-amber-400" />
-                <Star className="w-4 h-4 fill-amber-400 stroke-amber-400" />
-                <Star className="w-4 h-4 fill-gray-200 stroke-gray-300" />
-              </div>
-            </div>
-          </div>
+        {/* Header Row: Title */}
+        <div className="flex flex-col items-center justify-center text-center gap-4 mb-16 md:mb-20 w-full">
+          <span className="text-[#FF6B00] font-medium text-[15px]">
+            [ Our Expertize ]
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[44px] font-semibold text-gray-300 tracking-tight leading-tight">
+            Meet Our Specialist
+          </h2>
         </div>
 
-        {/* GSAP Horizontal Scroll Track clipped within max-w-9/12 bounds */}
-        <div className="w-full pt-10 ">
+        {/* GSAP Horizontal Scroll Track */}
+        <div className="w-full">
           <div
             ref={trackRef}
             className="flex gap-6 sm:gap-8 w-max will-change-transform pb-4"
@@ -158,7 +121,7 @@ export default function MeetSpecialistSection() {
               return (
                 <div
                   key={member.id || index}
-                  className={`w-[290px] sm:w-[320px] lg:w-[340px] h-[440px] sm:h-[480px] rounded-[24px] ${bgClass} relative overflow-hidden flex flex-col justify-end group shadow-[0_4px_25px_rgba(0,0,0,0.03)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)] transition-all duration-500 cursor-pointer`}
+                  className={`w-[290px] sm:w-[310px] h-[400px] sm:h-[440px] rounded-[24px] ${bgClass} relative overflow-hidden flex flex-col justify-end group cursor-pointer`}
                 >
                   {/* Specialist Portrait Image */}
                   {member.picture ? (
@@ -169,24 +132,23 @@ export default function MeetSpecialistSection() {
                       className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     />
                   ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center text-gray-500/50 pb-20">
+                    <div className="w-full h-full flex flex-col items-center justify-center text-gray-600/30 pb-20">
                       <UserIcon className="w-24 h-24 mb-4" />
                     </div>
                   )}
 
-                  {/* Bottom Light White Gradient */}
-                  <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-white/95 via-white/60 to-transparent pointer-events-none z-20 transition-all duration-500 group-hover:opacity-100" />
+                  {/* Strong Orange Bottom Gradient Overlay */}
+                  <div className="absolute inset-x-0 bottom-0 h-[50%] bg-gradient-to-t from-[#FF6B00] via-[#FF6B00]/80 to-transparent pointer-events-none z-20" />
 
                   {/* Text Info Overlay */}
-                  <div className="relative z-30 p-6 sm:p-7 text-gray-900 flex flex-col space-y-1.5">
-                    <h3 className="text-xl sm:text-2xl font-medium tracking-tight text-gray-900 leading-snug">
+                  <div className="relative z-30 p-6 sm:p-7 text-white flex flex-col space-y-1">
+                    <h3 className="text-lg sm:text-xl font-bold tracking-tight text-white leading-snug">
                       {member.name}
                     </h3>
-                    <p className="text-gray-600 text-xs sm:text-sm font-normal">
+                    <p className="text-white/90 text-xs sm:text-sm font-medium">
                       {member.designation?.title || member.role || "Specialist"}
                     </p>
                   </div>
-
                 </div>
               );
             })}
