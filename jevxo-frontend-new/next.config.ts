@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  /* config options here */
+  /* config options he */
   typescript: {
     ignoreBuildErrors: true,
   },
