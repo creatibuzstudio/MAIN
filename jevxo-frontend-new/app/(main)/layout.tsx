@@ -9,6 +9,8 @@ export default function MainLayout({
   return (
     <>
       <Navbar />
+
+      {/* fgdgsg */}
       <main className="flex-1">{children}</main>
       <Footer />
     </>
