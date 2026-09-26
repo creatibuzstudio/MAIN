@@ -2,7 +2,7 @@ import Hero from "../components/landing/banner/Hero";
 import Cta from "../components/landing/banner/Cta";
 import Partners from "../components/landing/partners/page";
 import AboutUs from "../components/landing/aboutus/page";
-import OurService from "../components/landing/ourService/page";
+import OurService from "../components/landing/ourservice/page";
 import ProcessSection from "../components/landing/process/ProcessSection";
 import AiSection from "../components/landing/ai/AiSection";
 import ComparisonSection from "../components/landing/comparison/ComparisonSection";
