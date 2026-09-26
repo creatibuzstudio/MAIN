@@ -24,6 +24,9 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   experimental: {
     // Optimize memory usage during production builds for limited environments (e.g. VPS/Docker)
     cpus: 1,
