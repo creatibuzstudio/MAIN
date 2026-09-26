@@ -27,12 +27,6 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  experimental: {
-    // Optimize memory usage during production builds for limited environments (e.g. VPS/Docker)
-    cpus: 1,
-    workerThreads: false,
-    memoryBasedWorkersCount: true,
-  },
 };
 
 export default nextConfig;
