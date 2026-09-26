@@ -7,69 +7,69 @@ import { reviewApi, Review } from "../../../../api/reviewApi";
 const DEFAULT_REVIEWS: Review[] = [
   {
     id: "rev-1",
-    reviewText: "Jevxo delivered our entire SaaS MVP in less than 4 weeks. Their code quality and design aesthetic wowed our investors from day one!",
+    reviewText: "Thanks to the personalized attention and guidance provided by the Prenatal Center. I highly recommend them to any Quisque faucibus quam justo, sit amet fermentum...",
     rating: 5,
     thumbUrl: "https://randomuser.me/api/portraits/men/32.jpg",
     videoUrl: "https://www.youtube.com/watch?v=LXb3EKWsInQ",
     clientId: "c1",
     createdAt: "",
     updatedAt: "",
-    client: { id: "c1", name: "David Miller", email: "david@example.com", role: "Founder & CEO, TechVentures" },
+    client: { id: "c1", name: "Bonnie M. Pattison", email: "bonnie@example.com", role: "Happy mom from New York" },
   },
   {
     id: "rev-2",
-    reviewText: "The team at Jevxo is fast, highly responsive, and exceptionally talented in Next.js and UI/UX design. Highly recommended!",
+    reviewText: "Thanks to the personalized attention and guidance provided by the Prenatal Center. I highly recommend them to any Quisque faucibus quam justo, sit amet fermentum...",
     rating: 5,
-    thumbUrl: "https://randomuser.me/api/portraits/women/44.jpg",
+    thumbUrl: "https://randomuser.me/api/portraits/men/44.jpg",
     videoUrl: "https://www.youtube.com/watch?v=LXb3EKWsInQ",
     clientId: "c2",
     createdAt: "",
     updatedAt: "",
-    client: { id: "c2", name: "Sarah Jenkins", email: "sarah@example.com", role: "VP of Product, FinScale" },
+    client: { id: "c2", name: "Bonnie M. Pattison", email: "sarah@example.com", role: "Happy mom from New York" },
   },
   {
     id: "rev-3",
-    reviewText: "Working with Jevxo felt like having a senior engineering squad in-house. They transformed our legacy app into a modern product.",
+    reviewText: "Thanks to the personalized attention and guidance provided by the Prenatal Center. I highly recommend them to any Quisque faucibus quam justo, sit amet fermentum...",
     rating: 5,
-    thumbUrl: "https://randomuser.me/api/portraits/men/45.jpg",
+    thumbUrl: "https://randomuser.me/api/portraits/women/45.jpg",
     videoUrl: "https://www.youtube.com/watch?v=LXb3EKWsInQ",
     clientId: "c3",
     createdAt: "",
     updatedAt: "",
-    client: { id: "c3", name: "Marcus Vance", email: "marcus@example.com", role: "CTO, CloudMatrix" },
+    client: { id: "c3", name: "Bonnie M. Pattison", email: "marcus@example.com", role: "Happy mom from New York" },
   },
   {
     id: "rev-4",
-    reviewText: "Outstanding design system and pixel-perfect implementation. Our conversion rates increased by 40% after the redesign!",
+    reviewText: "Thanks to the personalized attention and guidance provided by the Prenatal Center. I highly recommend them to any Quisque faucibus quam justo, sit amet fermentum...",
     rating: 5,
-    thumbUrl: "https://randomuser.me/api/portraits/women/68.jpg",
+    thumbUrl: "https://randomuser.me/api/portraits/men/68.jpg",
     videoUrl: "https://www.youtube.com/watch?v=LXb3EKWsInQ",
     clientId: "c4",
     createdAt: "",
     updatedAt: "",
-    client: { id: "c4", name: "Elena Rostova", email: "elena@example.com", role: "Head of Growth, LuxLife" },
+    client: { id: "c4", name: "Bonnie M. Pattison", email: "elena@example.com", role: "Happy mom from New York" },
   },
   {
     id: "rev-5",
-    reviewText: "Their attention to detail and performance optimization is unmatched. Our page load speeds dropped under 1 second.",
+    reviewText: "Thanks to the personalized attention and guidance provided by the Prenatal Center. I highly recommend them to any Quisque faucibus quam justo, sit amet fermentum...",
     rating: 5,
-    thumbUrl: "https://randomuser.me/api/portraits/men/75.jpg",
+    thumbUrl: "https://randomuser.me/api/portraits/women/75.jpg",
     videoUrl: "https://www.youtube.com/watch?v=LXb3EKWsInQ",
     clientId: "c5",
     createdAt: "",
     updatedAt: "",
-    client: { id: "c5", name: "Alex Chen", email: "alex@example.com", role: "Co-Founder, CommercePulse" },
+    client: { id: "c5", name: "Bonnie M. Pattison", email: "alex@example.com", role: "Happy mom from New York" },
   },
   {
     id: "rev-6",
-    reviewText: "Jevxo is our go-to partner for all full-stack web and mobile development. Professional, reliable, and super fast.",
+    reviewText: "Thanks to the personalized attention and guidance provided by the Prenatal Center. I highly recommend them to any Quisque faucibus quam justo, sit amet fermentum...",
     rating: 5,
     thumbUrl: "https://randomuser.me/api/portraits/men/86.jpg",
     videoUrl: "https://www.youtube.com/watch?v=LXb3EKWsInQ",
     clientId: "c6",
     createdAt: "",
     updatedAt: "",
-    client: { id: "c6", name: "Robert Taylor", email: "robert@example.com", role: "Product Manager, Enterprise AI" },
+    client: { id: "c6", name: "Bonnie M. Pattison", email: "robert@example.com", role: "Happy mom from New York" },
   },
 ];
 
@@ -116,54 +116,54 @@ export default function TestimonialsSection() {
     return (
       <div
         key={cardKey}
-        className="w-[440px] md:w-[480px] shrink-0 bg-white rounded-[20px] p-4 sm:p-5 border border-gray-100/90 shadow-[0_4px_25px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.08)] flex items-center gap-5 transition-all duration-300 group"
+        className="w-[450px] md:w-[520px] shrink-0 bg-[#16181A] rounded-[24px] p-5 border border-white/5 flex items-stretch gap-6 group"
       >
         {/* Left Side: Image Thumbnail Container with Play Overlay */}
         <div 
-          className={`w-[160px] sm:w-[180px] md:w-[195px] h-[160px] sm:h-[180px] md:h-[195px] rounded-[16px] relative overflow-hidden bg-gray-900 shrink-0 ${item.videoUrl ? 'cursor-pointer' : ''}`}
+          className={`w-[170px] md:w-[200px] rounded-[16px] relative overflow-hidden bg-gray-900 shrink-0 ${item.videoUrl ? 'cursor-pointer' : ''}`}
           onClick={() => item.videoUrl ? setPlayingVideoUrl(item.videoUrl) : undefined}
         >
-          <div className="w-full h-full relative flex items-center justify-center bg-gray-200 group-hover:scale-105 transition-transform duration-500">
+          <div className="w-full h-full relative flex items-center justify-center bg-gray-800 transition-transform duration-500 group-hover:scale-105">
             {item.thumbUrl ? (
-              <img src={item.thumbUrl} alt="Thumbnail" className="w-full h-full object-cover opacity-80" />
+              <img src={item.thumbUrl} alt="Thumbnail" className="w-full h-full object-cover" />
             ) : (
-              <UserIcon className="w-16 h-16 text-gray-400" />
+              <UserIcon className="w-16 h-16 text-gray-600" />
             )}
           </div>
 
           {/* Corner Play Button Overlay */}
           {item.videoUrl && (
-            <div className="absolute bottom-3 left-3 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110 z-20 border border-white/20">
-              <Play className="w-3.5 h-3.5 fill-white text-white ml-0.5" />
+            <div className="absolute bottom-4 left-4 w-9 h-9 rounded-full bg-white flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110 z-20">
+              <Play className="w-4 h-4 fill-[#2E5CFF] text-[#2E5CFF] ml-0.5" />
             </div>
           )}
         </div>
 
         {/* Right Side: Rating, Quote, Client Info */}
-        <div className="flex flex-col justify-between h-full py-0.5 pr-1 w-full">
+        <div className="flex flex-col justify-between h-full py-1 pr-1 w-full flex-1">
           <div>
             {/* Rating Stars */}
-            <div className="flex items-center gap-1 mb-2 text-[#fbbf24]">
+            <div className="flex items-center gap-1.5 mb-4 text-[#fbbf24]">
               {[...Array(rating)].map((_, i) => (
-                <Star key={i} className="w-3.5 h-3.5 fill-[#fbbf24] stroke-none" />
+                <Star key={i} className="w-4 h-4 fill-[#fbbf24] stroke-none" />
               ))}
               {[...Array(5 - rating)].map((_, i) => (
-                <Star key={`empty-${i}`} className="w-3.5 h-3.5 text-gray-300" />
+                <Star key={`empty-${i}`} className="w-4 h-4 text-gray-700 stroke-none" />
               ))}
             </div>
 
             {/* Testimonial Quote */}
-            <p className="text-[#64748b] text-xs sm:text-[13px] leading-relaxed mb-3 line-clamp-4 font-normal">
+            <p className="text-[#8B9197] text-[14px] leading-[1.6] mb-4 font-normal">
               {item.reviewText}
             </p>
           </div>
 
           {/* Author Name & Subtitle */}
           <div>
-            <h4 className="font-medium text-[#1e293b] text-base sm:text-[17px] tracking-tight">
+            <h4 className="font-medium text-white/90 text-[16px] tracking-tight mb-0.5">
               {item.client?.name || "Anonymous Client"}
             </h4>
-            <p className="text-xs text-[#94a3b8] font-normal mt-0.5">
+            <p className="text-[13px] text-[#697077] font-normal">
               {item.client?.role || "Client"}
             </p>
           </div>
@@ -172,11 +172,11 @@ export default function TestimonialsSection() {
     );
   };
 
-  // Divide reviews into 3 rows for the marquee
+  // Divide reviews into 2 rows for the marquee
   const getRowData = (rowNumber: number) => {
     if (reviews.length === 0) return [];
 
-    const perRow = Math.ceil(reviews.length / 3);
+    const perRow = Math.ceil(reviews.length / 2);
     const startIdx = (rowNumber - 1) * perRow;
     const endIdx = startIdx + perRow;
 
@@ -192,35 +192,27 @@ export default function TestimonialsSection() {
 
   const row1 = getRowData(1);
   const row2 = getRowData(2);
-  const row3 = getRowData(3);
 
   return (
     <section
       id="testimonials"
-      className="w-full py-6 md:py-8  text-gray-900 relative overflow-hidden flex flex-col items-center justify-center border-t border-gray-100"
+      className="w-full py-16 md:py-24 bg-[#0a0a0a] relative overflow-hidden flex flex-col items-center justify-center border-t border-gray-900"
     >
-      {/* Side Fade Gradient Overlays */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-44 bg-gradient-to-r from-[#F2F2F2] to-transparent z-20" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-44 bg-gradient-to-l from-[#F2F2F2] to-transparent z-20" />
+      {/* Side Fade Gradient Overlays (Dark Theme) */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-44 bg-gradient-to-r from-[#0a0a0a] to-transparent z-20" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-44 bg-gradient-to-l from-[#0a0a0a] to-transparent z-20" />
 
       {/* Header Container */}
-      <div className="max-w-3xl w-full px-6 flex flex-col items-center text-center mb-10 md:mb-12 relative z-10">
-        <div
-          className="bg-transparent border border-[#003FEA4D] text-[#252323] px-5 h-[40px] rounded-full text-[13px] font-normal leading-none tracking-normal inline-flex justify-center items-center gap-1.5 whitespace-nowrap shadow-2xs mb-4"
-          style={{ fontFamily: '"Helvetica Now Display", sans-serif' }}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#3b82f6] animate-pulse" />
-          What Our Clients Say
-        </div>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-medium text-[#0f172a] tracking-tight leading-tight mb-3">
-          Real Stories. Real Impact.
+      <div className="max-w-4xl w-full px-6 flex flex-col items-center text-center mb-16 relative z-10">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[56px] font-semibold text-white tracking-tight leading-tight flex flex-col items-center gap-2">
+          <span>What SaaS Teams Say About Working</span>
+          <span className="font-serif italic font-medium text-white/90 mt-2 text-4xl sm:text-5xl md:text-6xl lg:text-[64px]">
+            with Creatibuz Studio
+          </span>
         </h2>
-        <p className="text-gray-500 text-sm md:text-base font-normal max-w-lg leading-relaxed">
-          Don't just take our word for it. Hear directly from founders and team leaders who transformed their digital products with Jevxo.
-        </p>
       </div>
 
-      {/* 3 Infinite Marquee Rows */}
+      {/* Infinite Marquee Rows */}
       {reviews.length > 0 && (
         <div className="w-full space-y-6 relative z-10 overflow-hidden py-2">
           {/* Row 1: Marquee Left */}
@@ -231,11 +223,6 @@ export default function TestimonialsSection() {
           {/* Row 2: Marquee Right */}
           <div className="flex animate-marquee-reverse gap-6">
             {row2.map((item, idx) => renderCard(item, `r2-${idx}`))}
-          </div>
-
-          {/* Row 3: Marquee Left */}
-          <div className="flex animate-marquee gap-6">
-            {row3.map((item, idx) => renderCard(item, `r3-${idx}`))}
           </div>
         </div>
       )}

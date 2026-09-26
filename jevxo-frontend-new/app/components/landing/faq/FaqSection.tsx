@@ -28,95 +28,79 @@ const faqs = [
 ];
 
 export default function FaqSection() {
-  // Initially null so all FAQs are closed by default (opens only on click)
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleFaq = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section id="faq" className="relative z-10 w-full py-6 md:py-8 bg-[#F2F2F2] flex justify-center border-t border-gray-100 overflow-hidden">
-      <div className="w-full max-w-[95%] sm:max-w-8/12 mx-auto px-2 sm:px-6 lg:px-8 flex flex-col">
-        
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+    <section id="faq" className="w-full py-16 md:py-24 bg-[#0a0a0a]">
+      <div className="w-full max-w-[95%] lg:max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
           
-          {/* Left Column: Title & CTA Button */}
-          <div className="lg:col-span-5 flex flex-col items-start space-y-5">
-            {/* Pill Badge */}
-            <div
-              className="bg-transparent border border-[#003FEA4D] text-[#252323] w-[160px] h-[40px] rounded-full text-[13px] font-normal leading-none tracking-normal inline-flex justify-center items-center gap-1.5 whitespace-nowrap shadow-2xs"
-              style={{ fontFamily: '"Helvetica Now Display", sans-serif' }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#3b82f6] animate-pulse" />
-              Ask Anything
-            </div>
-
-            {/* Headline Title */}
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[32px] font-medium text-[#0f172a] tracking-tight leading-[1.12]">
-              <span className="block text-[#0f172a]">Frequently Asked</span>
-              <span className="block mt-1 text-[#0f172a]">
-                <span className="font-serif italic font-normal text-[#0f172a]">Questions &</span> <span className="font-medium text-[#0f172a]">Answers.</span>
+          {/* Left Column: Titles & CTA */}
+          <div className="w-full lg:w-4/12 flex flex-col items-start pt-2">
+            <span className="text-[#FF6B00] font-medium text-[15px] mb-6">
+              [ Ask Anything ]
+            </span>
+            
+            <h2 className="text-4xl md:text-5xl lg:text-[46px] font-semibold text-white/90 tracking-tight leading-[1.1] mb-6">
+              Frequently <br />
+              <span className="font-serif italic font-medium text-white/70">
+                Asked Question
               </span>
             </h2>
-
-            <p className="text-xs sm:text-sm md:text-base text-[#64748b] leading-relaxed font-normal max-w-md pt-1">
-              Have questions before getting started? Explore our most common inquiries regarding project timelines, monthly retainers, custom design systems, and post-launch support.
+            
+            <p className="text-[#71717A] text-[15px] mb-10">
+              Before You Ask — Here's the Answer
             </p>
-
-            {/* Request Free Audit CTA Button */}
-            <div className="pt-2">
-              <Link
-                href="#contact"
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-[#1658fe] to-[#004cf6] hover:from-[#1148d4] hover:to-[#003ec8] text-white rounded-full pl-6 pr-2 py-2 transition-all duration-300 shadow-[0_8px_25px_rgba(22,88,254,0.35)] hover:shadow-[0_12px_30px_rgba(22,88,254,0.5)] hover:scale-[1.02] group/btn"
-              >
-                <span className="text-sm font-medium tracking-tight">Request Free Audit</span>
-                <div className="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center shrink-0 group-hover/btn:rotate-45 transition-transform duration-300 shadow-sm">
-                  <ArrowUpRight className="w-4 h-4 text-black stroke-[2.2]" />
-                </div>
-              </Link>
-            </div>
+            
+            <Link 
+              href="#contact" 
+              className="group relative inline-flex items-center gap-3 bg-[#FF6B00] hover:bg-[#E65C00] text-white rounded-full pl-6 pr-1.5 py-1.5 text-[15px] font-semibold transition-all cursor-pointer shadow-[0_0_30px_rgba(255,107,0,0.4)] hover:shadow-[0_0_40px_rgba(255,107,0,0.6)]"
+            >
+              <span>Request Free Audit</span>
+              <div className="w-8 h-8 rounded-full bg-white text-[#FF6B00] flex items-center justify-center font-bold group-hover:-rotate-12 transition-transform duration-300">
+                <ArrowUpRight className="w-4 h-4" />
+              </div>
+            </Link>
           </div>
 
-          {/* Right Column: FAQ Accordion List */}
-          <div className="lg:col-span-7 flex flex-col space-y-4 w-full">
+          {/* Right Column: FAQ Accordions */}
+          <div className="w-full lg:w-8/12 flex flex-col space-y-4">
             {faqs.map((faq, index) => {
               const isOpen = openIndex === index;
               return (
                 <div 
-                  key={index}
-                  className={`bg-white rounded-[16px] border transition-all duration-300 overflow-hidden ${
-                    isOpen 
-                      ? "border-blue-200/80 shadow-[0_8px_30px_rgba(22,88,254,0.06)]" 
-                      : "border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)]"
-                  }`}
+                  key={index} 
+                  className="w-full bg-[#161618] border border-white/5 rounded-[12px] overflow-hidden transition-all duration-300"
                 >
                   <button
                     onClick={() => toggleFaq(index)}
-                    className="w-full p-6 text-left flex items-center justify-between gap-6 focus:outline-none cursor-pointer group"
+                    className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
                   >
-                    <span className="text-lg sm:text-xl font-medium text-[#0f172a] tracking-tight leading-snug">
+                    <span className="text-[17px] font-medium text-white/80 pr-8">
                       {faq.question}
                     </span>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 bg-[#1658fe]/10 text-[#1658fe]" : "bg-gray-100 text-gray-600 group-hover:bg-gray-200"}`}>
+                    <span className="text-[#FF6B00] flex-shrink-0 ml-4">
                       {isOpen ? (
-                        <Minus className="w-4 h-4 stroke-[2.2]" />
+                        <Minus className="w-5 h-5 stroke-[2.5]" />
                       ) : (
-                        <Plus className="w-4 h-4 stroke-[2.2]" />
+                        <Plus className="w-5 h-5 stroke-[2.5]" />
                       )}
-                    </div>
+                    </span>
                   </button>
-
-                  {/* Smooth Animated Collapsible Container */}
+                  
                   <div 
-                    className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
+                    className={`grid transition-all duration-300 ease-in-out ${
                       isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                     }`}
                   >
                     <div className="overflow-hidden">
-                      <div className="px-6 pb-6 text-[#64748b] text-sm sm:text-base leading-relaxed border-t border-gray-100/80 pt-4">
+                      <p className="px-6 pb-6 pt-0 text-[15px] text-[#A1A1AA] leading-relaxed max-w-3xl">
                         {faq.answer}
-                      </div>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -125,7 +109,6 @@ export default function FaqSection() {
           </div>
 
         </div>
-
       </div>
     </section>
   );

@@ -241,7 +241,7 @@ export default function AboutUs() {
             <span className="text-5xl md:text-[80px] font-light font-helvetica text-primary-text leading-[100px]">
               {countDeliveries}+
             </span>
-            <span className="mt-3 text-primary-text font-helvetica text-[20px] font-normal leading-[38px]">
+            <span className="text-primary-text font-helvetica text-[20px] font-normal leading-[38px]">
               Project Deliveries
             </span>
           </div>
@@ -251,7 +251,7 @@ export default function AboutUs() {
             <span className="text-5xl md:text-[80px] font-light font-helvetica text-primary-text leading-[100px]">
               {countExperts}+
             </span>
-            <span className="mt-3 text-primary-text font-helvetica text-[20px] font-normal leading-[38px]">
+            <span className="text-primary-text font-helvetica text-[20px] font-normal leading-[38px]">
               In-House Experts
             </span>
           </div>
@@ -261,7 +261,7 @@ export default function AboutUs() {
             <span className="text-5xl md:text-[80px] font-light font-helvetica text-primary-text leading-[100px]">
               {countClients}%
             </span>
-            <span className="mt-3 text-primary-text font-helvetica text-[20px] font-normal leading-[38px]">
+            <span className="text-primary-text font-helvetica text-[20px] font-normal leading-[38px]">
               Satisfied Clients
             </span>
           </div>
@@ -271,7 +271,7 @@ export default function AboutUs() {
             <span className="text-5xl md:text-[80px] font-light font-helvetica text-primary-text leading-[100px]">
               {countPartners}+
             </span>
-            <span className="mt-3 text-primary-text font-helvetica text-[20px] font-normal leading-[38px]">
+            <span className="text-primary-text font-helvetica text-[20px] font-normal leading-[38px]">
               Business Partner
             </span>
           </div>
