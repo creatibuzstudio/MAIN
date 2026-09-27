@@ -35,33 +35,33 @@ export default function FaqSection() {
   };
 
   return (
-    <section id="faq" className="w-full py-16 md:py-24 bg-[#0a0a0a]">
+    <section id="faq" className="w-full">
       <div className="w-full max-w-[95%] lg:max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
           
           {/* Left Column: Titles & CTA */}
           <div className="w-full lg:w-4/12 flex flex-col items-start pt-2">
-            <span className="text-[#FF6B00] font-medium text-[15px] mb-6">
+            <span className="text-primary text-sm md:text-[20px] mb-6">
               [ Ask Anything ]
             </span>
             
-            <h2 className="text-4xl md:text-5xl lg:text-[46px] font-semibold text-white/90 tracking-tight leading-[1.1] mb-6">
+            <h2 className="text-4xl md:text-5xl lg:text-[46px] font-semibold text-header-text tracking-tight leading-[1.1] mb-6">
               Frequently <br />
-              <span className="font-serif italic font-medium text-white/70">
+              <span className="font-serif italic font-medium text-header-text">
                 Asked Question
               </span>
             </h2>
             
-            <p className="text-[#71717A] text-[15px] mb-10">
+            <p className="text-primary-text text-[15px] mb-10">
               Before You Ask — Here's the Answer
             </p>
             
             <Link 
               href="#contact" 
-              className="group relative inline-flex items-center gap-3 bg-[#FF6B00] hover:bg-[#E65C00] text-white rounded-full pl-6 pr-1.5 py-1.5 text-[15px] font-semibold transition-all cursor-pointer shadow-[0_0_30px_rgba(255,107,0,0.4)] hover:shadow-[0_0_40px_rgba(255,107,0,0.6)]"
+              className="group relative inline-flex items-center gap-3 bg-primary hover:bg-primary text-white rounded-full pl-6 pr-1.5 py-1.5 text-[15px] transition-all cursor-pointer shadow-[0_0_30px_rgba(255,107,0,0.4)] hover:shadow-[0_0_40px_rgba(255,107,0,0.6)]"
             >
               <span>Request Free Audit</span>
-              <div className="w-8 h-8 rounded-full bg-white text-[#FF6B00] flex items-center justify-center font-bold group-hover:-rotate-12 transition-transform duration-300">
+              <div className="w-8 h-8 rounded-full bg-foreground text-primary flex items-center justify-center font-bold group-hover:-rotate-12 transition-transform duration-300">
                 <ArrowUpRight className="w-4 h-4" />
               </div>
             </Link>
@@ -72,18 +72,18 @@ export default function FaqSection() {
             {faqs.map((faq, index) => {
               const isOpen = openIndex === index;
               return (
-                <div 
-                  key={index} 
-                  className="w-full bg-[#161618] border border-white/5 rounded-[12px] overflow-hidden transition-all duration-300"
+                <div
+                  key={index}
+                  className="w-full bg-[#181A1E] border border-white/10 rounded-lg overflow-hidden transition-all duration-300"
                 >
                   <button
                     onClick={() => toggleFaq(index)}
                     className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
                   >
-                    <span className="text-[17px] font-medium text-white/80 pr-8">
+                    <span className="text-[17px] md:text-[20px] font-semibold text-primary-text pr-8">
                       {faq.question}
                     </span>
-                    <span className="text-[#FF6B00] flex-shrink-0 ml-4">
+                    <span className="text-primary flex-shrink-0 ml-4">
                       {isOpen ? (
                         <Minus className="w-5 h-5 stroke-[2.5]" />
                       ) : (
@@ -91,14 +91,16 @@ export default function FaqSection() {
                       )}
                     </span>
                   </button>
-                  
-                  <div 
+
+                  <div
                     className={`grid transition-all duration-300 ease-in-out ${
-                      isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                      isOpen
+                        ? "grid-rows-[1fr] opacity-100"
+                        : "grid-rows-[0fr] opacity-0"
                     }`}
                   >
                     <div className="overflow-hidden">
-                      <p className="px-6 pb-6 pt-0 text-[15px] text-[#A1A1AA] leading-relaxed max-w-3xl">
+                      <p className="px-6 pb-6 pt-0 text-[15px] text-primary-text leading-relaxed max-w-3xl">
                         {faq.answer}
                       </p>
                     </div>

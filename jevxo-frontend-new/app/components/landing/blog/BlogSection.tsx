@@ -84,25 +84,23 @@ export default function BlogSection() {
   }, []);
 
   return (
-    <SectionContainer
-      id="blog"
-      containerClassName="relative w-full overflow-hidden bg-background"
-    >
+    <div>
       {/* 1. Header & Typography */}
       <motion.div
+        id="blog"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
         className="text-center max-w-3xl mx-auto"
       >
-        <span className="text-[#F85800] text-sm font-semibold tracking-wide text-center mb-3 block font-sans">
+        <span className="text-primary text-sm md:text-[20px] text-center mb-3">
           [ Our Latest Blog ]
         </span>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center tracking-tight font-sans">
+        <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-header-text text-center tracking-tight">
           Where Creativity Meets
           <span
-            className="font-serif italic font-normal text-white text-center text-3xl sm:text-4xl md:text-5xl mt-1 block"
+            className="font-serif italic font-normal text-foreground text-center text-3xl sm:text-4xl md:text-5xl mt-1 block"
             style={{ fontFamily: "var(--font-dm-serif), serif" }}
           >
             Intelligent Design.
@@ -149,7 +147,7 @@ export default function BlogSection() {
                 </span>
 
                 {/* 3. Article Headline */}
-                <h3 className="text-zinc-300 font-medium text-base md:text-lg leading-snug mt-2 mb-6 line-clamp-2 group-hover:text-white transition-colors">
+                <h3 className="text-zinc-300 font-medium text-base md:text-lg leading-snug mt-2 mb-6 line-clamp-2 group-hover:text-foreground transition-colors">
                   {card.title}
                 </h3>
               </div>
@@ -160,7 +158,7 @@ export default function BlogSection() {
                   href={`/blog/${card.slug}`}
                   className={`rounded-full px-4 py-2.5 flex items-center justify-between w-fit gap-3 transition-all duration-300 group/btn ${
                     isActive
-                      ? "bg-[#F85800] text-white text-sm font-semibold shadow-[0_0_30px_rgba(248,88,0,0.45)]"
+                      ? "bg-[#F85800] text-foreground text-sm font-semibold shadow-[0_0_30px_rgba(248,88,0,0.45)]"
                       : "bg-zinc-900/90 text-zinc-300 text-sm font-medium border border-white/10 hover:bg-zinc-800"
                   }`}
                 >
@@ -168,8 +166,8 @@ export default function BlogSection() {
                   <div
                     className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-transform duration-300 group-hover/btn:rotate-45 ${
                       isActive
-                        ? "bg-white text-[#F85800]"
-                        : "bg-[#F85800] text-white"
+                        ? "bg-white text-primary"
+                        : "bg-[#F85800] text-foreground"
                     }`}
                   >
                     <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
@@ -180,6 +178,6 @@ export default function BlogSection() {
           );
         })}
       </div>
-    </SectionContainer>
+    </div>
   );
 }

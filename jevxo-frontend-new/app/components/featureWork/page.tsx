@@ -99,7 +99,7 @@ export default function FeatureWorksPage({
         <span className="text-primary text-lg md:text-xl mb-3">
           [ Feature Work ]
         </span>
-        <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-primary-text tracking-tight leading-[1.18] max-w-5xl mx-auto">
+        <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-header-text tracking-tight leading-[1.18] max-w-5xl mx-auto">
           Explore my projects to experience innovative{" "}
           <span className="inline md:block">
             design and uncover creative solution

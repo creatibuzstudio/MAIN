@@ -1,7 +1,7 @@
 import React from "react";
 
 export function GridSpark({
-  className = "w-6 h-6 text-zinc-500",
+  className = "w-6 h-6 text-primary-text",
 }: {
   className?: string;
 }) {
@@ -72,10 +72,10 @@ export default function SectionContainer({
         {crossMarkers && showTopBorder && (
           <>
             <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 z-10">
-              <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-zinc-500 hover:text-[#F85800] transition-colors" />
+              <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-primary-text hover:text-primary transition-colors" />
             </div>
             <div className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 z-10">
-              <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-zinc-500 hover:text-[#F85800] transition-colors" />
+              <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-primary-text hover:text-primary transition-colors" />
             </div>
           </>
         )}
@@ -91,10 +91,10 @@ export default function SectionContainer({
         {crossMarkers && showBottomBorder && (
           <>
             <div className="absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2 z-10">
-              <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-zinc-500 hover:text-[#F85800] transition-colors" />
+              <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-primary-text hover:text-primary transition-colors" />
             </div>
             <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 z-10">
-              <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-zinc-500 hover:text-[#F85800] transition-colors" />
+              <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-primary-text hover:text-primary transition-colors" />
             </div>
           </>
         )}

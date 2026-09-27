@@ -19,7 +19,6 @@ import FeatureWorks from "../components/featureWork/page";
 import WorkMarqueeSection from "../components/landing/marquee/WorkMarqueeSection";
 import Feature from "../components/landing/feature/feature";
 
-
 export default function Home() {
   return (
     <div className="relative min-h-screen w-full bg-background text-primary-text flex flex-col justify-between overflow-hidden">
@@ -37,10 +36,9 @@ export default function Home() {
         <OurService />
       </SectionContainer>
 
-      {/* <SectionContainer extendTopBorder={false}> */}
+      <SectionContainer extendTopBorder={false}>
       <FeatureWorks />
-      {/* </SectionContainer> */}
-
+      </SectionContainer>
 
       <ProcessSection />
 
@@ -54,31 +52,35 @@ export default function Home() {
 
       <WorkMarqueeSection />
 
-      <div className="pt-12 pb-16 md:pt-[50px] md:pb-[120px]">
+      <SectionContainer extendTopBorder={false}>
         <PricingSection />
-      </div>
+      </SectionContainer>
 
-      <BlogSection />
+      <ConcentricCtaSection />
 
-      <div className="py-12 md:py-[80px]">
+      <SectionContainer extendTopBorder={false}>
+        <BlogSection />
+      </SectionContainer>
+
+      <SectionContainer extendTopBorder={false}>
         <MeetSpecialistSection />
-      </div>
+      </SectionContainer>
 
-      <div className="pb-12 md:pb-[80px]">
-        <ConcentricCtaSection />
-      </div>
+      <SectionContainer extendTopBorder={false}>
+        <FaqSection />
+      </SectionContainer>
 
-      <FaqSection />
-
-      <div className="py-16 md:py-[100px]">
+      <SectionContainer extendTopBorder={false}>
         <ContactSection />
-      </div>
+      </SectionContainer>
 
-      <div className="pb-16 md:pb-[80px]">
+      <SectionContainer extendTopBorder={false}>
         <TestimonialsSection />
-      </div>
+      </SectionContainer>
 
-      <Feature />
+      <SectionContainer extendTopBorder={false}>
+        <Feature />
+      </SectionContainer>
     </div>
   );
 }

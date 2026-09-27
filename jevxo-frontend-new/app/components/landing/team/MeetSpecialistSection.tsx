@@ -139,22 +139,20 @@ export default function MeetSpecialistSection() {
   }, []);
 
   return (
-    <SectionContainer
-      id="specialist"
-      containerClassName="relative w-full overflow-hidden bg-background"
-    >
+    <div>
       {/* 1. Section Header */}
       <motion.div
+        id="specialist"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
         className="text-center max-w-3xl mx-auto"
       >
-        <span className="text-[#F85800] text-sm font-semibold tracking-wide text-center mb-3 block font-sans">
+        <span className="text-primary text-sm md:text-[20px] text-center">
           [ Our Expertize ]
         </span>
-        <h2 className="font-sans font-bold text-white text-3xl md:text-5xl text-center tracking-tight">
+        <h2 className="font-bold text-header-text text-3xl md:text-4xl lg:text-[40px] text-center tracking-tight">
           Meet Our Specialist
         </h2>
       </motion.div>
@@ -169,7 +167,7 @@ export default function MeetSpecialistSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="relative rounded-3xl overflow-hidden group cursor-pointer aspect-[3/4] bg-zinc-900 border border-white/10 hover:border-white/25 transition-all duration-300 shadow-lg hover:shadow-2xl select-none"
+              className="relative rounded-xl overflow-hidden group cursor-pointer aspect-[3/4] bg-zinc-900 border border-white/10 hover:border-white/25 transition-all duration-300 shadow-lg hover:shadow-2xl select-none"
             >
               {/* Portrait Image with pastel background */}
               <div className="w-full h-full relative">
@@ -183,16 +181,16 @@ export default function MeetSpecialistSection() {
               </div>
 
               {/* Bottom Gradient Scrim */}
-              <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#F85800] via-[#F85800]/80 to-transparent pointer-events-none z-10" />
+              <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[bg-primary] via-[bg-primary]/80 to-transparent pointer-events-none z-10" />
 
               {/* Dynamic Info & Social Icons Container */}
               <div className="absolute inset-x-0 bottom-0 p-5 flex flex-col justify-end z-20">
                 {/* Name & Designation Text Block */}
                 <div className="transition-transform duration-300 ease-out group-hover:-translate-y-9">
-                  <h3 className="text-white font-bold text-lg md:text-xl tracking-tight font-sans">
+                  <h3 className="text-foreground font-bold text-lg md:text-xl tracking-tight font-sans">
                     {specialist.name}
                   </h3>
-                  <p className="text-white/90 text-xs md:text-sm font-medium mt-0.5 font-sans">
+                  <p className="text-foreground/90 text-xs md:text-sm font-medium mt-0.5 font-sans">
                     {specialist.role}
                   </p>
                 </div>
@@ -208,7 +206,7 @@ export default function MeetSpecialistSection() {
                         rel="noopener noreferrer"
                         aria-label={`${specialist.name}'s ${social.name}`}
                         style={{ transitionDelay: `${sIdx * 50}ms` }}
-                        className="w-8 h-8 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#F85800] flex items-center justify-center backdrop-blur-sm transition-all duration-200 shadow-md transform hover:scale-110 active:scale-95"
+                        className="w-8 h-8 rounded-full bg-white/20 hover:bg-white text-foreground hover:text-primary flex items-center justify-center backdrop-blur-sm transition-all duration-200 shadow-md transform hover:scale-110 active:scale-95"
                         onClick={(e) => e.stopPropagation()}
                       >
                         {renderSocialIcon(social.type)}
@@ -221,6 +219,6 @@ export default function MeetSpecialistSection() {
           );
         })}
       </div>
-    </SectionContainer>
+    </div>
   );
 }

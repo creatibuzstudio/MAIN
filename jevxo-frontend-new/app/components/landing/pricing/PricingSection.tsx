@@ -265,13 +265,7 @@ export default function PricingSection() {
   const activeCategory = CATEGORIES_DATA.find((c) => c.id === activeTabId) || CATEGORIES_DATA[0];
 
   return (
-    <SectionContainer
-      id="pricing"
-      showTopBorder={false}
-      showBottomBorder={false}
-      crossMarkers={false}
-      containerClassName="relative w-full overflow-hidden bg-background py-16 md:py-24"
-    >
+    <div id="pricing" className="relative w-full overflow-hidden">
       {/* 1. Responsive 75px x 75px Gridlines with Tinted Accent Cells (matching Hero Section) */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none [mask-image:radial-gradient(ellipse_80%_70%_at_50%_42%,black_40%,transparent_90%)]">
         <div
@@ -307,18 +301,18 @@ export default function PricingSection() {
       {/* 2. Content Container */}
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         {/* Section Tag */}
-        <span className="text-[#F85800] text-sm font-semibold tracking-wide text-center mb-3 block font-sans">
+        <span className="text-primary text-sm md:text-[20px] text-center mb-3 block font-sans">
           [ Pricing Plan ]
         </span>
 
         {/* Main Headline */}
-        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-bold text-white text-center tracking-tight leading-[1.18] max-w-3xl mx-auto font-sans mb-8">
+        <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-foreground text-center tracking-tight leading-[1.18] max-w-3xl mx-auto font-sans mb-8">
           Customize your plan to{" "}
-          <span className="font-serif italic font-normal text-white">
+          <span className="font-serif italic font-normal text-foreground">
             match your
           </span>
           <br className="hidden sm:inline" />{" "}
-          <span className="font-serif italic font-normal text-white">
+          <span className="font-serif italic font-normal text-foreground">
             goals,
           </span>{" "}
           scale, and business needs.
@@ -334,8 +328,8 @@ export default function PricingSection() {
                 onClick={() => setActiveTabId(tab.id)}
                 className={`transition-all duration-300 rounded-full text-sm font-medium ${
                   isActive
-                    ? "bg-[#F85800] text-white px-6 py-2 shadow-md shadow-[#F85800]/25"
-                    : "text-zinc-400 hover:text-white px-5 py-2"
+                    ? "bg-primary text-foreground px-6 py-2 shadow-md shadow-[#F85800]/25"
+                    : "text-primary-text hover:text-foreground px-5 py-2"
                 }`}
               >
                 {tab.name}
@@ -359,34 +353,34 @@ export default function PricingSection() {
                 viewport={{ once: true, margin: "-40px" }}
                 className={`relative rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 ${
                   isPopular
-                    ? "bg-zinc-950/90 border border-white/30 shadow-2xl z-10"
-                    : "bg-[#101216]/90 border border-white/10 shadow-xl z-0"
+                    ? "bg-[#232528] border-2 border-white/30 shadow-2xl z-10"
+                    : "bg-[#0F0F0F] border border-white/10 shadow-xl z-0"
                 }`}
               >
                 {/* Most Popular Top Floating Badge */}
                 {isPopular && (
-                  <div className="bg-[#F85800] text-white text-xs font-semibold px-4 py-1 rounded-full absolute -top-3.5 left-1/2 -translate-x-1/2 shadow-lg shadow-[#F85800]/30 tracking-wide">
+                  <div className="bg-primary text-foreground text-xs font-semibold px-4 py-1 rounded-full absolute -top-3.5 left-1/2 -translate-x-1/2 shadow-lg shadow-[#F85800]/30 tracking-wide">
                     Most Popular
                   </div>
                 )}
 
                 <div>
                   {/* Card Title */}
-                  <h3 className="text-2xl font-bold text-white tracking-tight mb-2 font-sans">
+                  <h3 className="text-2xl font-bold text-foreground tracking-tight mb-2 font-sans">
                     {plan.name}
                   </h3>
 
                   {/* Subtitle */}
-                  <p className="text-zinc-400 text-sm font-normal min-h-[42px] leading-relaxed font-sans mb-6">
+                  <p className="text-primary-text text-sm font-normal min-h-[42px] leading-relaxed font-sans mb-6">
                     {plan.subtitle}
                   </p>
 
                   {/* Price Row */}
                   <div className="flex items-baseline gap-2 mb-8">
-                    <span className="text-4xl md:text-5xl font-bold text-white tracking-tight font-sans">
+                    <span className="text-4xl md:text-5xl font-bold text-foreground tracking-tight font-sans">
                       <AnimatedPrice value={plan.price} />
                     </span>
-                    <span className="text-zinc-400 text-sm font-normal font-sans">
+                    <span className="text-primary-text text-sm font-normal font-sans">
                       {plan.period}
                     </span>
                   </div>
@@ -398,8 +392,8 @@ export default function PricingSection() {
                         <div
                           className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${
                             isPopular
-                              ? "bg-[#F85800] text-white shadow-[0_0_8px_rgba(248,88,0,0.4)]"
-                              : "bg-zinc-800 text-zinc-400"
+                              ? "bg-primary text-foreground shadow-[0_0_8px_rgba(248,88,0,0.4)]"
+                              : "bg-zinc-800 text-primary-text"
                           }`}
                         >
                           <Check className="w-3 h-3 stroke-[2.5]" />
@@ -420,8 +414,8 @@ export default function PricingSection() {
                   }}
                   className={`w-full py-3.5 rounded-full font-medium text-center text-sm transition-all duration-300 ${
                     isPopular
-                      ? "bg-[#F85800] text-white font-semibold shadow-[0_0_35px_rgba(248,88,0,0.45)] hover:brightness-110 active:scale-[0.98]"
-                      : "bg-zinc-800/80 hover:bg-zinc-700/80 text-white font-medium border border-white/10 active:scale-[0.98]"
+                      ? "bg-primary text-foreground font-semibold shadow-[0_0_35px_rgba(248,88,0,0.8)] hover:brightness-110 active:scale-[0.98]"
+                      : "bg-zinc-800/80 hover:bg-zinc-700/80 text-foreground font-medium border border-white/10 active:scale-[0.98]"
                   }`}
                 >
                   {plan.buttonText}
@@ -438,15 +432,16 @@ export default function PricingSection() {
           <div className="bg-[#111622] border border-gray-800 rounded-2xl p-6 md:p-8 w-full max-w-lg shadow-2xl relative text-left">
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+              className="absolute top-4 right-4 text-gray-400 hover:text-foreground transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
-            <h3 className="text-2xl font-bold text-white mb-2 font-sans">
+            <h3 className="text-2xl font-bold text-foreground mb-2 font-sans">
               Book {selectedPlan.name}
             </h3>
             <p className="text-gray-400 text-sm mb-6 font-sans">
-              ${selectedPlan.price.toLocaleString()} {selectedPlan.period}. Fill out the form below and we'll get in touch with you shortly.
+              ${selectedPlan.price.toLocaleString()} {selectedPlan.period}. Fill
+              out the form below and we'll get in touch with you shortly.
             </p>
 
             <form
@@ -456,12 +451,21 @@ export default function PricingSection() {
                 try {
                   await packageBookingApi.createBooking({
                     ...formData,
-                    billingCycle: selectedPlan.period.replace("/", "").replace("per", "").trim() || "month",
+                    billingCycle:
+                      selectedPlan.period
+                        .replace("/", "")
+                        .replace("per", "")
+                        .trim() || "month",
                     packageId: selectedPlan.id,
                   });
                   alert("Booking successful! We will contact you soon.");
                   setIsModalOpen(false);
-                  setFormData({ name: "", userEmail: "", companyName: "", companyEmail: "" });
+                  setFormData({
+                    name: "",
+                    userEmail: "",
+                    companyName: "",
+                    companyEmail: "",
+                  });
                 } catch (error) {
                   console.error("Booking failed:", error);
                   alert("Booking failed. Please try again.");
@@ -479,8 +483,10 @@ export default function PricingSection() {
                   required
                   type="text"
                   value={formData.name}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
-                  className="w-full bg-[#0b101d] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#F85800] transition-colors"
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, name: e.target.value }))
+                  }
+                  className="w-full bg-[#0b101d] border border-gray-700 rounded-lg px-4 py-2.5 text-foreground focus:outline-none focus:border-[#F85800] transition-colors"
                   placeholder="John Doe"
                 />
               </div>
@@ -492,8 +498,13 @@ export default function PricingSection() {
                   required
                   type="email"
                   value={formData.userEmail}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, userEmail: e.target.value }))}
-                  className="w-full bg-[#0b101d] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#F85800] transition-colors"
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      userEmail: e.target.value,
+                    }))
+                  }
+                  className="w-full bg-[#0b101d] border border-gray-700 rounded-lg px-4 py-2.5 text-foreground focus:outline-none focus:border-[#F85800] transition-colors"
                   placeholder="john@example.com"
                 />
               </div>
@@ -505,8 +516,13 @@ export default function PricingSection() {
                   required
                   type="text"
                   value={formData.companyName}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, companyName: e.target.value }))}
-                  className="w-full bg-[#0b101d] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#F85800] transition-colors"
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      companyName: e.target.value,
+                    }))
+                  }
+                  className="w-full bg-[#0b101d] border border-gray-700 rounded-lg px-4 py-2.5 text-foreground focus:outline-none focus:border-[#F85800] transition-colors"
                   placeholder="Acme Corp"
                 />
               </div>
@@ -518,15 +534,20 @@ export default function PricingSection() {
                   required
                   type="email"
                   value={formData.companyEmail}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, companyEmail: e.target.value }))}
-                  className="w-full bg-[#0b101d] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#F85800] transition-colors"
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      companyEmail: e.target.value,
+                    }))
+                  }
+                  className="w-full bg-[#0b101d] border border-gray-700 rounded-lg px-4 py-2.5 text-foreground focus:outline-none focus:border-[#F85800] transition-colors"
                   placeholder="contact@acme.com"
                 />
               </div>
               <button
                 disabled={isSubmitting}
                 type="submit"
-                className="w-full py-3.5 bg-[#F85800] hover:brightness-110 disabled:opacity-50 text-white rounded-lg font-medium transition-all mt-6 shadow-[0_0_20px_rgba(248,88,0,0.35)]"
+                className="w-full py-3.5 bg-primary hover:brightness-110 disabled:opacity-50 text-foreground rounded-lg font-medium transition-all mt-6 shadow-[0_0_20px_rgba(248,88,0,0.35)]"
               >
                 {isSubmitting ? "Booking..." : "Confirm Booking"}
               </button>
@@ -534,6 +555,6 @@ export default function PricingSection() {
           </div>
         </div>
       )}
-    </SectionContainer>
+    </div>
   );
 }

@@ -196,7 +196,7 @@ export default function TestimonialsSection() {
   return (
     <section
       id="testimonials"
-      className="w-full py-16 md:py-24 bg-[#0a0a0a] relative overflow-hidden flex flex-col items-center justify-center border-t border-gray-900"
+      className="w-full relative overflow-hidden flex flex-col items-center justify-center border-t border-gray-900"
     >
       {/* Side Fade Gradient Overlays (Dark Theme) */}
       <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-44 bg-gradient-to-r from-[#0a0a0a] to-transparent z-20" />
@@ -204,9 +204,9 @@ export default function TestimonialsSection() {
 
       {/* Header Container */}
       <div className="max-w-4xl w-full px-6 flex flex-col items-center text-center mb-16 relative z-10">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[56px] font-semibold text-white tracking-tight leading-tight flex flex-col items-center gap-2">
+        <h2 className="text-3xl md:text-4xl lg:text-[40px] font-semibold text-header-text tracking-tight leading-tight flex flex-col items-center gap-2">
           <span>What SaaS Teams Say About Working</span>
-          <span className="font-serif italic font-medium text-white/90 mt-2 text-4xl sm:text-5xl md:text-6xl lg:text-[64px]">
+          <span className="font-serif italic font-medium text-white/90 mt-2 text-3xl md:text-4xl lg:text-[40px]">
             with Creatibuz Studio
           </span>
         </h2>
@@ -229,15 +229,15 @@ export default function TestimonialsSection() {
 
       {/* Video Modal */}
       {playingVideoUrl && (
-        <div 
+        <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 sm:p-6"
           onClick={() => setPlayingVideoUrl(null)}
         >
-          <div 
+          <div
             className="relative w-full max-w-4xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <button 
+            <button
               className="absolute top-4 right-4 text-white/80 hover:text-white z-10 bg-black/50 hover:bg-black/80 rounded-full p-2 transition-all cursor-pointer"
               onClick={() => setPlayingVideoUrl(null)}
             >

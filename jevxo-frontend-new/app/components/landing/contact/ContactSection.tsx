@@ -51,7 +51,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="w-full py-10 md:py-16 flex justify-center bg-[#0a0a0a]"
+      className="w-full flex justify-center"
     >
       <div className="w-full max-w-[95%] lg:max-w-6xl mx-auto px-2 sm:px-4 md:px-6">
         {/* Dark Floating Card Container with subtle Orange top-left border */}
