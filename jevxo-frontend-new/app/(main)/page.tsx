@@ -36,9 +36,7 @@ export default function Home() {
         <OurService />
       </SectionContainer>
 
-      <SectionContainer extendTopBorder={false}>
       <FeatureWorks />
-      </SectionContainer>
 
       <ProcessSection />
 

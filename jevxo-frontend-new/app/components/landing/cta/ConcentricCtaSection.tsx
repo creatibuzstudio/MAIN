@@ -15,8 +15,10 @@ interface OrbitIcon {
 
 interface OrbitRingConfig {
   id: string;
-  diameter: number; // diameter in pixels
-  duration: number; // rotation duration in seconds
+  diameter: number; // diameter in pixels (user custom settings: 650, 850, 1050)
+  duration?: number; // legacy speed alias
+  ringDuration: number; // ring rotation speed in seconds (user setting: 555s)
+  iconDuration: number; // icons orbital rotation speed in seconds (faster, e.g. 32s, 42s, 52s)
   direction: "clockwise" | "counter-clockwise";
   strokeColor: string;
   strokeWidth: number;
@@ -27,8 +29,9 @@ interface OrbitRingConfig {
 const ORBIT_RINGS: OrbitRingConfig[] = [
   {
     id: "inner",
-    diameter: 480,
-    duration: 30,
+    diameter: 650,
+    ringDuration: 555,
+    iconDuration: 60, // faster independent orbital rotation for icons
     direction: "clockwise",
     strokeColor: "rgba(255, 255, 255, 0.32)",
     strokeWidth: 1.5,
@@ -48,8 +51,9 @@ const ORBIT_RINGS: OrbitRingConfig[] = [
   },
   {
     id: "middle",
-    diameter: 720,
-    duration: 40,
+    diameter: 850,
+    ringDuration: 555,
+    iconDuration: 50, // faster independent orbital rotation for icons
     direction: "counter-clockwise",
     strokeColor: "rgba(255, 255, 255, 0.22)",
     strokeWidth: 1.5,
@@ -74,8 +78,9 @@ const ORBIT_RINGS: OrbitRingConfig[] = [
   },
   {
     id: "outer",
-    diameter: 960,
-    duration: 55,
+    diameter: 1100,
+    ringDuration: 555,
+    iconDuration: 45, // faster independent orbital rotation for icons
     direction: "clockwise",
     strokeColor: "rgba(255, 255, 255, 0.16)",
     strokeWidth: 1.5,
@@ -158,24 +163,27 @@ export default function ConcentricCtaSection() {
             {ORBIT_RINGS.map((ring) => {
               const radius = ring.diameter / 2;
               const isClockwise = ring.direction === "clockwise";
+              const ringSpeed = ring.ringDuration || ring.duration || 555;
+              const iconSpeed = ring.iconDuration || 35;
 
               return (
                 <div
                   key={ring.id}
                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                  style={{
+                    width: `${ring.diameter}px`,
+                    height: `${ring.diameter}px`,
+                  }}
                 >
-                  {/* Rotating Ring Container */}
+                  {/* 1. Ring SVG Container (Rotates at ringSpeed = 555s) */}
                   <div
-                    className="relative pointer-events-none"
+                    className="absolute inset-0 pointer-events-none"
                     style={{
-                      width: `${ring.diameter}px`,
-                      height: `${ring.diameter}px`,
-                      animation: `${isClockwise ? "orbitClockwise" : "orbitCounterClockwise"} ${ring.duration}s linear infinite`,
+                      animation: `${isClockwise ? "orbitClockwise" : "orbitCounterClockwise"} ${ringSpeed}s linear infinite`,
                     }}
                   >
-                    {/* SVG Dashed Circle (Crisp vector dashes, not solid border) */}
                     <svg
-                      className="absolute inset-0 w-full h-full pointer-events-none"
+                      className="w-full h-full pointer-events-none"
                       viewBox={`0 0 ${ring.diameter} ${ring.diameter}`}
                     >
                       <circle
@@ -189,8 +197,15 @@ export default function ConcentricCtaSection() {
                         strokeLinecap="round"
                       />
                     </svg>
+                  </div>
 
-                    {/* Orbiting Icons */}
+                  {/* 2. Icons Orbit Container (Rotates at iconSpeed = faster independent orbital revolution) */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      animation: `${isClockwise ? "orbitClockwise" : "orbitCounterClockwise"} ${iconSpeed}s linear infinite`,
+                    }}
+                  >
                     {ring.icons.map((icon) => {
                       const rad = (icon.angle * Math.PI) / 180;
                       const x = Math.round(radius * Math.cos(rad));
@@ -206,18 +221,18 @@ export default function ConcentricCtaSection() {
                             transform: "translate(-50%, -50%)",
                           }}
                         >
-                          {/* Counter-rotating badge keeping the tool upright */}
+                          {/* Counter-rotating badge keeping the tool upright at iconSpeed */}
                           <div
-                            className="w-11 h-11 md:w-13 md:h-13 rounded-full bg-zinc-900/90 border border-white/15 flex items-center justify-center shadow-lg p-2.5 transition-transform duration-200 hover:scale-115 cursor-pointer backdrop-blur-sm"
+                            className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-zinc-900/90 border border-white/15 flex items-center justify-center shadow-lg transition-transform duration-200 hover:scale-115 cursor-pointer backdrop-blur-sm"
                             style={{
-                              animation: `${isClockwise ? "orbitCounterClockwise" : "orbitClockwise"} ${ring.duration}s linear infinite`,
+                              animation: `${isClockwise ? "orbitCounterClockwise" : "orbitClockwise"} ${iconSpeed}s linear infinite`,
                             }}
                           >
                             <Image
                               src={icon.src}
                               alt={icon.name}
-                              width={48}
-                              height={48}
+                              width={50}
+                              height={50}
                               className="w-full h-full object-contain pointer-events-none select-none"
                             />
                           </div>
@@ -238,7 +253,7 @@ export default function ConcentricCtaSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="font-sans font-bold text-white text-3xl sm:text-4xl md:text-5xl lg:text-[52px] text-center leading-[1.18] tracking-tight max-w-xl mx-auto"
+            className="font-bold text-foreground text-3xl md:text-4xl lg:text-[40px] text-center leading-[1.18] tracking-tight max-w-3xl mx-auto"
           >
             Ready to build something<br className="hidden sm:inline" /> that actually converts?
           </motion.h2>
@@ -262,11 +277,11 @@ export default function ConcentricCtaSection() {
           >
             <Link
               href="#contact"
-              className="group inline-flex items-center gap-3.5 rounded-full bg-white text-black font-semibold text-sm sm:text-base pl-6 sm:pl-7 pr-2.5 py-2 sm:py-2.5 hover:bg-zinc-100 transition-all duration-300 hover:scale-105 active:scale-95 shadow-2xl"
+              className="group inline-flex items-center gap-5 rounded-full bg-white text-black font-semibold text-sm sm:text-base px-5 pr-1 py-1 hover:bg-zinc-100 transition-all duration-300 hover:scale-105 active:scale-95 shadow-2xl"
             >
               <span>Request Free Audit</span>
-              <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black text-white flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
-                <ArrowUpRight className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.5]" />
+              <span className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black text-white flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
+                <ArrowUpRight className="w-4 h-4 md:w-6 md:h-6 stroke-[2]" />
               </span>
             </Link>
           </motion.div>

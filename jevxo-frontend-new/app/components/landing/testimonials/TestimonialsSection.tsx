@@ -116,16 +116,22 @@ export default function TestimonialsSection() {
     return (
       <div
         key={cardKey}
-        className="w-[450px] md:w-[520px] shrink-0 bg-[#16181A] rounded-[24px] p-5 border border-white/5 flex items-stretch gap-6 group"
+        className="w-[450px] md:w-[520px] shrink-0 bg-[#181A1E] rounded-xl p-5 border border-white/5 flex items-stretch gap-6 group"
       >
         {/* Left Side: Image Thumbnail Container with Play Overlay */}
-        <div 
-          className={`w-[170px] md:w-[200px] rounded-[16px] relative overflow-hidden bg-gray-900 shrink-0 ${item.videoUrl ? 'cursor-pointer' : ''}`}
-          onClick={() => item.videoUrl ? setPlayingVideoUrl(item.videoUrl) : undefined}
+        <div
+          className={`w-[170px] md:w-[200px] rounded-xl relative overflow-hidden bg-gray-900 shrink-0 ${item.videoUrl ? "cursor-pointer" : ""}`}
+          onClick={() =>
+            item.videoUrl ? setPlayingVideoUrl(item.videoUrl) : undefined
+          }
         >
           <div className="w-full h-full relative flex items-center justify-center bg-gray-800 transition-transform duration-500 group-hover:scale-105">
             {item.thumbUrl ? (
-              <img src={item.thumbUrl} alt="Thumbnail" className="w-full h-full object-cover" />
+              <img
+                src={item.thumbUrl}
+                alt="Thumbnail"
+                className="w-full h-full object-cover"
+              />
             ) : (
               <UserIcon className="w-16 h-16 text-gray-600" />
             )}
@@ -148,7 +154,10 @@ export default function TestimonialsSection() {
                 <Star key={i} className="w-4 h-4 fill-[#fbbf24] stroke-none" />
               ))}
               {[...Array(5 - rating)].map((_, i) => (
-                <Star key={`empty-${i}`} className="w-4 h-4 text-gray-700 stroke-none" />
+                <Star
+                  key={`empty-${i}`}
+                  className="w-4 h-4 text-gray-700 stroke-none"
+                />
               ))}
             </div>
 
