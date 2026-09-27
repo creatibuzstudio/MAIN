@@ -1,233 +1,185 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { blogApi, Blog } from "../../../../api/blogApi";
+import SectionContainer from "@/app/components/ui/SectionContainer";
+import { blogApi } from "@/api/blogApi";
 
-gsap.registerPlugin(ScrollTrigger);
+interface BlogCardItem {
+  id: string;
+  slug: string;
+  title: string;
+  date: string;
+  image: string;
+  alt: string;
+}
+
+const DEFAULT_BLOGS: BlogCardItem[] = [
+  {
+    id: "1",
+    slug: "the-future-of-branding-why-design-quality-matters-more-than-ever",
+    title: "The Future of Branding Why Design Quality Matters More Than Ever.",
+    date: "July 31, 2025",
+    image: "/blogInsight/first.png",
+    alt: "Doing Things brand tote bag showcase",
+  },
+  {
+    id: "2",
+    slug: "the-future-of-branding-why-design-quality-matters-more-than-ever-2",
+    title: "The Future of Branding Why Design Quality Matters More Than Ever.",
+    date: "July 31, 2025",
+    image: "/blogInsight/second.png",
+    alt: "Digital data and binary depth perspective",
+  },
+  {
+    id: "3",
+    slug: "the-future-of-branding-why-design-quality-matters-more-than-ever-3",
+    title: "The Future of Branding Why Design Quality Matters More Than Ever.",
+    date: "July 31, 2025",
+    image: "/blogInsight/thired.png",
+    alt: "Pack mockup packaging and branding design",
+  },
+];
 
 export default function BlogSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [blogs, setBlogs] = useState<Blog[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [blogs, setBlogs] = useState<BlogCardItem[]>(DEFAULT_BLOGS);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const data = await blogApi.getAllBlogs();
-        // data could be paginated or an array
         const blogList = Array.isArray(data) ? data : data?.data || [];
-        setBlogs(blogList);
-      } catch (error) {
-        console.error("Failed to fetch blogs:", error);
-      } finally {
-        setIsLoading(false);
+        if (blogList.length > 0) {
+          setBlogs((prev) =>
+            prev.map((fallback, idx) => {
+              const apiItem = blogList[idx];
+              if (!apiItem) return fallback;
+              return {
+                id: apiItem.id || fallback.id,
+                slug: apiItem.slug || fallback.slug,
+                title: apiItem.title || fallback.title,
+                date: apiItem.createdAt
+                  ? new Date(apiItem.createdAt).toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
+                    })
+                  : fallback.date,
+                image: fallback.image, // strictly loaded from /public/blogInsight/
+                alt: fallback.alt,
+              };
+            })
+          );
+        }
+      } catch {
+        // Keep DEFAULT_BLOGS if api is empty or offline
       }
     };
 
     fetchBlogs();
   }, []);
 
-  useEffect(() => {
-    if (isLoading || blogs.length === 0) return;
-
-    const ctx = gsap.context(() => {
-      // Bi-directional GSAP Entrance Reveal for Blog & Insight Cards (Ultra-fast 0.2s blur clear)
-      gsap.fromTo(
-        ".blog-card",
-        { opacity: 0, y: 25, scale: 0.98, filter: "blur(2px)" },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          filter: "blur(0px)",
-          duration: 0.4,
-          stagger: 0.05,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 85%",
-            end: "bottom 15%",
-            toggleActions: "play reverse play reverse",
-          },
-        }
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [isLoading, blogs.length]);
-
-  const getValidImageSrc = (src?: string | null): string | null => {
-    if (!src || typeof src !== "string") return null;
-    const trimmed = src.trim();
-    if (!trimmed || trimmed === "null" || trimmed === "undefined") return null;
-
-    if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
-      try {
-        new URL(trimmed);
-        return trimmed;
-      } catch {
-        return null;
-      }
-    }
-
-    if (trimmed.startsWith("/")) {
-      return trimmed;
-    }
-
-    return `/${trimmed}`;
-  };
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric'
-    });
-  };
-
-  const mainBlog = blogs[0];
-  const sideBlogs = blogs.slice(1, 3);
-  const mainBlogImageSrc = mainBlog ? getValidImageSrc(mainBlog.coverImage) : null;
-
   return (
-    <section ref={sectionRef} id="blog" className="relative z-10 w-full py-6 md:py-8  flex justify-center  overflow-hidden">
-      <div className="w-full max-w-[95%] lg:max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 flex flex-col">
+    <SectionContainer
+      id="blog"
+      containerClassName="relative w-full overflow-hidden bg-background"
+    >
+      {/* 1. Header & Typography */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center max-w-3xl mx-auto"
+      >
+        <span className="text-[#F85800] text-sm font-semibold tracking-wide text-center mb-3 block font-sans">
+          [ Our Latest Blog ]
+        </span>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center tracking-tight font-sans">
+          Where Creativity Meets
+          <span
+            className="font-serif italic font-normal text-white text-center text-3xl sm:text-4xl md:text-5xl mt-1 block"
+            style={{ fontFamily: "var(--font-dm-serif), serif" }}
+          >
+            Intelligent Design.
+          </span>
+        </h2>
+      </motion.div>
 
-        {/* Title & Header Row */}
+      {/* 2. Blog Cards Grid */}
+      <div
+        onMouseLeave={() => setHoveredIndex(null)}
+        className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 w-full"
+      >
+        {blogs.map((card, idx) => {
+          // Card 2 (idx === 1) is active by default, or the card currently hovered
+          const isActive =
+            hoveredIndex !== null ? hoveredIndex === idx : idx === 1;
 
-        <div
-          className="bg-transparent mb-10  border border-[#003FEA4D] text-[#252323] w-[160px] h-[40px] rounded-full text-[14px] font-normal leading-none tracking-normal inline-flex justify-center items-center gap-1.5 shadow-2xs"
-          style={{ fontFamily: '"Helvetica Now Display", sans-serif' }}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#3b82f6] animate-pulse" />
-          Blog & Insights
-        </div>
-
-        <div className="flex pb-8 flex-col lg:flex-row lg:items-start justify-between gap-8 mb-10 md:mb-12 w-full">
-          {/* Left Title Area */}
-          <div className="flex flex-col items-start gap-3.5 lg:w-1/2">
-            {/* Pill Badge */}
-
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[32px] font-medium text-[#0f172a] tracking-tight leading-[1.15]">
-              <span className="block text-[#0f172a]">Latest Insights &</span>
-              <span className="block mt-1 text-[#0f172a]">
-                <span className="font-serif italic font-normal text-[#0f172a]">Industry</span> <span className="font-medium text-[#0f172a]">Articles.</span>
-              </span>
-            </h2>
-          </div>
-
-          {/* Right Description Text */}
-          <div className="md:w-[42%] pt-1 md:pt-6">
-            <p className="text-xs sm:text-sm md:text-base text-[#64748b] font-normal leading-relaxed">
-              Thoughtful perspectives on design, UX, branding, and digital products—written to help founders, teams, and businesses make better decisions.
-            </p>
-          </div>
-        </div>
-
-        {/* Blog Grid (Left Main Card + Right 2 Cards Stack) */}
-        {!isLoading && blogs.length > 0 && (
-          <div className="grid grid-cols-1 lg:grid-cols-12  gap-6 items-stretch">
-
-            {/* Left Column: Featured Main Blog Post Card */}
-            {mainBlog && (
-              <div className="blog-card lg:col-span-6 bg-white rounded-[16px] p-6 sm:p-7 flex flex-col justify-between shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-gray-100/80 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1">
-                {/* Main Featured Banner Image */}
-                <div className="w-full h-[280px] sm:h-[340px] md:h-[360px] rounded-[12px] relative overflow-hidden mb-6 bg-gray-100 flex items-center justify-center">
-                  {mainBlogImageSrc ? (
-                    <img
-                      src={mainBlogImageSrc}
-                      alt={mainBlog.title}
-                      className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
-                    />
-                  ) : (
-                    <span className="text-gray-400 font-medium">No Image</span>
-                  )}
+          return (
+            <motion.div
+              key={card.id}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              onMouseEnter={() => setHoveredIndex(idx)}
+              className="bg-card rounded-3xl p-5 border border-white/10 hover:border-white/20 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
+            >
+              {/* Top Area: Thumbnail, Date, Headline */}
+              <div>
+                {/* 1. Featured Thumbnail */}
+                <div className="rounded-2xl overflow-hidden aspect-[16/10] bg-black/40 border border-white/5 relative">
+                  <Image
+                    src={card.image}
+                    alt={card.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                 </div>
 
-                {/* Content Details */}
-                <div className="flex flex-col justify-between flex-1">
-                  <div>
-                    <span className="text-[#94a3b8] text-xs sm:text-sm font-normal block mb-1.5">
-                      {formatDate(mainBlog.createdAt)}
-                    </span>
-                    <h3 className="text-lg sm:text-xl md:text-[22px] font-medium text-[#0a0c16] tracking-tight leading-snug mb-2 line-clamp-2">
-                      {mainBlog.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 line-clamp-3 mb-4">
-                      {mainBlog.excerpt || mainBlog.content?.replace(/<[^>]+>/g, '')}
-                    </p>
-                  </div>
+                {/* 2. Date Tag */}
+                <span className="text-zinc-500 text-xs font-normal mt-4 block">
+                  {card.date}
+                </span>
 
-                  <div>
-                    <Link
-                      href={`/blog/${mainBlog.slug || mainBlog.id}`}
-                      className="inline-flex items-center gap-2.5 bg-black hover:bg-gray-800 text-white rounded-full pl-4 pr-1 py-1 transition-all duration-300 hover:scale-[1.03] group/btn"
-                    >
-                      <span className="text-xs sm:text-sm font-medium">Open Blog</span>
-                      <div className="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shrink-0 group-hover/btn:rotate-45 transition-transform duration-300">
-                        <ArrowUpRight className="w-3.5 h-3.5 text-black stroke-[2.2]" />
-                      </div>
-                    </Link>
-                  </div>
-                </div>
+                {/* 3. Article Headline */}
+                <h3 className="text-zinc-300 font-medium text-base md:text-lg leading-snug mt-2 mb-6 line-clamp-2 group-hover:text-white transition-colors">
+                  {card.title}
+                </h3>
               </div>
-            )}
 
-            {/* Right Column: 2 Stacked Cards */}
-            <div className="lg:col-span-6 flex flex-col space-y-6 justify-between">
-              {sideBlogs.map((blog) => {
-                const blogImageSrc = getValidImageSrc(blog.coverImage);
-                return (
-                  <div key={blog.id} className="blog-card bg-white rounded-[16px] p-6 sm:p-7 flex flex-col sm:flex-row items-center gap-6 shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-gray-100/80 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 h-full">
-                    {/* Image thumbnail */}
-                    <div className="w-full sm:w-[220px] md:w-[250px] h-[185px] sm:h-[195px] md:h-[210px] rounded-[12px] relative overflow-hidden shrink-0 bg-gray-100 flex items-center justify-center">
-                      {blogImageSrc ? (
-                        <img
-                          src={blogImageSrc}
-                          alt={blog.title}
-                          className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
-                        />
-                      ) : (
-                        <span className="text-gray-400 font-medium text-sm">No Image</span>
-                      )}
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex flex-col justify-center h-full w-full py-1">
-                      <span className="text-[#94a3b8] text-xs sm:text-sm font-normal block mb-1.5">
-                        {formatDate(blog.createdAt)}
-                      </span>
-                      <h3 className="text-base sm:text-lg md:text-[19px] font-medium text-[#0a0c16] tracking-tight leading-snug mb-2 line-clamp-2">
-                        {blog.title}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-gray-600 line-clamp-2 mb-4">
-                        {blog.excerpt || blog.content?.replace(/<[^>]+>/g, '')}
-                      </p>
-
-                      <div>
-                        <Link
-                          href={`/blog/${blog.slug || blog.id}`}
-                          className="inline-flex items-center gap-2.5 bg-black hover:bg-gray-800 text-white rounded-full pl-4 pr-1 py-1 transition-all duration-300 hover:scale-[1.03] group/btn"
-                        >
-                          <span className="text-xs sm:text-sm font-medium">Open Blog</span>
-                          <div className="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shrink-0 group-hover/btn:rotate-45 transition-transform duration-300">
-                            <ArrowUpRight className="w-3.5 h-3.5 text-black stroke-[2.2]" />
-                          </div>
-                        </Link>
-                      </div>
-                    </div>
+              {/* Bottom Area: 4. Interactive CTA Button */}
+              <div className="mt-auto">
+                <Link
+                  href={`/blog/${card.slug}`}
+                  className={`rounded-full px-4 py-2.5 flex items-center justify-between w-fit gap-3 transition-all duration-300 group/btn ${
+                    isActive
+                      ? "bg-[#F85800] text-white text-sm font-semibold shadow-[0_0_30px_rgba(248,88,0,0.45)]"
+                      : "bg-zinc-900/90 text-zinc-300 text-sm font-medium border border-white/10 hover:bg-zinc-800"
+                  }`}
+                >
+                  <span>Open Article</span>
+                  <div
+                    className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-transform duration-300 group-hover/btn:rotate-45 ${
+                      isActive
+                        ? "bg-white text-[#F85800]"
+                        : "bg-[#F85800] text-white"
+                    }`}
+                  >
+                    <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
                   </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
+                </Link>
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
-    </section>
+    </SectionContainer>
   );
 }
