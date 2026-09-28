@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { Check, X } from "lucide-react";
 import { motion, animate } from "framer-motion";
 import SectionContainer from "@/app/components/ui/SectionContainer";
@@ -265,37 +266,15 @@ export default function PricingSection() {
   const activeCategory = CATEGORIES_DATA.find((c) => c.id === activeTabId) || CATEGORIES_DATA[0];
 
   return (
-    <div id="pricing" className="relative w-full overflow-hidden">
-      {/* 1. Responsive 75px x 75px Gridlines with Tinted Accent Cells (matching Hero Section) */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none [mask-image:radial-gradient(ellipse_80%_70%_at_50%_42%,black_40%,transparent_90%)]">
-        <div
-          className="absolute inset-0 w-full h-full"
-          style={{
-            backgroundSize: "75px 75px",
-            backgroundImage:
-              "linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px)",
-            backgroundPosition: "center top",
-          }}
-        >
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-[75px] left-[calc(50%-487.5px)] w-[75px] h-[75px] bg-white/[0.04]" />
-            <div className="absolute top-[150px] left-[calc(50%-262.5px)] w-[75px] h-[75px] bg-white/[0.025]" />
-            <div className="absolute top-[225px] left-[calc(50%-562.5px)] w-[75px] h-[75px] bg-white/[0.05]" />
-            <div className="absolute top-[225px] left-[calc(50%-112.5px)] w-[75px] h-[75px] bg-white/[0.02]" />
-            <div className="absolute top-[300px] left-[calc(50%-412.5px)] w-[75px] h-[75px] bg-white/[0.035]" />
-            <div className="absolute top-[375px] left-[calc(50%-487.5px)] w-[75px] h-[75px] bg-white/[0.045]" />
-            <div className="absolute top-[450px] left-[calc(50%-187.5px)] w-[75px] h-[75px] bg-white/[0.025]" />
-            <div className="absolute top-[525px] left-[calc(50%-337.5px)] w-[75px] h-[75px] bg-white/[0.03]" />
-            <div className="absolute top-[75px] left-[calc(50%+187.5px)] w-[75px] h-[75px] bg-white/[0.03]" />
-            <div className="absolute top-[150px] left-[calc(50%+412.5px)] w-[75px] h-[75px] bg-white/[0.025]" />
-            <div className="absolute top-[150px] left-[calc(50%+112.5px)] w-[75px] h-[75px] bg-white/[0.04]" />
-            <div className="absolute top-[225px] left-[calc(50%+262.5px)] w-[75px] h-[75px] bg-white/[0.05]" />
-            <div className="absolute top-[300px] left-[calc(50%+487.5px)] w-[75px] h-[75px] bg-white/[0.035]" />
-            <div className="absolute top-[375px] left-[calc(50%+187.5px)] w-[75px] h-[75px] bg-white/[0.045]" />
-            <div className="absolute top-[450px] left-[calc(50%+337.5px)] w-[75px] h-[75px] bg-white/[0.02]" />
-            <div className="absolute top-[525px] left-[calc(50%+112.5px)] w-[75px] h-[75px] bg-white/[0.035]" />
-          </div>
-        </div>
+    <div id="pricing" className="relative w-full overflow-hidden py-16 md:py-24 lg:py-32">
+      {/* Figma Grid Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+        <Image
+          src="/grid-bg.png"
+          alt="Pricing Grid Background"
+          fill
+          className="object-cover object-top -translate-y-3"
+        />
       </div>
 
       {/* 2. Content Container */}

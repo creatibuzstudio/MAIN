@@ -50,7 +50,7 @@ export default function Home() {
 
       <WorkMarqueeSection />
 
-      <SectionContainer extendTopBorder={false}>
+      <SectionContainer extendTopBorder={false} noPadding={true}>
         <PricingSection />
       </SectionContainer>
 
@@ -72,9 +72,7 @@ export default function Home() {
         <ContactSection />
       </SectionContainer>
 
-      <SectionContainer extendTopBorder={false}>
-        <TestimonialsSection />
-      </SectionContainer>
+      <TestimonialsSection />
 
       <SectionContainer extendTopBorder={false}>
         <Feature />

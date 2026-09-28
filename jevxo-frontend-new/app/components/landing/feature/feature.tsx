@@ -4,76 +4,63 @@ import { Gem } from 'lucide-react';
 
 const Feature = () => {
   return (
-    <section className="px-4 md:px-8 w-full overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="relative rounded-[40px] overflow-hidden flex flex-col lg:flex-row items-center justify-between p-8 md:p-12 lg:p-16 bg-primary">
-          {/* Subtle Background Waves / Concentric Circles Effect
-          <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center">
-            <div className="absolute w-[150%] h-[150%] top-[-25%] right-[-25%] opacity-10">
-              <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-                 <g stroke="#ffffff" strokeWidth="0.5" fill="none">
-                    <circle cx="100" cy="0" r="10"/>
-                    <circle cx="100" cy="0" r="20"/>
-                    <circle cx="100" cy="0" r="30"/>
-                    <circle cx="100" cy="0" r="40"/>
-                    <circle cx="100" cy="0" r="50"/>
-                    <circle cx="100" cy="0" r="60"/>
-                    <circle cx="100" cy="0" r="70"/>
-                    <circle cx="100" cy="0" r="80"/>
-                    <circle cx="100" cy="0" r="90"/>
-                    <circle cx="100" cy="0" r="100"/>
-                    <circle cx="100" cy="0" r="110"/>
-                    <circle cx="100" cy="0" r="120"/>
-                    <circle cx="100" cy="0" r="130"/>
-                    <circle cx="100" cy="0" r="140"/>
-                 </g>
-              </svg>
-            </div>
-          </div> */}
+    <div className="w-full">
+      <div className="relative rounded-[28px] sm:rounded-[36px] overflow-hidden flex flex-col lg:flex-row items-stretch lg:items-center justify-between px-6 sm:px-10 lg:px-14 pt-10 sm:pt-14 pb-0 min-h-[440px] shadow-2xl bg-primary">
+        {/* Background Image: /newsletter-bg.png */}
+        <Image
+          src="/newsletter-bg.png"
+          alt="Newsletter Background"
+          fill
+          className="object-cover object-center pointer-events-none select-none z-0"
+          priority
+        />
 
-          <div className="relative z-10 w-full lg:w-1/2 text-white mb-12 lg:mb-0">
-            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full mb-6">
-              <Gem size={16} className="text-white" />
-              <span className="text-sm font-medium">Powerfull Features</span>
-            </div>
-
-            <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold leading-[1.1] mb-6">
-              Start Your Project With Confidence.
-            </h2>
-
-            <p className="text-xs md:text-base text-foreground mb-10 max-w-4xl leading-relaxed">
-              Creatibuz Studio is your trusted technology partner - A
-              full-service UI/UX and development agency helping startups and
-              businesses create fast, scalable, and user-focused digital
-              products.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center gap-3 max-w-md">
-              <input
-                type="email"
-                placeholder="Email Address .."
-                className="w-full sm:flex-1 bg-white text-gray-900 px-6 py-4 rounded-[14px] outline-none placeholder:text-gray-400 font-medium focus:ring-4 focus:ring-white/30 transition-all"
-              />
-              <button className="w-full sm:w-auto bg-[#333333] hover:bg-[#111111] text-white px-8 py-4 rounded-[14px] font-semibold transition-all shadow-lg whitespace-nowrap">
-                Subscribe
-              </button>
-            </div>
+        {/* Left Side Content */}
+        <div className="relative z-10 w-full lg:w-[48%] text-white pb-10 lg:pb-12">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-3.5 py-1.5 rounded-full mb-6 text-white text-[13px] font-medium shadow-xs">
+            <Gem size={14} className="text-white fill-white" />
+            <span>Powerfull Features</span>
           </div>
 
-          <div className="relative z-10 w-full lg:w-1/2 flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-[650px] aspect-[1] scale-110 lg:translate-x-16 origin-right">
-              <Image
-                src="/laptopFeatured.png"
-                alt="Dashboard Mockup"
-                fill
-                className="object-contain drop-shadow-2xl"
-              />
-            </div>
+          {/* Heading */}
+          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-white tracking-tight leading-[1.15] mb-5">
+            Start Your Project With<br className="hidden sm:inline" /> Confidence.
+          </h2>
+
+          {/* Description */}
+          <p className="text-[14px] sm:text-[15px] lg:text-[16px] text-white/95 max-w-lg leading-relaxed mb-8 sm:mb-10 font-normal">
+            Creatibuz Studio is your trusted technology partner – A full-service UI/UX and development agency helping startups and businesses create fast, scalable, and user-focused digital products.
+          </p>
+
+          {/* Newsletter Input + Button */}
+          <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-[460px]">
+            <input
+              type="email"
+              placeholder="Email Address .."
+              className="w-full sm:flex-1 bg-white text-[#18191D] placeholder:text-[#94A3B8] px-5 py-3.5 rounded-[12px] text-[14px] font-normal outline-none shadow-sm focus:ring-2 focus:ring-black/20"
+            />
+            <button className="w-full sm:w-auto bg-[#2D2E30] hover:bg-[#1E1F21] text-white text-[14px] font-semibold px-7 py-3.5 rounded-[12px] shadow-md transition-all cursor-pointer whitespace-nowrap">
+              Subscribe
+            </button>
+          </div>
+        </div>
+
+        {/* Right Side: Laptop Mockup resting flush on the bottom edge */}
+        <div className="relative z-10 w-full lg:w-[50%] flex items-end justify-center lg:justify-end self-end mt-4 lg:mt-0">
+          <div className="relative w-full max-w-[580px] aspect-[1318/965] scale-120 translate-y-2 lg:translate-y-4 lg:translate-x-4">
+            <Image
+              src="/laptopFeatured.png"
+              alt="Dashboard Mockup"
+              fill
+              className="object-contain object-bottom drop-shadow-2xl"
+              priority
+            />
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
-}
+};
 
 export default Feature;

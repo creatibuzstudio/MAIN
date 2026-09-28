@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Star, Play, User as UserIcon, X } from "lucide-react";
 import { reviewApi, Review } from "../../../../api/reviewApi";
+import { GridSpark } from "../../ui/SectionContainer";
 
 const DEFAULT_REVIEWS: Review[] = [
   {
@@ -116,11 +117,11 @@ export default function TestimonialsSection() {
     return (
       <div
         key={cardKey}
-        className="w-[450px] md:w-[520px] shrink-0 bg-[#181A1E] rounded-xl p-5 border border-white/5 flex items-stretch gap-6 group"
+        className="w-[440px] sm:w-[500px] shrink-0 bg-card rounded-xl p-3 sm:p-4 border border-white/5 flex items-stretch gap-5 group transition-colors hover:border-white/10"
       >
         {/* Left Side: Image Thumbnail Container with Play Overlay */}
         <div
-          className={`w-[170px] md:w-[200px] rounded-xl relative overflow-hidden bg-gray-900 shrink-0 ${item.videoUrl ? "cursor-pointer" : ""}`}
+          className={`w-[140px] sm:w-[160px] aspect-square rounded-xl relative overflow-hidden bg-gray-900 shrink-0 ${item.videoUrl ? "cursor-pointer" : ""}`}
           onClick={() =>
             item.videoUrl ? setPlayingVideoUrl(item.videoUrl) : undefined
           }
@@ -139,8 +140,8 @@ export default function TestimonialsSection() {
 
           {/* Corner Play Button Overlay */}
           {item.videoUrl && (
-            <div className="absolute bottom-4 left-4 w-9 h-9 rounded-full bg-white flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110 z-20">
-              <Play className="w-4 h-4 fill-[#2E5CFF] text-[#2E5CFF] ml-0.5" />
+            <div className="absolute bottom-3 left-3 w-8 h-8 rounded-full bg-white/95 shadow-md flex items-center justify-center transition-transform duration-300 group-hover:scale-110 z-20">
+              <Play className="w-3.5 h-3.5 fill-[#5D5FEF] text-[#5D5FEF] ml-0.5" />
             </div>
           )}
         </div>
@@ -149,9 +150,9 @@ export default function TestimonialsSection() {
         <div className="flex flex-col justify-between h-full py-1 pr-1 w-full flex-1">
           <div>
             {/* Rating Stars */}
-            <div className="flex items-center gap-1.5 mb-4 text-[#fbbf24]">
+            <div className="flex items-center gap-1 mb-3 text-[#F59E0B]">
               {[...Array(rating)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-[#fbbf24] stroke-none" />
+                <Star key={i} className="w-4 h-4 fill-[#F59E0B] stroke-none" />
               ))}
               {[...Array(5 - rating)].map((_, i) => (
                 <Star
@@ -162,17 +163,17 @@ export default function TestimonialsSection() {
             </div>
 
             {/* Testimonial Quote */}
-            <p className="text-[#8B9197] text-[14px] leading-[1.6] mb-4 font-normal">
+            <p className="text-primary-text text-[13.5px] leading-relaxed mb-4 font-normal line-clamp-3">
               {item.reviewText}
             </p>
           </div>
 
           {/* Author Name & Subtitle */}
           <div>
-            <h4 className="font-medium text-white/90 text-[16px] tracking-tight mb-0.5">
+            <h4 className="font-semibold text-primary-text text-[15px] md:text-lg tracking-tight mb-0.5">
               {item.client?.name || "Anonymous Client"}
             </h4>
-            <p className="text-[13px] text-[#697077] font-normal">
+            <p className="text-[13px] text-primary-text font-normal">
               {item.client?.role || "Client"}
             </p>
           </div>
@@ -183,20 +184,24 @@ export default function TestimonialsSection() {
 
   // Divide reviews into 2 rows for the marquee
   const getRowData = (rowNumber: number) => {
-    if (reviews.length === 0) return [];
-
-    const perRow = Math.ceil(reviews.length / 2);
+    const list = reviews && reviews.length > 0 ? reviews : DEFAULT_REVIEWS;
+    const perRow = Math.ceil(list.length / 2);
     const startIdx = (rowNumber - 1) * perRow;
     const endIdx = startIdx + perRow;
 
-    let rowReviews = reviews.slice(startIdx, endIdx);
-
+    let rowReviews = list.slice(startIdx, endIdx);
     if (rowReviews.length === 0) {
-      rowReviews = [...reviews];
+      rowReviews = [...list];
     }
 
-    const duplicated = [...rowReviews, ...rowReviews, ...rowReviews];
-    return duplicated;
+    // Ensure at least 8 items in the base set so it spans past any screen width
+    let baseSet = [...rowReviews];
+    while (baseSet.length < 8) {
+      baseSet = [...baseSet, ...rowReviews];
+    }
+
+    // Duplicate baseSet exactly once for a seamless 50% infinite marquee loop (16+ cards, 8,500px+)
+    return [...baseSet, ...baseSet];
   };
 
   const row1 = getRowData(1);
@@ -205,36 +210,62 @@ export default function TestimonialsSection() {
   return (
     <section
       id="testimonials"
-      className="w-full relative overflow-hidden flex flex-col items-center justify-center border-t border-gray-900"
+      className="relative w-full overflow-hidden py-16 md:py-24 lg:py-32 select-none"
     >
-      {/* Side Fade Gradient Overlays (Dark Theme) */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-44 bg-gradient-to-r from-[#0a0a0a] to-transparent z-20" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-44 bg-gradient-to-l from-[#0a0a0a] to-transparent z-20" />
+      {/* 1. Full-width top horizontal divider line */}
+      <div className="w-full h-px bg-white/[0.12] absolute top-0 inset-x-0 pointer-events-none z-0" />
 
-      {/* Header Container */}
-      <div className="max-w-4xl w-full px-6 flex flex-col items-center text-center mb-16 relative z-10">
-        <h2 className="text-3xl md:text-4xl lg:text-[40px] font-semibold text-header-text tracking-tight leading-tight flex flex-col items-center gap-2">
+      {/* 2. Background Grid: max-w-7xl vertical lines & cross markers behind the cards */}
+      <div className="absolute inset-0 max-w-7xl mx-auto pointer-events-none z-0">
+        {/* Left vertical border line */}
+        <div className="absolute left-0 top-0 bottom-0 w-px bg-white/[0.12]" />
+        {/* Right vertical border line */}
+        <div className="absolute right-0 top-0 bottom-0 w-px bg-white/[0.12]" />
+
+        {/* Top Diamond Cross Marks */}
+        <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 z-10">
+          <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-primary-text" />
+        </div>
+        <div className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 z-10">
+          <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-primary-text" />
+        </div>
+
+        {/* Bottom Diamond Cross Marks */}
+        <div className="absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2 z-10">
+          <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-primary-text" />
+        </div>
+        <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 z-10">
+          <GridSpark className="w-5 h-5 sm:w-6 sm:h-6 text-primary-text" />
+        </div>
+      </div>
+
+      {/* 3. Header Container */}
+      <div className="max-w-4xl w-full mx-auto px-6 flex flex-col items-center text-center mb-14 md:mb-16 relative z-10">
+        <h2 className="text-3xl md:text-4xl lg:text-[42px] font-bold text-white tracking-tight leading-tight flex flex-col items-center gap-2">
           <span>What SaaS Teams Say About Working</span>
-          <span className="font-serif italic font-medium text-white/90 mt-2 text-3xl md:text-4xl lg:text-[40px]">
+          <span className="font-serif italic font-normal text-white mt-1 text-3xl md:text-4xl lg:text-[42px]">
             with Creatibuz Studio
           </span>
         </h2>
       </div>
 
-      {/* Infinite Marquee Rows */}
+      {/* 4. Infinite Marquee Rows - Edge-to-Edge Full Screen Width (Zero Gap on Both Sides) */}
       {reviews.length > 0 && (
-        <div className="w-full space-y-6 relative z-10 overflow-hidden py-2">
+        <div className="w-full overflow-hidden space-y-6 py-2 relative z-10">
           {/* Row 1: Marquee Left */}
-          <div className="flex animate-marquee gap-6">
+          <div className="flex animate-marquee gap-6 will-change-transform">
             {row1.map((item, idx) => renderCard(item, `r1-${idx}`))}
           </div>
 
           {/* Row 2: Marquee Right */}
-          <div className="flex animate-marquee-reverse gap-6">
+          <div className="flex animate-marquee-reverse gap-6 will-change-transform">
             {row2.map((item, idx) => renderCard(item, `r2-${idx}`))}
           </div>
         </div>
       )}
+
+      {/* 5. Full-width bottom horizontal divider line */}
+      <div className="w-full h-px bg-white/[0.12] absolute bottom-0 inset-x-0 pointer-events-none z-0" />
 
       {/* Video Modal */}
       {playingVideoUrl && (

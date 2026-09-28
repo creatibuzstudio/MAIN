@@ -126,12 +126,12 @@ export default function BlogSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               onMouseEnter={() => setHoveredIndex(idx)}
-              className="bg-card rounded-3xl p-5 border border-white/10 hover:border-white/20 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
+              className="bg-nav rounded-xl p-3 border border-white/10 hover:border-white/20 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
             >
               {/* Top Area: Thumbnail, Date, Headline */}
               <div>
                 {/* 1. Featured Thumbnail */}
-                <div className="rounded-2xl overflow-hidden aspect-[16/10] bg-black/40 border border-white/5 relative">
+                <div className="rounded-xl overflow-hidden aspect-[16/10] bg-black/40 border border-white/5 relative">
                   <Image
                     src={card.image}
                     alt={card.alt}
@@ -142,35 +142,35 @@ export default function BlogSection() {
                 </div>
 
                 {/* 2. Date Tag */}
-                <span className="text-zinc-500 text-xs font-normal mt-4 block">
+                <span className="text-primary-text text-xs font-normal mt-4 block">
                   {card.date}
                 </span>
 
                 {/* 3. Article Headline */}
-                <h3 className="text-zinc-300 font-medium text-base md:text-lg leading-snug mt-2 mb-6 line-clamp-2 group-hover:text-foreground transition-colors">
+                <h3 className="text-primary-text font-medium text-base md:text-lg leading-snug mt-2 mb-6 line-clamp-2 group-hover:text-foreground transition-colors">
                   {card.title}
                 </h3>
               </div>
 
               {/* Bottom Area: 4. Interactive CTA Button */}
-              <div className="mt-auto">
+              <div className="my-2">
                 <Link
                   href={`/blog/${card.slug}`}
-                  className={`rounded-full px-4 py-2.5 flex items-center justify-between w-fit gap-3 transition-all duration-300 group/btn ${
+                  className={`rounded-full px-4 pr-2 py-2 flex items-center justify-between w-fit gap-3 transition-all duration-300 group/btn ${
                     isActive
-                      ? "bg-[#F85800] text-foreground text-sm font-semibold shadow-[0_0_30px_rgba(248,88,0,0.45)]"
-                      : "bg-zinc-900/90 text-zinc-300 text-sm font-medium border border-white/10 hover:bg-zinc-800"
+                      ? "bg-primary text-foreground text-sm md:text-base font-semibold shadow-[0_0_30px_rgba(248,88,0,0.45)]"
+                      : "bg-[#202020] text-header-text text-sm md:text-base font-medium border border-white/10 hover:bg-zinc-800"
                   }`}
                 >
                   <span>Open Article</span>
                   <div
-                    className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-transform duration-300 group-hover/btn:rotate-45 ${
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-transform duration-300 group-hover/btn:rotate-45 ${
                       isActive
                         ? "bg-white text-primary"
-                        : "bg-[#F85800] text-foreground"
+                        : "bg-primary text-foreground"
                     }`}
                   >
-                    <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                    <ArrowUpRight className="w-6 h-6 stroke-[2]" />
                   </div>
                 </Link>
               </div>

@@ -1,111 +1,202 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import SectionContainer from "@/app/components/ui/SectionContainer";
 
-interface OrbitIcon {
+interface FloatingIconConfig {
   name: string;
   src: string;
-  angle: number; // degrees (0 is 3 o'clock, 90 is 6 o'clock, 180 is 9 o'clock, 270 is 12 o'clock)
+  // Offset coordinates relative to center (0,0) in px
+  // Negative X is Left, Positive X is Right
+  // Negative Y is Up, Positive Y is Down
+  xOffset: number;
+  yOffset: number;
+  size?: number; // size in px
+  jellyFactor: number; // sensitivity multiplier for spring motion
 }
 
-interface OrbitRingConfig {
-  id: string;
-  diameter: number; // diameter in pixels (user custom settings: 650, 850, 1050)
-  duration?: number; // legacy speed alias
-  ringDuration: number; // ring rotation speed in seconds (user setting: 555s)
-  iconDuration: number; // icons orbital rotation speed in seconds (faster, e.g. 32s, 42s, 52s)
-  direction: "clockwise" | "counter-clockwise";
-  strokeColor: string;
-  strokeWidth: number;
-  dashArray: string;
-  icons: OrbitIcon[];
-}
+// 8 icons distributed across 3 orbits:
+// 1st Orbit (Inner, r=350px): 1 Left, 1 Right
+// 2nd Orbit (Middle, r=450px): 2 Left (top & bottom), 2 Right (top & bottom)
+// 3rd Orbit (Outer, r=550px): 1 Left, 1 Right
+const JELLY_ICONS: FloatingIconConfig[] = [
+  // 1st Orbit (Inner Ring, diameter 700px, radius 350px)
+  {
+    name: "Miro",
+    src: "/animatedSection/6a58a6a2cb044ee3817c8f32_Frame 2147238892 1.png",
+    xOffset: -350,
+    yOffset: 0,
+    size: 50,
+    jellyFactor: 1.2,
+  },
+  {
+    name: "Sketch",
+    src: "/animatedSection/Group 1707480799.png",
+    xOffset: 350,
+    yOffset: 0,
+    size: 50,
+    jellyFactor: 1.2,
+  },
 
-const ORBIT_RINGS: OrbitRingConfig[] = [
+  // 2nd Orbit (Middle Ring, diameter 900px, radius 450px)
+  // Left: Upper & Lower
   {
-    id: "inner",
-    diameter: 650,
-    ringDuration: 555,
-    iconDuration: 60, // faster independent orbital rotation for icons
-    direction: "clockwise",
-    strokeColor: "rgba(255, 255, 255, 0.32)",
-    strokeWidth: 1.5,
-    dashArray: "8 14",
-    icons: [
-      {
-        name: "Miro",
-        src: "/animatedSection/6a58a6a2cb044ee3817c8f32_Frame 2147238892 1.png",
-        angle: 185, // Left side
-      },
-      {
-        name: "Sketch",
-        src: "/animatedSection/Group 1707480799.png",
-        angle: 10, // Right side
-      },
-    ],
+    name: "Framer",
+    src: "/animatedSection/Group 1707480794.png",
+    xOffset: -390,
+    yOffset: -225,
+    size: 50,
+    jellyFactor: 1.05,
   },
   {
-    id: "middle",
-    diameter: 850,
-    ringDuration: 555,
-    iconDuration: 50, // faster independent orbital rotation for icons
-    direction: "counter-clockwise",
-    strokeColor: "rgba(255, 255, 255, 0.22)",
-    strokeWidth: 1.5,
-    dashArray: "9 16",
-    icons: [
-      {
-        name: "Framer",
-        src: "/animatedSection/Group 1707480794.png",
-        angle: 230, // Top-left
-      },
-      {
-        name: "Anthropic",
-        src: "/animatedSection/Group 1707480800.png",
-        angle: 125, // Bottom-left
-      },
-      {
-        name: "Webflow",
-        src: "/animatedSection/Group 1707480801.png",
-        angle: 315, // Top-right
-      },
-    ],
+    name: "Anthropic",
+    src: "/animatedSection/Group 1707480800.png",
+    xOffset: -390,
+    yOffset: 225,
+    size: 50,
+    jellyFactor: 1.15,
+  },
+  // Right: Upper & Lower
+  {
+    name: "Webflow",
+    src: "/animatedSection/Group 1707480801.png",
+    xOffset: 390,
+    yOffset: -225,
+    size: 50,
+    jellyFactor: 1.1,
   },
   {
-    id: "outer",
-    diameter: 1100,
-    ringDuration: 555,
-    iconDuration: 45, // faster independent orbital rotation for icons
-    direction: "clockwise",
-    strokeColor: "rgba(255, 255, 255, 0.16)",
-    strokeWidth: 1.5,
-    dashArray: "10 18",
-    icons: [
-      {
-        name: "Fi",
-        src: "/animatedSection/6a58a76f75452fd285b8ab73_Frame 2147238888 (1) 1.png",
-        angle: 180, // Far left
-      },
-      {
-        name: "Supabase",
-        src: "/animatedSection/6a58a80e4ee26d41bf4dd8a6_Frame 2147238892 (2) 1.png",
-        angle: 0, // Far right
-      },
-      {
-        name: "Figma",
-        src: "/animatedSection/6a58a73bd7b7e03d4a590269_Frame 2147238891 1.png",
-        angle: 55, // Bottom right
-      },
-    ],
+    name: "Figma",
+    src: "/animatedSection/6a58a73bd7b7e03d4a590269_Frame 2147238891 1.png",
+    xOffset: 390,
+    yOffset: 225,
+    size: 50,
+    jellyFactor: 1.05,
+  },
+
+  // 3rd Orbit (Outer Ring, diameter 1100px, radius 550px)
+  {
+    name: "Fi",
+    src: "/animatedSection/6a58a76f75452fd285b8ab73_Frame 2147238888 (1) 1.png",
+    xOffset: -550,
+    yOffset: 0,
+    size: 50,
+    jellyFactor: 1.25,
+  },
+  {
+    name: "Supabase",
+    src: "/animatedSection/6a58a80e4ee26d41bf4dd8a6_Frame 2147238892 (2) 1.png",
+    xOffset: 550,
+    yOffset: 0,
+    size: 50,
+    jellyFactor: 1.1,
   },
 ];
 
+// Single Jelly Item with proximity-based magnetic jelly physics
+function JellyIconItem({
+  icon,
+  mouseX,
+  mouseY,
+}: {
+  icon: FloatingIconConfig;
+  mouseX: any;
+  mouseY: any;
+}) {
+  // Proximity-based calculation: ONLY moves when cursor is near this specific icon/area
+  const targetOffset = useTransform([mouseX, mouseY], ([mx, my]: [number, number]) => {
+    // If cursor is outside container
+    if (mx > 50000) return { x: 0, y: 0 };
+
+    const dx = mx - icon.xOffset;
+    const dy = my - icon.yOffset;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    // Proximity radius: icons only react within this distance (270px)
+    const PROXIMITY_RADIUS = 270;
+
+    if (dist < PROXIMITY_RADIUS) {
+      const ratio = 1 - dist / PROXIMITY_RADIUS;
+      // Smooth organic falloff
+      const smoothFactor = Math.sin((ratio * Math.PI) / 2);
+      // Gentle jelly pull towards cursor (max ~28px)
+      const maxDisplacement = 28 * icon.jellyFactor;
+      const angle = Math.atan2(dy, dx);
+      return {
+        x: Math.cos(angle) * smoothFactor * maxDisplacement,
+        y: Math.sin(angle) * smoothFactor * maxDisplacement,
+      };
+    }
+
+    return { x: 0, y: 0 };
+  });
+
+  const rawX = useTransform(targetOffset, (val) => val.x);
+  const rawY = useTransform(targetOffset, (val) => val.y);
+
+  // Elastic jelly spring physics
+  const springConfig = { damping: 11, stiffness: 160, mass: 0.65 };
+  const springX = useSpring(rawX, springConfig);
+  const springY = useSpring(rawY, springConfig);
+
+  // Subtle organic tilt as it stretches
+  const rotateSpring = useTransform(springX, [-30, 30], [-8, 8]);
+
+  return (
+    <motion.div
+      className="absolute top-1/2 left-1/2 pointer-events-auto select-none"
+      style={{
+        x: springX,
+        y: springY,
+        rotate: rotateSpring,
+        translateX: `calc(-50% + ${icon.xOffset}px)`,
+        translateY: `calc(-50% + ${icon.yOffset}px)`,
+      }}
+      whileHover={{ scale: 1.18 }}
+      whileTap={{ scale: 0.92 }}
+      transition={{ type: "spring", stiffness: 350, damping: 14 }}
+    >
+        <Image
+          src={icon.src}
+          alt={icon.name}
+          width={icon.size}
+          height={icon.size}
+          className="w-full h-full object-contain pointer-events-none select-none"
+        />
+    </motion.div>
+  );
+}
+
 export default function ConcentricCtaSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Motion values to track cursor pixel coordinates relative to center (0, 0)
+  // Default to 99999 so icons rest calmly when cursor is not hovering
+  const mouseX = useMotionValue(99999);
+  const mouseY = useMotionValue(99999);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+
+    // Mouse coordinates in pixels relative to center of container
+    const x = e.clientX - (rect.left + rect.width / 2);
+    const y = e.clientY - (rect.top + rect.height / 2);
+
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
+  const handleMouseLeave = () => {
+    // Put coordinates far away so all icons gently spring back to rest
+    mouseX.set(99999);
+    mouseY.set(99999);
+  };
+
   return (
     <SectionContainer
       id="cta"
@@ -115,24 +206,14 @@ export default function ConcentricCtaSection() {
       className="!p-0 !py-0 !px-0 w-full"
       containerClassName="relative w-full overflow-hidden bg-black"
     >
-      {/* Inline styles for continuous orbital rotation and counter-rotation */}
-      <style>{`
-        @keyframes orbitClockwise {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes orbitCounterClockwise {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(-360deg); }
-        }
-      `}</style>
-
-      {/* Main Bounded Container with explicit overflow-hidden and defined height */}
+      {/* Interactive Container tracking mouse movement */}
       <div
-        className="relative w-full h-[520px] sm:h-[580px] md:h-[640px] bg-black flex items-center justify-center"
-        style={{ overflow: "hidden" }}
+        ref={containerRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="relative w-full h-[520px] sm:h-[580px] md:h-[640px] bg-black flex items-center justify-center overflow-hidden cursor-default"
       >
-        {/* 1. Pure CSS Atmospheric Gradient Background (No image asset) */}
+        {/* 1. Atmospheric Glow Background */}
         <div
           className="absolute inset-0 pointer-events-none z-0"
           style={{
@@ -148,7 +229,7 @@ export default function ConcentricCtaSection() {
           }}
         />
 
-        {/* 2. Concentric Orbit System strictly bounded to the background height with vertical fade mask */}
+        {/* 2. Static Concentric Dashed Orbit Rings */}
         <div
           className="absolute inset-0 flex items-center justify-center pointer-events-none z-10"
           style={{
@@ -159,103 +240,46 @@ export default function ConcentricCtaSection() {
               "linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)",
           }}
         >
-          <div className="relative flex items-center justify-center scale-[0.52] sm:scale-[0.72] md:scale-[0.88] lg:scale-100 origin-center pointer-events-none">
-            {ORBIT_RINGS.map((ring) => {
-              const radius = ring.diameter / 2;
-              const isClockwise = ring.direction === "clockwise";
-              const ringSpeed = ring.ringDuration || ring.duration || 555;
-              const iconSpeed = ring.iconDuration || 35;
+          {/* Inner Ring (700px diameter -> radius 350px) */}
+          <div
+            className="absolute rounded-full border border-dashed border-white/[0.12] pointer-events-none"
+            style={{ width: "700px", height: "700px" }}
+          />
+          {/* Middle Ring (900px diameter -> radius 450px) */}
+          <div
+            className="absolute rounded-full border border-dashed border-white/[0.12] pointer-events-none"
+            style={{ width: "900px", height: "900px" }}
+          />
+          {/* Outer Ring (1100px diameter -> radius 550px) */}
+          <div
+            className="absolute rounded-full border border-dashed border-white/[0.12] pointer-events-none"
+            style={{ width: "1100px", height: "1100px" }}
+          />
 
-              return (
-                <div
-                  key={ring.id}
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-                  style={{
-                    width: `${ring.diameter}px`,
-                    height: `${ring.diameter}px`,
-                  }}
-                >
-                  {/* 1. Ring SVG Container (Rotates at ringSpeed = 555s) */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      animation: `${isClockwise ? "orbitClockwise" : "orbitCounterClockwise"} ${ringSpeed}s linear infinite`,
-                    }}
-                  >
-                    <svg
-                      className="w-full h-full pointer-events-none"
-                      viewBox={`0 0 ${ring.diameter} ${ring.diameter}`}
-                    >
-                      <circle
-                        cx={radius}
-                        cy={radius}
-                        r={radius - 1}
-                        fill="none"
-                        stroke={ring.strokeColor}
-                        strokeWidth={ring.strokeWidth}
-                        strokeDasharray={ring.dashArray}
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </div>
-
-                  {/* 2. Icons Orbit Container (Rotates at iconSpeed = faster independent orbital revolution) */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      animation: `${isClockwise ? "orbitClockwise" : "orbitCounterClockwise"} ${iconSpeed}s linear infinite`,
-                    }}
-                  >
-                    {ring.icons.map((icon) => {
-                      const rad = (icon.angle * Math.PI) / 180;
-                      const x = Math.round(radius * Math.cos(rad));
-                      const y = Math.round(radius * Math.sin(rad));
-
-                      return (
-                        <div
-                          key={icon.name}
-                          className="absolute pointer-events-auto"
-                          style={{
-                            left: `calc(50% + ${x}px)`,
-                            top: `calc(50% + ${y}px)`,
-                            transform: "translate(-50%, -50%)",
-                          }}
-                        >
-                          {/* Counter-rotating badge keeping the tool upright at iconSpeed */}
-                          <div
-                            className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-zinc-900/90 border border-white/15 flex items-center justify-center shadow-lg transition-transform duration-200 hover:scale-115 cursor-pointer backdrop-blur-sm"
-                            style={{
-                              animation: `${isClockwise ? "orbitCounterClockwise" : "orbitClockwise"} ${iconSpeed}s linear infinite`,
-                            }}
-                          >
-                            <Image
-                              src={icon.src}
-                              alt={icon.name}
-                              width={50}
-                              height={50}
-                              className="w-full h-full object-contain pointer-events-none select-none"
-                            />
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            })}
+          {/* 3. The 8 Jelly Floating Icons precisely positioned on the 3 orbits */}
+          <div className="absolute inset-0 pointer-events-none scale-[0.62] sm:scale-[0.80] md:scale-[0.92] lg:scale-100 origin-center">
+            {JELLY_ICONS.map((icon) => (
+              <JellyIconItem
+                key={icon.name}
+                icon={icon}
+                mouseX={mouseX}
+                mouseY={mouseY}
+              />
+            ))}
           </div>
         </div>
 
-        {/* 3. Center CTA Content (Static Overlay - Z-Index 20) */}
+        {/* 4. Center Stationary CTA Content (Z-Index 20) */}
         <div className="relative z-20 max-w-2xl mx-auto px-4 text-center pointer-events-auto flex flex-col items-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="font-bold text-foreground text-3xl md:text-4xl lg:text-[40px] text-center leading-[1.18] tracking-tight max-w-3xl mx-auto"
+            className="font-bold text-white text-3xl md:text-4xl lg:text-[42px] text-center leading-[1.18] tracking-tight max-w-3xl mx-auto"
           >
-            Ready to build something<br className="hidden sm:inline" /> that actually converts?
+            Ready to build something
+            <br className="hidden sm:inline" /> that actually converts?
           </motion.h2>
 
           <motion.p
@@ -265,7 +289,9 @@ export default function ConcentricCtaSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-zinc-300/90 text-sm sm:text-base text-center max-w-lg mx-auto mt-4 leading-relaxed font-normal"
           >
-            Stop waiting weeks for design feedback. Get your first draft in 48 hours and launch your product before your competitors even finish planning.
+            Stop waiting weeks for design feedback. Get your first draft in 48
+            hours and launch your product before your competitors even finish
+            planning.
           </motion.p>
 
           <motion.div
@@ -277,7 +303,7 @@ export default function ConcentricCtaSection() {
           >
             <Link
               href="#contact"
-              className="group inline-flex items-center gap-5 rounded-full bg-white text-black font-semibold text-sm sm:text-base px-5 pr-1 py-1 hover:bg-zinc-100 transition-all duration-300 hover:scale-105 active:scale-95 shadow-2xl"
+              className="group inline-flex items-center gap-5 rounded-full bg-white text-black font-semibold text-sm sm:text-base px-6 pr-1.5 py-1.5 hover:bg-zinc-100 transition-all duration-300 hover:scale-105 active:scale-95 shadow-2xl"
             >
               <span>Request Free Audit</span>
               <span className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black text-white flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">

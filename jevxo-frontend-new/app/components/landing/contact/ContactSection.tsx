@@ -54,22 +54,19 @@ export default function ContactSection() {
       className="w-full flex justify-center"
     >
       <div className="w-full max-w-[95%] lg:max-w-6xl mx-auto px-2 sm:px-4 md:px-6">
-        {/* Dark Floating Card Container with subtle Orange top-left border */}
+        {/* Dark Floating Card Container with prominent Orange border matching Figma */}
         <div 
-          className="w-full bg-[#121316] text-white rounded-[24px] p-8 sm:p-10 md:p-12 shadow-2xl flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-16 relative overflow-hidden"
-          style={{
-            boxShadow: 'inset 1px 1px 0px rgba(255, 107, 0, 0.4), 0 20px 50px rgba(0,0,0,0.5)',
-          }}
+          className="w-full bg-card text-foreground rounded-2xl p-8 sm:p-10 md:p-12 shadow-2xl flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-16 relative overflow-hidden border border-[#FF6B00]/40 shadow-[0_0_35px_rgba(255,107,0,0.12)]"
         >
           {/* Subtle Orange Glow behind the card left corner */}
-          <div className="absolute top-0 left-0 w-64 h-64 bg-[#FF6B00]/10 rounded-full blur-[80px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
+          <div className="absolute top-0 left-0 w-72 h-72 bg-[#FF6B00]/15 rounded-full blur-[90px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
 
           {/* Left Column: Headline, Photo, Profile Info */}
           <div className="w-full lg:w-5/12 flex flex-col items-start relative z-10">
             {/* Headline */}
-            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight leading-[1.2] mb-10 text-white">
+            <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold tracking-tight leading-[1.2] mb-8 text-white">
               Enhance Your Brand <br className="hidden sm:inline" />
-              Potential <span className="font-serif italic font-medium text-[#FF6B00]">At No Cost!</span>
+              Potential <span className=" italic font-medium text-primary">At No Cost!</span>
             </h2>
 
             {/* Hakim Photo Container */}
@@ -83,16 +80,16 @@ export default function ContactSection() {
             </div>
 
             {/* Profile Name & Title */}
-            <h3 className="text-3xl font-bold text-white tracking-tight mb-2">
+            <h3 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight mb-2">
               Md Abdul Hakim
             </h3>
-            <p className="text-[15px] text-[#A1A1AA] font-normal leading-snug mb-8">
+            <p className="text-[15px] md:text-[20px] text-foreground font-normal leading-snug mb-8">
               Founder & CEO -<br />Creatibuz Studio - Agency
             </p>
 
             {/* WhatsApp Contact */}
-            <div className="flex flex-col items-start gap-2">
-              <div className="flex items-center gap-3 text-[15px] font-medium text-white/90">
+            <div className="flex flex-col items-start">
+              <div className="flex items-center gap-3 text-[15px] md:text-[20px] font-medium text-white/90">
                 <Image
                   src="/whatsapp.png"
                   alt="WhatsApp"
@@ -105,7 +102,7 @@ export default function ContactSection() {
               <Link
                 href="https://wa.me/+8801968657353"
                 target="_blank"
-                className="text-[#FF6B00] font-semibold text-[17px] hover:text-[#E65C00] transition-colors mt-2"
+                className="text-primary font-semibold text-[17px] md:text-[22px] hover:text-[#E65C00] transition-colors mt-1"
               >
                 Book a Call Directly
               </Link>
@@ -130,7 +127,7 @@ export default function ContactSection() {
               <form onSubmit={handleSubmit} className="space-y-7">
                 {/* Full Name */}
                 <div className="space-y-2">
-                  <label className="text-[13px] font-normal text-white block">
+                  <label className="text-[13px] md:text-base font-normal text-white/90 block">
                     Full Name
                   </label>
                   <input
@@ -141,14 +138,14 @@ export default function ContactSection() {
                     onChange={(e) =>
                       setFormData({ ...formData, fullName: e.target.value })
                     }
-                    className="w-full bg-transparent border border-[#2A2D35] focus:border-[#FF6B00] rounded-[10px] px-4 py-3.5 text-white placeholder-[#52525B] text-[15px] font-normal transition-all outline-none"
+                    className="w-full bg-[#18191D] border border-white/10 focus:border-[#FF6B00] rounded-[12px] px-4 py-3.5 text-white placeholder-[#5A5D66] text-[15px] font-normal transition-all outline-none"
                   />
                 </div>
 
                 {/* Email & WhatsApp Inputs */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-2">
-                    <label className="text-[13px] font-normal text-white block">
+                    <label className="text-[13px] md:text-base font-normal text-white/90 block">
                       Email Address
                     </label>
                     <input
@@ -159,12 +156,12 @@ export default function ContactSection() {
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
                       }
-                      className="w-full bg-transparent border border-[#2A2D35] focus:border-[#FF6B00] rounded-[10px] px-4 py-3.5 text-white placeholder-[#52525B] text-[15px] font-normal transition-all outline-none"
+                      className="w-full bg-[#18191D] border border-white/10 focus:border-[#FF6B00] rounded-[12px] px-4 py-3.5 text-white placeholder-[#5A5D66] text-[15px] font-normal transition-all outline-none"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-[13px] font-normal text-white block">
+                    <label className="text-[13px] md:text-base font-normal text-white/90 block">
                       WhatsApp
                     </label>
                     <input
@@ -174,14 +171,14 @@ export default function ContactSection() {
                       onChange={(e) =>
                         setFormData({ ...formData, whatsapp: e.target.value })
                       }
-                      className="w-full bg-transparent border border-[#2A2D35] focus:border-[#FF6B00] rounded-[10px] px-4 py-3.5 text-white placeholder-[#52525B] text-[15px] font-normal transition-all outline-none"
+                      className="w-full bg-[#18191D] border border-white/10 focus:border-[#FF6B00] rounded-[12px] px-4 py-3.5 text-white placeholder-[#5A5D66] text-[15px] font-normal transition-all outline-none"
                     />
                   </div>
                 </div>
 
                 {/* Budget Setup Pills */}
                 <div className="space-y-3 pt-2">
-                  <label className="text-[13px] font-normal text-white block mb-4">
+                  <label className="text-[13px] md:text-base font-normal text-white/90 block mb-4">
                     Budget Setup
                   </label>
                   <div className="flex flex-wrap gap-3">
@@ -192,9 +189,9 @@ export default function ContactSection() {
                           key={option}
                           type="button"
                           onClick={() => setSelectedBudget(option)}
-                          className={`px-5 py-2.5 rounded-[8px] text-[13px] sm:text-[14px] font-normal transition-all cursor-pointer border ${isSelected
-                            ? "bg-transparent text-white border-white/30"
-                            : "bg-transparent text-gray-400 border-[#2A2D35] hover:text-white hover:border-[#3A3D45]"
+                          className={`px-8 py-4 rounded-[10px] text-[13px] sm:text-[14px] font-normal transition-all cursor-pointer border ${isSelected
+                            ? "bg-[#24262E] text-white border-white/30 shadow-xs"
+                            : "bg-[#18191D] text-gray-400 border-white/10 hover:text-white hover:border-white/20"
                             }`}
                         >
                           {option}
@@ -206,7 +203,7 @@ export default function ContactSection() {
 
                 {/* Product Details */}
                 <div className="space-y-2 pt-2">
-                  <label className="text-[13px] font-normal text-white block">
+                  <label className="text-[13px] md:text-base font-normal text-white/90 block">
                     Product Details
                   </label>
                   <textarea
@@ -220,22 +217,27 @@ export default function ContactSection() {
                         productDetails: e.target.value,
                       })
                     }
-                    className="w-full bg-transparent border border-[#2A2D35] focus:border-[#FF6B00] rounded-[10px] px-4 py-3.5 text-white placeholder-[#52525B] text-[15px] font-normal transition-all outline-none resize-none"
+                    className="w-full bg-[#18191D] border border-white/10 focus:border-[#FF6B00] rounded-[12px] px-4 py-3.5 text-white placeholder-[#5A5D66] text-[15px] font-normal transition-all outline-none resize-none min-h-[140px]"
                   />
                 </div>
 
                 {/* Free Booking Button */}
-                <div className="pt-8">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="group relative inline-flex items-center gap-3 bg-[#FF6B00] hover:bg-[#E65C00] text-white rounded-full pl-6 pr-1.5 py-1.5 text-[15px] font-semibold transition-all cursor-pointer shadow-[0_0_30px_rgba(255,107,0,0.4)] hover:shadow-[0_0_40px_rgba(255,107,0,0.6)] disabled:opacity-70 disabled:cursor-not-allowed"
-                  >
-                    <span>{isSubmitting ? "Submitting..." : "Free Booking"}</span>
-                    <div className="w-8 h-8 rounded-full bg-white text-[#FF6B00] flex items-center justify-center font-bold group-hover:-rotate-12 transition-transform duration-300">
-                      {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowUpRight className="w-4 h-4" />}
-                    </div>
-                  </button>
+                <div className="pt-6 flex justify-start relative">
+                  <div className="relative group inline-block">
+                    {/* Ambient Glow */}
+                    <div className="absolute inset-0 bg-primary blur-xl opacity-60 rounded-full scale-105 pointer-events-none group-hover:opacity-85 group-hover:scale-110 transition-all duration-300" />
+
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="relative inline-flex items-center gap-3.5 bg-gradient-to-r from-[#FF5500] to-[#FF4500] hover:from-[#FF6000] hover:to-[#FF5000] text-white rounded-full pl-7 pr-1.5 py-1.5 text-[15px] sm:text-[16px] font-semibold tracking-wide transition-all cursor-pointer shadow-[0_10px_35px_rgba(255,85,0,0.5)] disabled:opacity-70 disabled:cursor-not-allowed"
+                    >
+                      <span>{isSubmitting ? "Submitting..." : "Free Booking"}</span>
+                      <div className="w-8 h-8 rounded-full bg-white text-primary flex items-center justify-center font-bold group-hover:-rotate-12 transition-transform duration-300">
+                        {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowUpRight className="w-6 h-6 stroke-[2]" />}
+                      </div>
+                    </button>
+                  </div>
                 </div>
               </form>
             )}
