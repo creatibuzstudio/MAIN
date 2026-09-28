@@ -65,9 +65,9 @@ export default function ProcessSection() {
       if (cards.length === 0) return;
 
       const cardWidth = cards[0].offsetWidth;
-      const gap = 24; // gap-6 in Tailwind = 24px
-      // Exposed width of each card when stacked under the next card
-      const visibleWidth = Math.max(85, Math.round(cardWidth * 0.33));
+      const gap = -25; // initial card gap = -25px
+      // Exposed width of each card when stacked under the next card (increased to prevent bunching at end of scroll)
+      const visibleWidth = Math.max(130, Math.round(cardWidth * 0.46));
       const stepDistance = cardWidth + gap - visibleWidth;
 
       // Smooth Timeline for card sliding & stacking on scroll
@@ -126,12 +126,6 @@ export default function ProcessSection() {
         />
       </div>
 
-      {/* Local style for stacking hover priority */}
-      <style>{`
-        .process-card:hover {
-          z-index: 50 !important;
-        }
-      `}</style>
 
       {/* SectionContainer Wrapper */}
       <div className="relative z-10 w-full max-w-[95%] lg:max-w-7xl mx-auto flex flex-col px-4 sm:px-6 md:px-8 py-16 md:py-24 lg:py-32">
@@ -165,7 +159,7 @@ export default function ProcessSection() {
         <div className="w-full py-4">
           <div
             ref={trackRef}
-            className="flex flex-nowrap gap-6 w-max min-w-full"
+            className="flex flex-nowrap -space-x-[25px] w-max min-w-full"
           >
             {steps.map((item, index) => (
               <div

@@ -63,7 +63,7 @@ export default function ComparisonSection() {
             </div>
 
             {/* VISA Cards visual at bottom right */}
-            <div className="absolute -bottom-14 -right-28 sm:-right-24 md:-right-32 w-[340px] sm:w-[380px] md:w-[440px] h-[240px] sm:h-[300px] pointer-events-none z-10">
+            <div className="absolute -bottom-12 -right-28 sm:-right-24 md:-right-36 w-[340px] sm:w-[380px] md:w-[450px] h-[240px] sm:h-[300px] md:h-[400px] pointer-events-none z-10">
               <Image
                 src="/whyChooseUs/Card Image.png"
                 alt="Payment Cards"
