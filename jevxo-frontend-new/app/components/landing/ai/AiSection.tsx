@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Workflow,
   Sparkles,
@@ -12,9 +12,7 @@ import {
   Rocket,
   type LucideIcon,
 } from "lucide-react";
-import SectionContainer, {
-  GridSpark,
-} from "@/app/components/ui/SectionContainer";
+import { GridSpark } from "@/app/components/ui/SectionContainer";
 
 interface AiFeatureCard {
   id: string;
@@ -82,16 +80,12 @@ export default function AiSection() {
     right: { x: number; y: number };
   } | null>(null);
 
-  const [pulseActive, setPulseActive] = useState(false);
-  const [isEnergized, setIsEnergized] = useState(false);
-
   // Dynamic layout & SVG connector calculation
   const updatePaths = useCallback(() => {
     if (!containerRef.current || !hubRef.current) return;
     const cRect = containerRef.current.getBoundingClientRect();
     const hRect = hubRef.current.getBoundingClientRect();
 
-    const hubCenterY = hRect.top + hRect.height / 2 - cRect.top;
     const hubLeft = hRect.left - cRect.left;
     const hubRight = hRect.right - cRect.left;
 
@@ -108,32 +102,33 @@ export default function AiSection() {
 
     if (points.some((p) => p === null)) return;
 
-    // Junctions halfway between hub and middle cards
-    const p1 = points[1]!;
-    const p4 = points[4]!;
-    const junctionLeftX = (hubLeft + p1.x) / 2;
-    const junctionRightX = (hubRight + p4.x) / 2;
+    // Middle cards define the horizontal centerline of the circuit
+    const midLeftY = points[1]!.y;
+    const midRightY = points[4]!.y;
+
+    const junctionLeftX = (hubLeft + points[1]!.x) / 2;
+    const junctionRightX = (hubRight + points[4]!.x) / 2;
 
     setJunctions({
-      left: { x: junctionLeftX, y: hubCenterY },
-      right: { x: junctionRightX, y: hubCenterY },
+      left: { x: junctionLeftX, y: midLeftY },
+      right: { x: junctionRightX, y: midRightY },
     });
 
     const r = 16; // corner radius for orthogonal routing
 
     const newPaths: string[] = [
-      // Card 1 (Top Left)
-      `M ${hubLeft} ${hubCenterY} L ${junctionLeftX} ${hubCenterY} L ${junctionLeftX} ${points[0]!.y + r} Q ${junctionLeftX} ${points[0]!.y} ${junctionLeftX - r} ${points[0]!.y} L ${points[0]!.x} ${points[0]!.y}`,
-      // Card 2 (Middle Left)
-      `M ${hubLeft} ${hubCenterY} L ${points[1]!.x} ${hubCenterY}`,
-      // Card 3 (Bottom Left)
-      `M ${hubLeft} ${hubCenterY} L ${junctionLeftX} ${hubCenterY} L ${junctionLeftX} ${points[2]!.y - r} Q ${junctionLeftX} ${points[2]!.y} ${junctionLeftX - r} ${points[2]!.y} L ${points[2]!.x} ${points[2]!.y}`,
-      // Card 4 (Top Right)
-      `M ${hubRight} ${hubCenterY} L ${junctionRightX} ${hubCenterY} L ${junctionRightX} ${points[3]!.y + r} Q ${junctionRightX} ${points[3]!.y} ${junctionRightX + r} ${points[3]!.y} L ${points[3]!.x} ${points[3]!.y}`,
-      // Card 5 (Middle Right)
-      `M ${hubRight} ${hubCenterY} L ${points[4]!.x} ${hubCenterY}`,
-      // Card 6 (Bottom Right)
-      `M ${hubRight} ${hubCenterY} L ${junctionRightX} ${hubCenterY} L ${junctionRightX} ${points[5]!.y - r} Q ${junctionRightX} ${points[5]!.y} ${junctionRightX + r} ${points[5]!.y} L ${points[5]!.x} ${points[5]!.y}`,
+      // Card 0 (Top Left)
+      `M ${hubLeft} ${midLeftY} L ${junctionLeftX} ${midLeftY} L ${junctionLeftX} ${points[0]!.y + r} Q ${junctionLeftX} ${points[0]!.y} ${junctionLeftX - r} ${points[0]!.y} L ${points[0]!.x} ${points[0]!.y}`,
+      // Card 1 (Middle Left) -> Direct, prominent horizontal feed to middle card
+      `M ${hubLeft} ${midLeftY} L ${points[1]!.x} ${midLeftY}`,
+      // Card 2 (Bottom Left)
+      `M ${hubLeft} ${midLeftY} L ${junctionLeftX} ${midLeftY} L ${junctionLeftX} ${points[2]!.y - r} Q ${junctionLeftX} ${points[2]!.y} ${junctionLeftX - r} ${points[2]!.y} L ${points[2]!.x} ${points[2]!.y}`,
+      // Card 3 (Top Right)
+      `M ${hubRight} ${midRightY} L ${junctionRightX} ${midRightY} L ${junctionRightX} ${points[3]!.y + r} Q ${junctionRightX} ${points[3]!.y} ${junctionRightX + r} ${points[3]!.y} L ${points[3]!.x} ${points[3]!.y}`,
+      // Card 4 (Middle Right) -> Direct, prominent horizontal feed to middle card
+      `M ${hubRight} ${midRightY} L ${points[4]!.x} ${midRightY}`,
+      // Card 5 (Bottom Right)
+      `M ${hubRight} ${midRightY} L ${junctionRightX} ${midRightY} L ${junctionRightX} ${points[5]!.y - r} Q ${junctionRightX} ${points[5]!.y} ${junctionRightX + r} ${points[5]!.y} L ${points[5]!.x} ${points[5]!.y}`,
     ];
 
     setPaths(newPaths);
@@ -155,39 +150,6 @@ export default function AiSection() {
       clearTimeout(timer2);
     };
   }, [updatePaths]);
-
-  // Automated 5.5-second pleasing & smooth pulse cycle
-  useEffect(() => {
-    let isMounted = true;
-
-    const triggerCycle = () => {
-      if (!isMounted) return;
-      // 1. Fire energetic pulse from center orb
-      setPulseActive(true);
-
-      // 2. Pulse gracefully travels along connector lines and arrives at cards around ~1250ms
-      const t1 = setTimeout(() => {
-        if (isMounted) setIsEnergized(true);
-      }, 1250);
-
-      // 3. Cards hold luminous glow for ~1.8s, then smoothly and gently transition back to resting state
-      const t2 = setTimeout(() => {
-        if (isMounted) {
-          setIsEnergized(false);
-          setPulseActive(false);
-        }
-      }, 3100);
-    };
-
-    const initialTimer = setTimeout(triggerCycle, 600);
-    const interval = setInterval(triggerCycle, 5500);
-
-    return () => {
-      isMounted = false;
-      clearTimeout(initialTimer);
-      clearInterval(interval);
-    };
-  }, []);
 
   return (
     <div id="ai-section" className="w-full flex flex-col items-center">
@@ -228,40 +190,73 @@ export default function AiSection() {
             </filter>
           </defs>
 
-          {/* Base Connector Lines */}
+          {/* Base Circuit Connector Lines */}
           {paths.map((p, idx) => (
             <path
               key={`base-${idx}`}
               d={p}
               fill="none"
-              stroke="rgba(255, 255, 255, 0.12)"
+              stroke="rgba(255, 255, 255, 0.25)"
               strokeWidth="1.5"
             />
           ))}
 
-          {/* Energetic Outward Traveling Pulse Beams */}
-          {pulseActive &&
-            paths.map((p, idx) => (
-              <motion.path
-                key={`pulse-${idx}`}
-                d={p}
-                fill="none"
-                stroke="#FE5A00"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                filter="url(#ai-pulse-glow)"
-                initial={{ pathLength: 0, pathOffset: 0, opacity: 0 }}
-                animate={{
-                  pathLength: [0, 0.35, 0.35, 0],
-                  pathOffset: [0, 0.15, 0.72, 1],
-                  opacity: [0, 1, 1, 0],
-                }}
-                transition={{
-                  duration: 1.35,
-                  ease: [0.25, 0.1, 0.25, 1.0],
-                }}
-              />
-            ))}
+          {/* Smooth Traveling Primary Color Light Beams from Logo to Cards */}
+          {paths.map((p, idx) => {
+            const isMiddle = idx === 1 || idx === 4;
+            return (
+              <React.Fragment key={`pulse-group-${idx}`}>
+                {/* Outer Glow Beam
+                <motion.path
+                  d={p}
+                  fill="none"
+                  stroke="#FE5A00"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  filter="url(#ai-pulse-glow)"
+                  initial={{ pathLength: 0.08, pathOffset: 0, opacity: 0 }}
+                  animate={{
+                    pathLength: isMiddle
+                      ? [0.08, 0.45, 0.45, 0.08]
+                      : [0.08, 0.28, 0.28, 0.08],
+                    pathOffset: [0, 0.12, 0.9, 1],
+                    opacity: [0, 1, 1, 0],
+                  }}
+                  transition={{
+                    duration: 2.2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    times: [0, 0.15, 0.92, 1],
+                    repeatDelay: 0.6,
+                  }}
+                /> */}
+
+                {/* Inner Bright Core Beam */}
+                <motion.path
+                  d={p}
+                  fill="none"
+                  stroke="#FE5A00"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0.08, pathOffset: 0, opacity: 0 }}
+                  animate={{
+                    pathLength: isMiddle
+                      ? [0.08, 0.35, 0.35, 0.08]
+                      : [0.08, 0.22, 0.22, 0.08],
+                    pathOffset: [0, 0.12, 0.9, 1],
+                    opacity: [0, 0.95, 0.95, 0],
+                  }}
+                  transition={{
+                    duration: 2.2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    times: [0, 0.15, 0.92, 1],
+                    repeatDelay: 0.6,
+                  }}
+                />
+              </React.Fragment>
+            );
+          })}
         </svg>
 
         {/* Branch Junction Diamond Sparks */}
@@ -273,21 +268,23 @@ export default function AiSection() {
               style={{ left: junctions.left.x, top: junctions.left.y }}
             >
               <motion.div
-                animate={
-                  pulseActive
-                    ? {
-                        scale: [1, 1.4, 1],
-                        filter: [
-                          "drop-shadow(0 0 2px rgba(248,88,0,0.4))",
-                          "drop-shadow(0 0 10px rgba(248,88,0,1))",
-                          "drop-shadow(0 0 2px rgba(248,88,0,0.4))",
-                        ],
-                      }
-                    : { scale: 1 }
-                }
-                transition={{ duration: 0.6, delay: 0.55, ease: "easeInOut" }}
+                animate={{
+                  scale: [1, 1.5, 1],
+                  filter: [
+                    "drop-shadow(0 0 2px rgba(248,88,0,0.4))",
+                    "drop-shadow(0 0 12px rgba(248,88,0,1))",
+                    "drop-shadow(0 0 2px rgba(248,88,0,0.4))",
+                  ],
+                }}
+                transition={{
+                  duration: 2.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  times: [0, 0.45, 0.9],
+                  repeatDelay: 0.6,
+                }}
               >
-                <GridSpark className="w-3.5 h-3.5 text-primary" />
+                <GridSpark className="w-4 h-4 text-primary" />
               </motion.div>
             </div>
 
@@ -297,21 +294,23 @@ export default function AiSection() {
               style={{ left: junctions.right.x, top: junctions.right.y }}
             >
               <motion.div
-                animate={
-                  pulseActive
-                    ? {
-                        scale: [1, 1.4, 1],
-                        filter: [
-                          "drop-shadow(0 0 2px rgba(248,88,0,0.4))",
-                          "drop-shadow(0 0 10px rgba(248,88,0,1))",
-                          "drop-shadow(0 0 2px rgba(248,88,0,0.4))",
-                        ],
-                      }
-                    : { scale: 1 }
-                }
-                transition={{ duration: 0.6, delay: 0.55, ease: "easeInOut" }}
+                animate={{
+                  scale: [1, 1.5, 1],
+                  filter: [
+                    "drop-shadow(0 0 2px rgba(248,88,0,0.4))",
+                    "drop-shadow(0 0 12px rgba(248,88,0,1))",
+                    "drop-shadow(0 0 2px rgba(248,88,0,0.4))",
+                  ],
+                }}
+                transition={{
+                  duration: 2.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  times: [0, 0.45, 0.9],
+                  repeatDelay: 0.6,
+                }}
               >
-                <GridSpark className="w-3.5 h-3.5 text-primary" />
+                <GridSpark className="w-4 h-4 text-primary" />
               </motion.div>
             </div>
           </div>
@@ -319,24 +318,15 @@ export default function AiSection() {
 
         {/* Responsive Layout: 3 Columns on desktop, stacked on mobile */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-0 items-center">
-          {/* Left Column: 3 Cards */}
+          {/* Left Column: 3 Cards (Static Clean Borders) */}
           <div className="lg:col-span-4 flex flex-col gap-5 sm:gap-6 z-20">
             {LEFT_CARDS.map((card, idx) => (
-              <motion.div
+              <div
                 key={card.id}
                 ref={(el) => {
                   cardRefs.current[idx] = el;
                 }}
-                animate={{
-                  borderColor: isEnergized
-                    ? "var(--color-primary, #FE5A00)"
-                    : "rgba(255, 255, 255, 0.1)",
-                  boxShadow: isEnergized
-                    ? "0 0 32px rgba(248, 88, 0, 0.28)"
-                    : "0 0 0px rgba(0, 0, 0, 0)",
-                }}
-                transition={{ duration: 0.75, ease: "easeInOut" }}
-                className="bg-card rounded-2xl p-6 border border-border transition-colors duration-500 relative flex flex-col justify-center min-h-[160px] sm:min-h-[175px]"
+                className="bg-card rounded-2xl p-6 border border-border relative flex flex-col justify-center min-h-[160px] sm:min-h-[175px]"
               >
                 {/* Badge Icon */}
                 <div className="w-11 h-11 rounded-xl bg-primary flex items-center justify-center text-white shrink-0 shadow-[0_0_20px_rgba(248,88,0,0.35)]">
@@ -352,7 +342,7 @@ export default function AiSection() {
                 <p className="text-primary-text text-xs sm:text-sm leading-relaxed font-sans font-normal">
                   {card.description}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -363,71 +353,61 @@ export default function AiSection() {
               className="relative flex items-center justify-center"
             >
               {/* Outward Expanding Energy Ripple Ring */}
-              <AnimatePresence>
-                {pulseActive && (
-                  <motion.div
-                    initial={{ scale: 0.85, opacity: 0.85 }}
-                    animate={{ scale: 1.6, opacity: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 1.3, ease: "easeOut" }}
-                    className="absolute inset-0 rounded-full border-2 border-primary pointer-events-none"
-                  />
-                )}
-              </AnimatePresence>
+              <motion.div
+                animate={{
+                  scale: [0.95, 1.45],
+                  opacity: [0.75, 0],
+                }}
+                transition={{
+                  duration: 1.6,
+                  repeat: Infinity,
+                  ease: "easeOut",
+                  repeatDelay: 1.2,
+                }}
+                className="absolute inset-0 rounded-full border border-primary pointer-events-none"
+              />
 
               {/* Soft Outer Ambient Glow */}
-              <div className="absolute inset-0 rounded-full bg-primary/25 blur-2xl pointer-events-none scale-125" />
+              <div className="absolute inset-0 rounded-full bg-primary/25 blur-3xl pointer-events-none scale-150" />
 
               {/* Central Orb with Creatibuz Symbol */}
               <motion.div
-                animate={
-                  pulseActive
-                    ? {
-                        scale: [1, 1.06, 1],
-                        boxShadow: [
-                          "0 0 45px rgba(248,88,0,0.55)",
-                          "0 0 85px rgba(248,88,0,0.85)",
-                          "0 0 45px rgba(248,88,0,0.55)",
-                        ],
-                      }
-                    : {
-                        scale: 1,
-                        boxShadow: "0 0 45px rgba(248,88,0,0.55)",
-                      }
-                }
-                transition={{ duration: 1.2, ease: "easeInOut" }}
-                className="relative rounded-full bg-primary flex items-center justify-center shadow-[0_0_50px_rgba(248,88,0,0.55)] cursor-pointer select-none"
+                animate={{
+                  scale: [1, 1.05, 1],
+                  boxShadow: [
+                    "0 0 45px rgba(248,88,0,0.55)",
+                    "0 0 85px rgba(248,88,0,0.85)",
+                    "0 0 45px rgba(248,88,0,0.55)",
+                  ],
+                }}
+                transition={{
+                  duration: 2.8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="relative w-[150px] h-[150px] rounded-full bg-primary flex items-center justify-center shadow-[0_0_60px_rgba(248,88,0,0.55)] cursor-pointer select-none"
               >
                 <Image
                   src="/creatibuz-symbol.png"
                   alt="Creatibuz Studio"
-                  width={75}
-                  height={75}
-                  className="object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]"
+                  width={100}
+                  height={100}
+                  className="w-[130px] h-[130px] object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]"
                   priority
                 />
               </motion.div>
             </div>
           </div>
 
-          {/* Right Column: 3 Cards */}
+          {/* Right Column: 3 Cards (Static Clean Borders) */}
           <div className="lg:col-span-4 flex flex-col gap-5 sm:gap-6 z-20">
             {RIGHT_CARDS.map((card, idx) => (
-              <motion.div
+              <div
                 key={card.id}
                 ref={(el) => {
                   cardRefs.current[idx + 3] = el;
                 }}
-                animate={{
-                  borderColor: isEnergized
-                    ? "var(--color-primary, #FE5A00)"
-                    : "rgba(255, 255, 255, 0.1)",
-                  boxShadow: isEnergized
-                    ? "0 0 32px rgba(248, 88, 0, 0.28)"
-                    : "0 0 0px rgba(0, 0, 0, 0)",
-                }}
-                transition={{ duration: 0.75, ease: "easeInOut" }}
-                className="bg-card rounded-2xl p-6 border border-border transition-colors duration-500 relative flex flex-col justify-center min-h-[160px] sm:min-h-[175px]"
+                className="bg-card rounded-2xl p-6 border border-border relative flex flex-col justify-center min-h-[160px] sm:min-h-[175px]"
               >
                 {/* Badge Icon */}
                 <div className="w-11 h-11 rounded-xl bg-primary flex items-center justify-center text-white shrink-0 shadow-[0_0_20px_rgba(248,88,0,0.35)]">
@@ -443,7 +423,7 @@ export default function AiSection() {
                 <p className="text-primary-text text-xs sm:text-sm leading-relaxed font-sans font-normal">
                   {card.description}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

@@ -163,7 +163,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       containerHeight - lastCardHeight - bottomOffset
     ) + itemStackDistance * lastIdx;
     const lastPinStart = lastCardTop - lastTargetTop;
-    const pinEnd = lastPinStart + 250; // 250px reading pause after full stack, then seamless release
+    const pinEnd = lastPinStart; // Unpin seamlessly when the last card docks into the stack
 
     const scaleStep = itemScale > 0 ? itemScale : 0.05;
 
@@ -415,7 +415,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       }}
     >
       <div
-        className={`scroll-stack-inner pt-0 px-0 pb-30 md:pb-38 lg:pb-46 ${innerClassName}`.trim()}
+        className={`scroll-stack-inner pt-0 px-0 ${innerClassName}`.trim()}
       >
         {children}
         {/* Clean end element without artificial height */}
