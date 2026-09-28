@@ -326,7 +326,7 @@ export default function AiSection() {
                 ref={(el) => {
                   cardRefs.current[idx] = el;
                 }}
-                className="bg-card rounded-2xl p-6 border border-border relative flex flex-col justify-center min-h-[160px] sm:min-h-[175px]"
+                className="bg-card rounded-2xl p-6 relative flex flex-col justify-center min-h-[160px] sm:min-h-[175px]"
               >
                 {/* Badge Icon */}
                 <div className="w-11 h-11 rounded-xl bg-primary flex items-center justify-center text-white shrink-0 shadow-[0_0_20px_rgba(248,88,0,0.35)]">
@@ -407,7 +407,7 @@ export default function AiSection() {
                 ref={(el) => {
                   cardRefs.current[idx + 3] = el;
                 }}
-                className="bg-card rounded-2xl p-6 border border-border relative flex flex-col justify-center min-h-[160px] sm:min-h-[175px]"
+                className="bg-card rounded-2xl p-6 relative flex flex-col justify-center min-h-[160px] sm:min-h-[175px]"
               >
                 {/* Badge Icon */}
                 <div className="w-11 h-11 rounded-xl bg-primary flex items-center justify-center text-white shrink-0 shadow-[0_0_20px_rgba(248,88,0,0.35)]">

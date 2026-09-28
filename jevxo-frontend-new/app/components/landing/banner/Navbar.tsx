@@ -136,7 +136,7 @@ export default function Navbar() {
               key={link.name}
               href={link.href}
               onClick={(e) => handleSmoothScroll(e, link.href)}
-              className="text-[#9CA3AF] hover:text-white transition-colors duration-200 font-normal text-[14px] xl:text-[15px] tracking-tight relative py-1"
+              className="text-[#9CA3AF] hover:text-primary transition-colors duration-200 font-normal text-[14px] xl:text-[15px] tracking-tight relative py-1"
             >
               {link.name}
             </Link>

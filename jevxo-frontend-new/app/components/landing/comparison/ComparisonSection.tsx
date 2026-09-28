@@ -18,7 +18,7 @@ export default function ComparisonSection() {
           Creatibuz Studio Alternative?
           <br />
           <span>Think </span>
-          <span className="talic font-normal text-foreground">
+          <span className="italic font-normal text-foreground">
             One More Time!
           </span>
         </h2>
@@ -28,7 +28,7 @@ export default function ComparisonSection() {
       <div className="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-8 gap-6 items-stretch">
         {/* CARD 1: Flexible Payment Plans (col-span-3) */}
         <div className="md:col-span-3 relative p-[1px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col">
-          <div className="w-full h-full rounded-2xl overflow-hidden p-6 sm:p-7 relative flex flex-col justify-between min-h-[440px] md:min-h-[470px] bg-gradient-to-br from-[#191919] via-[#090909] to-primary">
+          <div className="w-full h-full rounded-2xl overflow-hidden p-6 sm:p-7 relative flex flex-col justify-start min-h-[380px] md:min-h-[400px] bg-gradient-to-br from-[#191919] via-[#090909] to-primary">
             {/* Ambient warm glow at bottom right */}
             <div className="absolute -bottom-14 -right-14 w-72 h-72 rounded-full bg-[#FE5A00]/25 blur-[75px] pointer-events-none" />
 
@@ -37,58 +37,25 @@ export default function ComparisonSection() {
               <h3 className="text-primary-text text-xl sm:text-2xl font-bold font-sans tracking-tight">
                 Flexible Payment Plans
               </h3>
-              <p className="text-primary-text text-xs sm:text-sm font-sans mt-1 mb-8">
+              <p className="text-primary-text text-xs sm:text-sm font-sans mt-1 mb-4">
                 Pay your way
               </p>
 
               {/* Switcher pills */}
-              <div className="flex items-center gap-2 mb-8">
-                {/* <button
-                  type="button"
-                  onClick={() => setBillingCycle("monthly")}
-                  className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                    billingCycle === "monthly"
-                      ? "bg-[#2A2A2A] text-white border border-white/20 shadow-sm"
-                      : "bg-[#141414] text-white/50 border border-white/10 hover:text-white"
-                  }`}
-                >
-                  Monthly
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setBillingCycle("quarterly")}
-                  className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                    billingCycle === "quarterly"
-                      ? "bg-[#2A2A2A] text-white border border-white/20 shadow-sm"
-                      : "bg-[#141414] text-white/50 border border-white/10 hover:text-white"
-                  }`}
-                >
-                  Quarterly
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setBillingCycle("annually")}
-                  className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                    billingCycle === "annually"
-                      ? "bg-[#2A2A2A] text-white border border-white/20 shadow-sm"
-                      : "bg-[#141414] text-white/50 border border-white/10 hover:text-white"
-                  }`}
-                >
-                  Annually
-                </button> */}
-                <div className="bg-card text-primary-text rounded-sm py-2 px-4 text-sm">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="bg-card text-primary-text rounded-sm py-1.5 px-3.5 text-xs sm:text-sm">
                   Monthly
                 </div>
-                <div className="bg-card text-primary-text rounded-sm py-2 px-4 text-sm">
+                <div className="bg-card text-primary-text rounded-sm py-1.5 px-3.5 text-xs sm:text-sm">
                   Quarterly
                 </div>
-                <div className="bg-card text-primary-text rounded-sm py-2 px-4 text-sm">
+                <div className="bg-card text-primary-text rounded-sm py-1.5 px-3.5 text-xs sm:text-sm">
                   Annually
                 </div>
               </div>
 
               {/* Bullet points */}
-              <div className="space-y-1.5 text-xs sm:text-sm text-white/50 font-sans">
+              <div className="space-y-1.5 text-xs sm:text-sm text-primary-text font-sans">
                 <p>• No commitment</p>
                 <p>• Cancel anytime</p>
                 <p>• No Extra Fees</p>
@@ -96,7 +63,7 @@ export default function ComparisonSection() {
             </div>
 
             {/* VISA Cards visual at bottom right */}
-            <div className="absolute -bottom-20 -right-55 w-[320px] sm:w-[350px] md:w-[550px] h-[230px] sm:h-[450px] pointer-events-none z-10">
+            <div className="absolute -bottom-14 -right-28 sm:-right-24 md:-right-32 w-[340px] sm:w-[380px] md:w-[440px] h-[240px] sm:h-[300px] pointer-events-none z-10">
               <Image
                 src="/whyChooseUs/Card Image.png"
                 alt="Payment Cards"
@@ -108,7 +75,7 @@ export default function ComparisonSection() {
         </div>
 
         {/* CARD 2: Visual Center Showcase - Cap (col-span-2) */}
-        <div className="md:col-span-2 relative p-[1px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col min-h-[440px] md:min-h-[470px]">
+        <div className="md:col-span-2 relative p-[1px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col min-h-[380px] md:min-h-[400px]">
           <div className="w-full h-full rounded-2xl overflow-hidden relative group bg-[#0B0B0B]">
             <Image
               src="/whyChooseUs/Card 02.png"
@@ -122,12 +89,12 @@ export default function ComparisonSection() {
 
         {/* CARD 3: Unlimited revision (col-span-3) */}
         <div className="md:col-span-3 relative p-[1px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col">
-          <div className="w-full h-full rounded-2xl overflow-hidden p-6 sm:p-7 relative flex flex-col justify-between min-h-[440px] md:min-h-[470px] bg-[#0E0E0E]">
+          <div className="w-full h-full rounded-2xl overflow-hidden p-6 sm:p-7 relative flex flex-col justify-between min-h-[380px] md:min-h-[400px] bg-[#0E0E0E]">
             {/* Subtle ambient amber warmth */}
             <div className="absolute -bottom-12 -left-12 w-56 h-56 bg-primary/10 blur-[60px] rounded-full pointer-events-none" />
 
             {/* Content Top */}
-            <div className="relative z-10 mb-3">
+            <div className="relative z-10 mb-3.5">
               <h3 className="text-primary-text text-xl sm:text-2xl font-bold font-sans tracking-tight">
                 Unlimited revision
               </h3>
@@ -138,10 +105,10 @@ export default function ComparisonSection() {
             </div>
 
             {/* Chat Box Widget */}
-            <div className="relative z-10 bg-[#141414] border border-white/[0.08] rounded-2xl p-4 sm:p-4.5 flex flex-col gap-3.5 shadow-xl mt-auto">
+            <div className="relative z-10 bg-[#141414] border border-white/[0.08] rounded-2xl p-3.5 sm:p-4 flex flex-col gap-3 shadow-xl">
               {/* Header */}
-              <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
-                <span className="text-xs sm:text-sm font-semibold text-white/90 font-sans flex items-center gap-1.5">
+              <div className="flex items-center justify-between border-b border-white/[0.08] pb-2.5">
+                <span className="text-xs sm:text-sm font-semibold text-primary-text font-sans flex items-center gap-1.5">
                   # Landing Animation Feedback
                 </span>
                 <div className="flex items-center gap-2">
@@ -177,16 +144,16 @@ export default function ComparisonSection() {
                         className="w-2.5 h-2.5 object-contain"
                       />
                     </div>
-                    <span className="text-[10px] font-bold text-white ml-1.5">
+                    <span className="text-[10px] font-bold text-primary-text ml-1.5">
                       5+
                     </span>
                   </div>
-                  <MoreVertical className="w-4 h-4 text-white/40 cursor-pointer hover:text-white transition-colors" />
+                  <MoreVertical className="w-4 h-4 text-primary-text/60 cursor-pointer hover:text-primary-text transition-colors" />
                 </div>
               </div>
 
               {/* Messages */}
-              <div className="space-y-3 font-sans">
+              <div className="space-y-2.5 font-sans">
                 {/* Message 1 */}
                 <div className="flex items-start gap-2.5">
                   <Image
@@ -194,22 +161,22 @@ export default function ComparisonSection() {
                     alt="Abdul Ahad"
                     width={32}
                     height={32}
-                    className="w-8 h-8 rounded-full border border-white/10 shrink-0 object-cover mt-0.5"
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/10 shrink-0 object-cover mt-0.5"
                   />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-baseline gap-1.5">
-                      <span className="text-xs font-semibold text-white">
+                      <span className="text-xs font-semibold text-primary-text">
                         Abdul Ahad
                       </span>
-                      <span className="text-[10px] text-white/40">
+                      <span className="text-[10px] text-primary-text/60">
                         — Today at 2:47 PM
                       </span>
                     </div>
-                    <p className="text-xs text-white/50 mt-0.5 leading-snug">
+                    <p className="text-xs text-primary-text mt-0.5 leading-snug">
                       Hey Team, is the landing feedback finalized?
                     </p>
                   </div>
-                  <MoreVertical className="w-3.5 h-3.5 text-white/30 shrink-0 mt-1" />
+                  <MoreVertical className="w-3.5 h-3.5 text-primary-text/40 shrink-0 mt-1" />
                 </div>
 
                 {/* Message 2 */}
@@ -219,25 +186,25 @@ export default function ComparisonSection() {
                     alt="Abdur Rahman"
                     width={32}
                     height={32}
-                    className="w-8 h-8 rounded-full border border-white/10 shrink-0 object-cover mt-0.5"
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/10 shrink-0 object-cover mt-0.5"
                   />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-baseline gap-1.5">
-                      <span className="text-xs font-semibold text-white">
+                      <span className="text-xs font-semibold text-primary-text">
                         Abdur Rahman
                       </span>
-                      <span className="text-[10px] text-white/40">
+                      <span className="text-[10px] text-primary-text/60">
                         — Today at 2:47 PM
                       </span>
                     </div>
-                    <p className="text-xs text-white/50 mt-0.5 leading-snug">
+                    <p className="text-xs text-primary-text mt-0.5 leading-snug">
                       Yep, all set up read for{" "}
                       <span className="text-[#3B82F6] font-medium">
                         @Rubendao
                       </span>
                     </p>
                   </div>
-                  <MoreVertical className="w-3.5 h-3.5 text-white/30 shrink-0 mt-1" />
+                  <MoreVertical className="w-3.5 h-3.5 text-primary-text/40 shrink-0 mt-1" />
                 </div>
 
                 {/* Message 3 */}
@@ -247,22 +214,22 @@ export default function ComparisonSection() {
                     alt="Rifat Hasan"
                     width={32}
                     height={32}
-                    className="w-8 h-8 rounded-full border border-white/10 shrink-0 object-cover mt-0.5"
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/10 shrink-0 object-cover mt-0.5"
                   />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-baseline gap-1.5">
-                      <span className="text-xs font-semibold text-white">
+                      <span className="text-xs font-semibold text-primary-text">
                         Rifat Hasan
                       </span>
-                      <span className="text-[10px] text-white/40">
+                      <span className="text-[10px] text-primary-text/60">
                         Today at 2:47 PM
                       </span>
                     </div>
-                    <p className="text-xs text-white/50 mt-0.5 leading-snug">
+                    <p className="text-xs text-primary-text mt-0.5 leading-snug">
                       Very Exited to see the rolled out.
                     </p>
                   </div>
-                  <MoreVertical className="w-3.5 h-3.5 text-white/30 shrink-0 mt-1" />
+                  <MoreVertical className="w-3.5 h-3.5 text-primary-text/40 shrink-0 mt-1" />
                 </div>
               </div>
             </div>
@@ -271,22 +238,22 @@ export default function ComparisonSection() {
 
         {/* CARD 4: Lifetime Support (col-span-3) */}
         <div className="md:col-span-3 relative p-[1px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col">
-          <div className="w-full h-full rounded-2xl overflow-hidden p-6 sm:p-7 relative flex flex-col justify-between min-h-[440px] md:min-h-[470px] bg-[#0E0E0E]">
+          <div className="w-full h-full rounded-2xl overflow-hidden p-6 sm:p-7 relative flex flex-col justify-start min-h-[380px] md:min-h-[400px] bg-[#0E0E0E]">
             {/* Content Top */}
-            <div>
-              <h3 className="text-white text-xl sm:text-2xl font-bold font-sans tracking-tight">
+            <div className="mb-4">
+              <h3 className="text-primary-text text-xl sm:text-2xl font-bold font-sans tracking-tight">
                 Lifetime Support
               </h3>
-              <p className="text-white/50 text-xs sm:text-sm font-sans mt-1.5 leading-relaxed">
+              <p className="text-primary-text text-xs sm:text-sm font-sans mt-1.5 leading-relaxed">
                 Enjoy unlimited revisions and lifetime support, ensuring your
                 satisfaction at every stage.
               </p>
             </div>
 
             {/* List Container with Avatar Stack Header */}
-            <div className="bg-[#141414] border border-white/[0.08] rounded-2xl p-4 sm:p-5 mt-5 flex flex-col gap-3 shadow-xl">
+            <div className="bg-[#141414] border border-white/[0.08] rounded-2xl p-4 sm:p-4.5 flex flex-col gap-2.5 shadow-xl">
               {/* Header Avatar Stack */}
-              <div className="flex items-center gap-1.5 mb-1">
+              <div className="flex items-center gap-1.5 mb-0.5">
                 <div className="flex items-center">
                   <Image
                     src="https://randomuser.me/api/portraits/men/32.jpg"
@@ -319,35 +286,35 @@ export default function ComparisonSection() {
                     />
                   </div>
                 </div>
-                <span className="text-xs font-bold text-white ml-1">5+</span>
+                <span className="text-xs font-bold text-primary-text ml-1">5+</span>
               </div>
 
               {/* Feature 1 */}
-              <div className="bg-[#181818] border border-white/[0.06] rounded-xl px-4 py-3 flex items-center gap-3.5">
+              <div className="bg-[#181818] border border-white/[0.06] rounded-xl px-3.5 py-2.5 flex items-center gap-3">
                 <div className="w-5 h-5 rounded-[5px] bg-[#00E676]/15 border border-[#00E676]/60 flex items-center justify-center text-[#00E676] shrink-0 shadow-[0_0_8px_rgba(0,230,118,0.25)]">
                   <Check className="w-3.5 h-3.5 stroke-[3]" />
                 </div>
-                <span className="text-xs sm:text-sm font-medium text-white/90 font-sans">
+                <span className="text-xs sm:text-sm font-medium text-primary-text font-sans">
                   Ongoing updates
                 </span>
               </div>
 
               {/* Feature 2 */}
-              <div className="bg-[#181818] border border-white/[0.06] rounded-xl px-4 py-3 flex items-center gap-3.5">
+              <div className="bg-[#181818] border border-white/[0.06] rounded-xl px-3.5 py-2.5 flex items-center gap-3">
                 <div className="w-5 h-5 rounded-[5px] bg-[#00E676]/15 border border-[#00E676]/60 flex items-center justify-center text-[#00E676] shrink-0 shadow-[0_0_8px_rgba(0,230,118,0.25)]">
                   <Check className="w-3.5 h-3.5 stroke-[3]" />
                 </div>
-                <span className="text-xs sm:text-sm font-medium text-white/90 font-sans">
+                <span className="text-xs sm:text-sm font-medium text-primary-text font-sans">
                   Priority Response Handing
                 </span>
               </div>
 
               {/* Feature 3 */}
-              <div className="bg-[#181818] border border-white/[0.06] rounded-xl px-4 py-3 flex items-center gap-3.5">
+              <div className="bg-[#181818] border border-white/[0.06] rounded-xl px-3.5 py-2.5 flex items-center gap-3">
                 <div className="w-5 h-5 rounded-[5px] bg-[#00E676]/15 border border-[#00E676]/60 flex items-center justify-center text-[#00E676] shrink-0 shadow-[0_0_8px_rgba(0,230,118,0.25)]">
                   <Check className="w-3.5 h-3.5 stroke-[3]" />
                 </div>
-                <span className="text-xs sm:text-sm font-medium text-white/90 font-sans">
+                <span className="text-xs sm:text-sm font-medium text-primary-text font-sans">
                   24/7 expert assistance
                 </span>
               </div>
@@ -357,21 +324,21 @@ export default function ComparisonSection() {
 
         {/* CARD 5: Diverse Skill Set & AI-Assisted Launches (col-span-5) */}
         <div className="md:col-span-5 relative p-[1px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col">
-          <div className="w-full h-full rounded-2xl overflow-hidden relative min-h-[440px] md:min-h-[470px] bg-gradient-to-br from-[#191919] via-[#1a0c03] to-[#FE5A00]/65">
+          <div className="w-full h-full rounded-2xl overflow-hidden relative min-h-[380px] md:min-h-[400px] bg-gradient-to-br from-[#191919] via-[#1a0c03] to-[#FE5A00]/65">
             {/* Warm rich radial gradient glow matching Figma screenshot */}
             <div className="absolute -bottom-16 -right-16 w-80 h-80 rounded-full bg-[#FE5A00]/45 blur-[85px] pointer-events-none" />
             <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-[#FE5A00]/20 blur-[70px] pointer-events-none" />
 
             {/* Inner Panes Grid: Left (Diverse Skill Set) and Right (AI-Assisted Launches) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 p-5 sm:p-7 relative z-10 h-full items-stretch">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 p-5 sm:p-6 relative z-10 h-full items-stretch">
               {/* Left Pane: Diverse Skill Set */}
-              <div className="lg:col-span-7 bg-[#121212]/90 border border-white/[0.08] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-xl">
-                <h4 className="text-white text-lg sm:text-xl font-semibold font-sans tracking-tight mb-4">
+              <div className="lg:col-span-7 bg-[#121212]/90 border border-white/[0.08] rounded-2xl p-4 sm:p-5 flex flex-col justify-center shadow-xl">
+                <h4 className="text-primary-text text-lg sm:text-xl font-semibold font-sans tracking-tight mb-3 sm:mb-3.5">
                   Diverse Skill Set
                 </h4>
 
                 {/* Team Members List */}
-                <div className="space-y-3.5 font-sans">
+                <div className="space-y-3 font-sans">
                   {/* Member 1 */}
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2.5 min-w-0">
@@ -383,19 +350,19 @@ export default function ComparisonSection() {
                         className="w-9 h-9 rounded-full border border-white/10 shrink-0 object-cover"
                       />
                       <div className="min-w-0">
-                        <p className="text-xs sm:text-sm font-semibold text-white truncate">
+                        <p className="text-xs sm:text-sm font-semibold text-primary-text truncate">
                           Sourov Dhali
                         </p>
-                        <p className="text-[11px] text-white/40 truncate">
+                        <p className="text-[11px] text-primary-text/60 truncate">
                           Product Designer
                         </p>
                       </div>
                     </div>
                     <div className="flex flex-col items-end shrink-0 gap-1">
-                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-white/60 whitespace-nowrap">
+                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-primary-text whitespace-nowrap">
                         UX Specialist
                       </span>
-                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-white/60 whitespace-nowrap">
+                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-primary-text whitespace-nowrap">
                         Design System
                       </span>
                     </div>
@@ -412,19 +379,19 @@ export default function ComparisonSection() {
                         className="w-9 h-9 rounded-full border border-white/10 shrink-0 object-cover"
                       />
                       <div className="min-w-0">
-                        <p className="text-xs sm:text-sm font-semibold text-white truncate">
+                        <p className="text-xs sm:text-sm font-semibold text-primary-text truncate">
                           Tanvir Ahmed
                         </p>
-                        <p className="text-[11px] text-white/40 truncate">
+                        <p className="text-[11px] text-primary-text/60 truncate">
                           Creative Director
                         </p>
                       </div>
                     </div>
                     <div className="flex flex-col items-end shrink-0 gap-1">
-                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-white/60 whitespace-nowrap">
+                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-primary-text whitespace-nowrap">
                         Brand Design
                       </span>
-                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-white/60 whitespace-nowrap">
+                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-primary-text whitespace-nowrap">
                         Design Direction
                       </span>
                     </div>
@@ -441,19 +408,19 @@ export default function ComparisonSection() {
                         className="w-9 h-9 rounded-full border border-white/10 shrink-0 object-cover"
                       />
                       <div className="min-w-0">
-                        <p className="text-xs sm:text-sm font-semibold text-white truncate">
+                        <p className="text-xs sm:text-sm font-semibold text-primary-text truncate">
                           Azaz Ahamed
                         </p>
-                        <p className="text-[11px] text-white/40 truncate">
+                        <p className="text-[11px] text-primary-text/60 truncate">
                           Sr Product Designer
                         </p>
                       </div>
                     </div>
                     <div className="flex flex-col items-end shrink-0 gap-1">
-                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-white/60 whitespace-nowrap">
+                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-primary-text whitespace-nowrap">
                         UX Consultant
                       </span>
-                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-white/60 whitespace-nowrap">
+                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-primary-text whitespace-nowrap">
                         SaaS Product Design
                       </span>
                     </div>
@@ -470,19 +437,19 @@ export default function ComparisonSection() {
                         className="w-9 h-9 rounded-full border border-white/10 shrink-0 object-cover"
                       />
                       <div className="min-w-0">
-                        <p className="text-xs sm:text-sm font-semibold text-white truncate">
+                        <p className="text-xs sm:text-sm font-semibold text-primary-text truncate">
                           Azaz Ahamed
                         </p>
-                        <p className="text-[11px] text-white/40 truncate">
+                        <p className="text-[11px] text-primary-text/60 truncate">
                           Sr Product Designer
                         </p>
                       </div>
                     </div>
                     <div className="flex flex-col items-end shrink-0 gap-1">
-                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-white/60 whitespace-nowrap">
+                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-primary-text whitespace-nowrap">
                         Growth Marketing
                       </span>
-                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-white/60 whitespace-nowrap">
+                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-primary-text whitespace-nowrap">
                         SEO Strategy
                       </span>
                     </div>
@@ -490,14 +457,14 @@ export default function ComparisonSection() {
                 </div>
               </div>
 
-              {/* Right Pane: AI-Assisted Launches */}
-              <div className="lg:col-span-5 flex flex-col justify-between py-1">
+              {/* Right Pane: AI-Assisted Launches (Heading and Paragraph keep text-white as requested) */}
+              <div className="lg:col-span-5 flex flex-col justify-center py-1">
                 {/* Content Top */}
                 <div>
                   <h3 className="text-white text-xl sm:text-2xl font-bold font-sans tracking-tight">
                     AI-Assisted Launches
                   </h3>
-                  <p className="text-xs sm:text-sm text-white/70 font-sans mt-2.5 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-white/70 font-sans mt-2 leading-relaxed">
                     Product launches with AI-assisted workflows that Reduce
                     repetitive tasks and launch digital products more
                     efficiently with faster execution.
@@ -505,7 +472,7 @@ export default function ComparisonSection() {
                 </div>
 
                 {/* 8 AI Logos Grid (4x2) in exact Figma order */}
-                <div className="grid grid-cols-4 gap-2.5 sm:gap-3 mt-6 sm:mt-8">
+                <div className="grid grid-cols-4 gap-2 sm:gap-2.5 mt-4 sm:mt-5">
                   {[
                     "/whyChooseUs/aiLogo/08.png",
                     "/whyChooseUs/aiLogo/01.png",
