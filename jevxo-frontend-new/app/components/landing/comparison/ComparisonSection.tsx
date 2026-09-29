@@ -340,137 +340,139 @@ export default function ComparisonSection() {
             {/* Inner Panes Grid: Left (Diverse Skill Set) and Right (AI-Assisted Launches) */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 p-5 sm:p-6 relative z-10 h-full items-stretch">
               {/* Left Pane: Diverse Skill Set */}
-              <div className="lg:col-span-6 bg-[#171717] border border-white/[0.08] rounded-2xl flex flex-col justify-center shadow-xl overflow-hidden">
-                {/* Header Title */}
-                <div className="px-4 md:px-6 pt-7 pb-2">
-                  <h4 className="text-primary-text text-xl sm:text-2xl font-semibold tracking-tight">
-                    Diverse Skill Set
-                  </h4>
-                </div>
-
-                {/* Team Members List with Full-Width Dividing Borders */}
-                <div className="font-sans flex flex-col">
-                  {/* Member 1 */}
-                  <div className="px-4 py-2 flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-3.5 min-w-0">
-                      <div className="relative shrink-0 w-10 h-10 rounded-full p-0.5 border border-white/20">
-                        <Image
-                          src="https://randomuser.me/api/portraits/men/33.jpg"
-                          alt="Sourov Dhali"
-                          width={30}
-                          height={30}
-                          className="w-full h-full rounded-full shrink-0 object-cover"
-                        />
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-sm sm:text-base font-semibold text-primary-text truncate">
-                          Sourov Dhali
-                        </p>
-                        <p className="text-xs text-primary-text/60 truncate mt-0.5">
-                          Product Designer
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-end shrink-0 gap-1.5">
-                      <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
-                        UX Specialist
-                      </span>
-                      <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E] text-foreground whitespace-nowrap">
-                        Design System
-                      </span>
-                    </div>
+              <div className="lg:col-span-6 relative p-[1.25px] bg-gradient-to-br from-white/10 to-primary rounded-xl overflow-hidden shadow-2xl">
+                <div className="w-full h-full bg-[#171717] rounded-xl flex flex-col justify-center">
+                  {/* Header Title */}
+                  <div className="px-4 md:px-6 pt-7 pb-2">
+                    <h4 className="text-primary-text text-xl sm:text-2xl font-semibold tracking-tight">
+                      Diverse Skill Set
+                    </h4>
                   </div>
 
-                  {/* Member 2 */}
-                  <div className="border-t border-white/[0.08] px-4 py-2 flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-3.5 min-w-0">
-                      <div className="relative shrink-0 w-10 h-10  rounded-full p-0.5 border border-white/20">
-                        <Image
-                          src="https://randomuser.me/api/portraits/men/36.jpg"
-                          alt="Tanvir Ahmed"
-                          width={56}
-                          height={56}
-                          className="w-full h-full rounded-full shrink-0 object-cover"
-                        />
+                  {/* Team Members List with Full-Width Dividing Borders */}
+                  <div className="font-sans flex flex-col">
+                    {/* Member 1 */}
+                    <div className="px-4 py-2 flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3.5 min-w-0">
+                        <div className="relative shrink-0 w-10 h-10 rounded-full p-0.5 border border-white/20">
+                          <Image
+                            src="https://randomuser.me/api/portraits/men/33.jpg"
+                            alt="Sourov Dhali"
+                            width={30}
+                            height={30}
+                            className="w-full h-full rounded-full shrink-0 object-cover"
+                          />
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-sm sm:text-base font-semibold text-primary-text truncate">
+                            Sourov Dhali
+                          </p>
+                          <p className="text-xs text-primary-text/60 truncate mt-0.5">
+                            Product Designer
+                          </p>
+                        </div>
                       </div>
-                      <div className="min-w-0">
-                        <p className="text-sm sm:text-base font-semibold text-primary-text truncate">
-                          Tanvir Ahmed
-                        </p>
-                        <p className="text-xs text-primary-text/60 truncate mt-0.5">
-                          Creative Director
-                        </p>
+                      <div className="flex flex-col items-end shrink-0 gap-1.5">
+                        <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
+                          UX Specialist
+                        </span>
+                        <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E] text-foreground whitespace-nowrap">
+                          Design System
+                        </span>
                       </div>
                     </div>
-                    <div className="flex flex-col items-end shrink-0 gap-1.5">
-                      <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
-                        Brand Design
-                      </span>
-                      <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
-                        Design Direction
-                      </span>
-                    </div>
-                  </div>
 
-                  {/* Member 3 */}
-                  <div className="border-t border-white/[0.08] px-4 py-2 flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-3.5 min-w-0">
-                      <div className="relative shrink-0 w-10 h-10 rounded-full p-0.5 border border-white/20">
-                        <Image
-                          src="https://randomuser.me/api/portraits/men/46.jpg"
-                          alt="Azaz Ahamed"
-                          width={56}
-                          height={56}
-                          className="w-full h-full rounded-full shrink-0 object-cover"
-                        />
+                    {/* Member 2 */}
+                    <div className="border-t border-white/[0.08] px-4 py-2 flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3.5 min-w-0">
+                        <div className="relative shrink-0 w-10 h-10  rounded-full p-0.5 border border-white/20">
+                          <Image
+                            src="https://randomuser.me/api/portraits/men/36.jpg"
+                            alt="Tanvir Ahmed"
+                            width={56}
+                            height={56}
+                            className="w-full h-full rounded-full shrink-0 object-cover"
+                          />
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-sm sm:text-base font-semibold text-primary-text truncate">
+                            Tanvir Ahmed
+                          </p>
+                          <p className="text-xs text-primary-text/60 truncate mt-0.5">
+                            Creative Director
+                          </p>
+                        </div>
                       </div>
-                      <div className="min-w-0">
-                        <p className="text-sm sm:text-base font-semibold text-primary-text truncate">
-                          Azaz Ahamed
-                        </p>
-                        <p className="text-xs text-primary-text/60 truncate mt-0.5">
-                          Sr Product Designer
-                        </p>
+                      <div className="flex flex-col items-end shrink-0 gap-1.5">
+                        <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
+                          Brand Design
+                        </span>
+                        <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
+                          Design Direction
+                        </span>
                       </div>
                     </div>
-                    <div className="flex flex-col items-end shrink-0 gap-1.5">
-                      <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
-                        UX Consultant
-                      </span>
-                      <span className="text-[9px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
-                        SaaS Product Design
-                      </span>
-                    </div>
-                  </div>
 
-                  {/* Member 4 */}
-                  <div className="border-t border-white/[0.08] px-4 py-2 pb-4 flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-3.5 min-w-0">
-                      <div className="relative shrink-0 w-10 h-10 rounded-full p-0.5 border border-white/20">
-                        <Image
-                          src="https://randomuser.me/api/portraits/men/52.jpg"
-                          alt="Azaz Ahamed"
-                          width={56}
-                          height={56}
-                          className="w-full h-full rounded-full shrink-0 object-cover"
-                        />
+                    {/* Member 3 */}
+                    <div className="border-t border-white/[0.08] px-4 py-2 flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3.5 min-w-0">
+                        <div className="relative shrink-0 w-10 h-10 rounded-full p-0.5 border border-white/20">
+                          <Image
+                            src="https://randomuser.me/api/portraits/men/46.jpg"
+                            alt="Azaz Ahamed"
+                            width={56}
+                            height={56}
+                            className="w-full h-full rounded-full shrink-0 object-cover"
+                          />
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-sm sm:text-base font-semibold text-primary-text truncate">
+                            Azaz Ahamed
+                          </p>
+                          <p className="text-xs text-primary-text/60 truncate mt-0.5">
+                            Sr Product Designer
+                          </p>
+                        </div>
                       </div>
-                      <div className="min-w-0">
-                        <p className="text-sm sm:text-base font-semibold text-primary-text truncate">
-                          Azaz Ahamed
-                        </p>
-                        <p className="text-xs text-primary-text/60 truncate mt-0.5">
-                          Sr Product Designer
-                        </p>
+                      <div className="flex flex-col items-end shrink-0 gap-1.5">
+                        <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
+                          UX Consultant
+                        </span>
+                        <span className="text-[9px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
+                          SaaS Product Design
+                        </span>
                       </div>
                     </div>
-                    <div className="flex flex-col items-end shrink-0 gap-1.5">
-                      <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
-                        Growth Marketing
-                      </span>
-                      <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
-                        SEO Strategy
-                      </span>
+
+                    {/* Member 4 */}
+                    <div className="border-t border-white/[0.08] px-4 py-2 pb-4 flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3.5 min-w-0">
+                        <div className="relative shrink-0 w-10 h-10 rounded-full p-0.5 border border-white/20">
+                          <Image
+                            src="https://randomuser.me/api/portraits/men/52.jpg"
+                            alt="Azaz Ahamed"
+                            width={56}
+                            height={56}
+                            className="w-full h-full rounded-full shrink-0 object-cover"
+                          />
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-sm sm:text-base font-semibold text-primary-text truncate">
+                            Azaz Ahamed
+                          </p>
+                          <p className="text-xs text-primary-text/60 truncate mt-0.5">
+                            Sr Product Designer
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex flex-col items-end shrink-0 gap-1.5">
+                        <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
+                          Growth Marketing
+                        </span>
+                        <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
+                          SEO Strategy
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>

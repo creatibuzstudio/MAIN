@@ -36,26 +36,38 @@ const ROW1_IMAGES = [
   {
     src: "/marquee/ashray-dashboard.png",
     alt: "Ashray SaaS Dashboard",
+    width: 1100,
+    height: 730,
   },
   {
     src: "/marquee/row1-2.png",
     alt: "Fitness Activity Mobile App",
+    width: 370,
+    height: 273,
   },
   {
     src: "/mockups/Mockup 15.png",
     alt: "MacBook Pro Product Showcase",
+    width: 1398,
+    height: 1047,
   },
   {
     src: "/marquee/row2-2.png",
     alt: "Job Board Analytics Dashboard",
+    width: 347,
+    height: 273,
   },
   {
     src: "/featureWorks/04 1.png",
     alt: "Food Delivery Mobile Experience",
+    width: 999,
+    height: 747,
   },
   {
     src: "/mockups/Jul 21, 2026, 03_47_59 PM 1.png",
     alt: "Studio Display Humanitarian Dashboard",
+    width: 1374,
+    height: 1029,
   },
 ];
 
@@ -64,26 +76,38 @@ const ROW2_IMAGES = [
   {
     src: "/marquee/row2-1.png",
     alt: "Villa House Green Laptop Mockup",
+    width: 370,
+    height: 273,
   },
   {
     src: "/marquee/row2-2.png",
     alt: "Job Board Dashboard Platform",
+    width: 347,
+    height: 273,
   },
   {
     src: "/mockups/Mobile app 04 1.png",
     alt: "Headset eCommerce Mobile App",
+    width: 1401,
+    height: 1038,
   },
   {
     src: "/featureWorks/Mockup 01 1.png",
     alt: "MacBook Industrial Grid Showcase",
+    width: 1008,
+    height: 756,
   },
   {
     src: "/mockups/ChatGPT Image Aug 22, 2026, 10_11_18 PM 1.png",
     alt: "Digital Finance Planner Mobile UI",
+    width: 1377,
+    height: 1029,
   },
   {
     src: "/marquee/ashray-dashboard.png",
     alt: "Ashray Foundation Operating System",
+    width: 1100,
+    height: 730,
   },
 ];
 
@@ -163,14 +187,15 @@ export default function WorkMarqueeSection() {
           {[...ROW1_IMAGES, ...ROW1_IMAGES].map((img, idx) => (
             <div
               key={idx}
-              className="relative w-[340px] sm:w-[400px] md:w-[460px] lg:w-[490px] h-[230px] sm:h-[270px] md:h-[300px] lg:h-[315px] shrink-0 rounded-lg overflow-hidden bg-[#161616] border border-white/10 shadow-[0_16px_36px_rgba(0,0,0,0.5)] group transition-all duration-300 hover:scale-[1.02] hover:border-white/20"
+              style={{ aspectRatio: `${img.width} / ${img.height}` }}
+              className="relative h-[210px] sm:h-[250px] md:h-[285px] lg:h-[315px] shrink-0 rounded-lg overflow-hidden bg-[#161616] border border-white/10 shadow-[0_16px_36px_rgba(0,0,0,0.5)] group transition-all duration-300 hover:scale-[1.02] hover:border-white/20"
             >
               <Image
                 src={img.src}
                 alt={img.alt}
                 fill
-                sizes="(max-width: 768px) 340px, 490px"
-                className="object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+                unoptimized
+                className="object-contain object-center group-hover:scale-105 transition-transform duration-500 ease-out"
               />
             </div>
           ))}
@@ -184,14 +209,15 @@ export default function WorkMarqueeSection() {
           {[...ROW2_IMAGES, ...ROW2_IMAGES].map((img, idx) => (
             <div
               key={idx}
-              className="relative w-[340px] sm:w-[400px] md:w-[460px] lg:w-[490px] h-[230px] sm:h-[270px] md:h-[300px] lg:h-[315px] shrink-0 rounded-lg overflow-hidden bg-[#161616] border border-white/10 shadow-[0_16px_36px_rgba(0,0,0,0.5)] group transition-all duration-300 hover:scale-[1.02] hover:border-white/20"
+              style={{ aspectRatio: `${img.width} / ${img.height}` }}
+              className="relative h-[210px] sm:h-[250px] md:h-[285px] lg:h-[315px] shrink-0 rounded-lg overflow-hidden bg-[#161616] border border-white/10 shadow-[0_16px_36px_rgba(0,0,0,0.5)] group transition-all duration-300 hover:scale-[1.02] hover:border-white/20"
             >
               <Image
                 src={img.src}
                 alt={img.alt}
                 fill
-                sizes="(max-width: 768px) 340px, 490px"
-                className="object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+                unoptimized
+                className="object-contain object-center group-hover:scale-105 transition-transform duration-500 ease-out"
               />
             </div>
           ))}

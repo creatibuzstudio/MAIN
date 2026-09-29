@@ -13,6 +13,8 @@ interface ServiceData {
   description: string;
   tags: string[];
   img: string;
+  width: number;
+  height: number;
 }
 
 const services: ServiceData[] = [
@@ -31,6 +33,8 @@ const services: ServiceData[] = [
       "Strategy",
     ],
     img: "/services/01.png",
+    width: 1854,
+    height: 1284,
   },
   {
     id: "uiux",
@@ -46,6 +50,8 @@ const services: ServiceData[] = [
       "Design System",
     ],
     img: "/Jevxo/13.png",
+    width: 799,
+    height: 592,
   },
   {
     id: "research",
@@ -61,6 +67,8 @@ const services: ServiceData[] = [
       "Product Strategy",
     ],
     img: "/mockups/Mockup 15.png",
+    width: 1398,
+    height: 1047,
   },
   {
     id: "saas",
@@ -76,6 +84,8 @@ const services: ServiceData[] = [
       "Analytics UI",
     ],
     img: "/Jevxo/09.png",
+    width: 888,
+    height: 590,
   },
   {
     id: "app",
@@ -91,6 +101,8 @@ const services: ServiceData[] = [
       "Performance",
     ],
     img: "/mockups/Mobile app 04 1.png",
+    width: 1401,
+    height: 1038,
   },
   {
     id: "web",
@@ -106,6 +118,8 @@ const services: ServiceData[] = [
       "SEO & Speed",
     ],
     img: "/Jevxo/04.png",
+    width: 793,
+    height: 595,
   },
 ];
 
@@ -141,15 +155,18 @@ export default function OurService() {
                 transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                 className="flex flex-col"
               >
-                {/* Image Container: Aspect ratio ~ 4:3 with rounded corners and border */}
-                <div className="relative w-full aspect-[5/3] rounded-xl overflow-hidden border border-white/10 bg-background shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
+                {/* Image Container: Preserving original aspect ratio and resolution without any cropping */}
+                <div
+                  style={{ aspectRatio: `${current.width || 4} / ${current.height || 3}` }}
+                  className="relative w-full rounded-xl overflow-hidden border border-white/10 bg-[#101012] shadow-[0_20px_50px_rgba(0,0,0,0.6)]"
+                >
                   <Image
                     src={current.img}
                     alt={current.title}
                     fill
-                    sizes="(max-width: 1024px) 100vw, 480px"
-                    className="object-cover"
+                    unoptimized
                     priority
+                    className="object-contain"
                   />
                 </div>
 

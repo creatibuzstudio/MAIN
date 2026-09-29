@@ -277,6 +277,12 @@ export default function PricingSection() {
         />
       </div>
 
+      {/* Section Container Border & Margin Lines (rendered above grid-bg to prevent being covered) */}
+      <div className="absolute left-0 top-0 bottom-0 w-px bg-white/[0.12] pointer-events-none z-10" />
+      <div className="absolute right-0 top-0 bottom-0 w-px bg-white/[0.12] pointer-events-none z-10" />
+      <div className="absolute top-0 inset-x-0 h-px bg-white/[0.12] pointer-events-none z-10" />
+      <div className="absolute bottom-0 inset-x-0 h-px bg-white/[0.12] pointer-events-none z-10" />
+
       {/* 2. Content Container */}
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         {/* Section Tag */}

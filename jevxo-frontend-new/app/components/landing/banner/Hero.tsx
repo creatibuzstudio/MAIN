@@ -20,6 +20,17 @@ const fadeUp: Variants = {
   }),
 };
 
+const DEFAULT_MOCKUPS_META: Record<string, { width: number; height: number }> = {
+  "/mockups/Mockup Ribbon 1.png": { width: 1362, height: 1023 },
+  "/mockups/ChatGPT Image Aug 23, 2026, 06_06_54 PM 1.png": { width: 1389, height: 1041 },
+  "/mockups/Mockup 15.png": { width: 1398, height: 1047 },
+  "/mockups/Mockup 3 1.png": { width: 1371, height: 1029 },
+  "/mockups/Mobile app 04 1.png": { width: 1401, height: 1038 },
+  "/mockups/ChatGPT Image Aug 22, 2026, 10_11_18 PM 1.png": { width: 1377, height: 1029 },
+  "/mockups/Jul 21, 2026, 03_47_59 PM 1.png": { width: 1374, height: 1029 },
+  "/mockups/ChatGPT Image Aug 22, 2026, 08_54_48 PM 1.png": { width: 1389, height: 1041 },
+};
+
 export default function Hero() {
   const defaultRow1 = [
     "/mockups/Mockup Ribbon 1.png",
@@ -83,7 +94,7 @@ export default function Hero() {
             alt="Hero Grid Background"
             fill
             priority
-            className="object-cover object-top -translate-y-3"
+            className="object-cover object-top -translate-y-[5px]"
           />
         </div>
 
@@ -92,7 +103,7 @@ export default function Hero() {
 
         {/* Main Hero Content */}
         <section className="relative z-10 w-full">
-          <main className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 pt-41.5 pb-16 md:pb-20 lg:pb-24 w-full max-w-6xl mx-auto">
+          <main className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 pt-37.5 pb-16 md:pb-20 lg:pb-24 w-full max-w-6xl mx-auto">
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -116,8 +127,9 @@ export default function Hero() {
                 <Image
                   src="/hero1.png"
                   alt="SaaS Tool Stack"
-                  width={150}
-                  height={22}
+                  width={470}
+                  height={118}
+                  unoptimized
                   className="h-4 sm:h-[25px] w-auto object-contain shrink-0 brightness-110"
                 />
                 <span className="text-[12px] sm:text-[13px] font-medium text-gray-200 tracking-tight font-sans">
@@ -167,7 +179,7 @@ export default function Hero() {
               initial="hidden"
               animate="visible"
               custom={3}
-              className="mt-10 sm:mt-12 flex justify-center w-full"
+              className="mt-12 sm:mt-16 flex justify-center w-full"
             >
               <motion.div
                 whileHover={{ scale: 1.04 }}
@@ -202,40 +214,48 @@ export default function Hero() {
               {/* Row 1: Right to Left (animate-marquee) */}
               <div className="overflow-hidden w-full flex group">
                 <div className="flex items-center gap-4 sm:gap-5 animate-marquee group-hover:[animation-play-state:paused] will-change-transform">
-                  {row1List.map((src, index) => (
-                    <div
-                      key={`row1-${index}`}
-                      className="relative flex-shrink-0 w-[300px] sm:w-[420px] md:w-[480px] lg:w-[520px] h-[200px] sm:h-[270px] md:h-[310px] lg:h-[330px] rounded-lg overflow-hidden border border-white/10 shadow-[0_16px_36px_rgba(0,0,0,0.7)] bg-[#101012] transition-all duration-300 hover:border-white/25 hover:shadow-[0_20px_45px_rgba(0,0,0,0.9)]"
-                    >
-                      <Image
-                        src={src}
-                        alt={`Portfolio showcase ${index + 1}`}
-                        fill
-                        sizes="(max-width: 768px) 420px, 520px"
-                        className="object-cover transition-transform duration-500 hover:scale-[1.03]"
-                      />
-                    </div>
-                  ))}
+                  {row1List.map((src, index) => {
+                    const meta = DEFAULT_MOCKUPS_META[src] || { width: 1380, height: 1035 };
+                    return (
+                      <div
+                        key={`row1-${index}`}
+                        style={{ aspectRatio: `${meta.width} / ${meta.height}` }}
+                        className="relative z-10 flex-shrink-0 h-[200px] sm:h-[260px] md:h-[295px] lg:h-[330px] rounded-lg overflow-hidden border border-white/10 shadow-[0_16px_36px_rgba(0,0,0,0.7)] bg-[#101012] transition-all duration-300 hover:border-white/25 hover:shadow-[0_20px_45px_rgba(0,0,0,0.9)]"
+                      >
+                        <Image
+                          src={src}
+                          alt={`Portfolio showcase ${index + 1}`}
+                          fill
+                          unoptimized
+                          className="object-contain transition-transform duration-500 hover:scale-[1.03]"
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
               {/* Row 2: Left to Right (animate-marquee-reverse) */}
               <div className="overflow-hidden w-full flex group">
                 <div className="flex items-center gap-4 sm:gap-5 animate-marquee-reverse group-hover:[animation-play-state:paused] will-change-transform">
-                  {row2List.map((src, index) => (
-                    <div
-                      key={`row2-${index}`}
-                      className="relative flex-shrink-0 w-[300px] sm:w-[420px] md:w-[480px] lg:w-[520px] h-[200px] sm:h-[270px] md:h-[310px] lg:h-[330px] rounded-lg overflow-hidden border border-white/10 shadow-[0_16px_36px_rgba(0,0,0,0.7)] bg-[#101012] transition-all duration-300 hover:border-white/25 hover:shadow-[0_20px_45px_rgba(0,0,0,0.9)]"
-                    >
-                      <Image
-                        src={src}
-                        alt={`Portfolio showcase ${index + 6}`}
-                        fill
-                        sizes="(max-width: 768px) 420px, 520px"
-                        className="object-cover transition-transform duration-500 hover:scale-[1.03]"
-                      />
-                    </div>
-                  ))}
+                  {row2List.map((src, index) => {
+                    const meta = DEFAULT_MOCKUPS_META[src] || { width: 1380, height: 1035 };
+                    return (
+                      <div
+                        key={`row2-${index}`}
+                        style={{ aspectRatio: `${meta.width} / ${meta.height}` }}
+                        className="relative z-10 flex-shrink-0 h-[200px] sm:h-[260px] md:h-[295px] lg:h-[330px] rounded-lg overflow-hidden border border-white/10 shadow-[0_16px_36px_rgba(0,0,0,0.7)] bg-[#101012] transition-all duration-300 hover:border-white/25 hover:shadow-[0_20px_45px_rgba(0,0,0,0.9)]"
+                      >
+                        <Image
+                          src={src}
+                          alt={`Portfolio showcase ${index + 6}`}
+                          fill
+                          unoptimized
+                          className="object-contain transition-transform duration-500 hover:scale-[1.03]"
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>

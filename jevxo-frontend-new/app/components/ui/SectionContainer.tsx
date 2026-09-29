@@ -47,14 +47,14 @@ export default function SectionContainer({
     >
       {/* Full width top horizontal divider line */}
       {showTopBorder && (
-        <div className="w-full h-px bg-white/[0.12] absolute top-0 inset-x-0 pointer-events-none z-10" />
+        <div className="w-full h-px bg-white/[0.12] absolute top-0 inset-x-0 pointer-events-none z-0" />
       )}
 
       {/* Main max-w-7xl container without default border-x */}
       <div className="relative w-full max-w-7xl mx-auto">
         {/* Left vertical border line: extends up into marquee if extendTopBorder is true */}
         <div
-          className={`absolute left-0 w-px bg-white/[0.12] pointer-events-none z-10 ${
+          className={`absolute left-0 w-px bg-white/[0.12] pointer-events-none z-0 ${
             extendTopBorder
               ? "-top-36 sm:-top-44 md:-top-52 bottom-0"
               : "top-0 bottom-0"
@@ -63,9 +63,9 @@ export default function SectionContainer({
 
         {/* Right vertical border line: extends up into marquee if extendTopBorder is true */}
         <div
-          className={`absolute right-0 w-px bg-white/[0.12] pointer-events-none z-10 ${
+          className={`absolute right-0 w-px bg-white/[0.12] pointer-events-none z-0 ${
             extendTopBorder
-              ? "-top-36 sm:-top-44 md:-top-52 bottom-0"
+              ? "-top-36 bottom-0"
               : "top-0 bottom-0"
           }`}
         />
@@ -106,7 +106,7 @@ export default function SectionContainer({
 
       {/* Full width bottom horizontal divider line */}
       {showBottomBorder && (
-        <div className="w-full h-px bg-white/[0.12] absolute bottom-0 inset-x-0 pointer-events-none z-10" />
+        <div className="w-full h-px bg-white/[0.12] absolute bottom-0 inset-x-0 pointer-events-none z-0" />
       )}
     </section>
   );

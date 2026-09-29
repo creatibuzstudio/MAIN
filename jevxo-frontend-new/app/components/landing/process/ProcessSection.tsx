@@ -34,7 +34,7 @@ const steps = [
   {
     step: "Step 05",
     title: "Testing",
-    description: "Interactive Prototyping, Usability testing, feedback collection, and implementation.",
+    description: "Interactive Prototyping, testing, feedback collection, and implementation.",
     icon: "/designprocess/Testing.png",
   },
   {
@@ -165,7 +165,7 @@ export default function ProcessSection() {
               <div
                 key={index}
                 style={{ zIndex: index + 1 }}
-                className="process-card group relative flex w-70 shrink-0 flex-col items-start overflow-hidden rounded-2xl bg-white px-6 py-10 text-left shadow-[-16px_0_35px_rgba(0,0,0,0.12),0_20px_45px_rgba(0,0,0,0.22)] transition-all duration-300 will-change-transform hover:-translate-y-2 hover:shadow-[-20px_0_40px_rgba(0,0,0,0.16),0_30px_60px_rgba(0,0,0,0.3)] md:px-8 md:py-10
+                className="process-card group relative flex w-70 shrink-0 flex-col items-start overflow-hidden rounded-2xl bg-white px-4 py-6 text-left shadow-[-16px_0_35px_rgba(0,0,0,0.12),0_20px_45px_rgba(0,0,0,0.22)] transition-all duration-300 will-change-transform hover:shadow-[-20px_0_40px_rgba(0,0,0,0.16),0_30px_60px_rgba(0,0,0,0.3)] md:px-6 md:py-8
   after:absolute after:-bottom-16 after:-left-16 after:-z-10 after:h-50 after:w-50 after:rounded-full after:bg-primary after:opacity-0 after:blur-3xl after:transition-all after:duration-500
   hover:after:opacity-50 hover:after:scale-110"
               >
@@ -185,17 +185,17 @@ export default function ProcessSection() {
                   </div>
 
                   {/* Step Badge Pill */}
-                  <span className="mb-4 inline-block rounded-full bg-[#F2F2F2] px-3.5 py-1 font-sans text-xs font-semibold text-zinc-600">
+                  <span className="mb-3 inline-block rounded-full bg-[#F2F2F2] px-3.5 py-1 font-sans text-xs font-semibold text-zinc-600">
                     {item.step}
                   </span>
 
                   {/* Title */}
-                  <h3 className="mb-4 font-sans text-2xl font-bold tracking-tight text-zinc-950 lg:text-[28px]">
+                  <h3 className="mb-4 text-2xl font-bold tracking-tight text-zinc-950 lg:text-3xl">
                     {item.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="font-sans text-sm leading-relaxed text-zinc-800 sm:text-[15px]">
+                  <p className="text-sm leading-relaxed text-zinc-800 sm:text-base">
                     {item.description}
                   </p>
                 </div>
