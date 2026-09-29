@@ -197,7 +197,7 @@ export default function FeatureWorksPage({
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 lg:gap-6 w-full items-stretch">
                       {/* Left Column: Hero Mockup (8 cols) */}
                       <div className="lg:col-span-8 flex flex-col justify-center">
-                        <div className="relative w-full rounded-xl sm:rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl group/hero">
+                        <div className="relative w-full rounded-xl overflow-hidden border border-white/[0.08] shadow-2xl group/hero">
                           <Image
                             src={project.images.hero.src}
                             alt="Main Project Display"
@@ -213,7 +213,7 @@ export default function FeatureWorksPage({
                       {/* Right Column: 2 Stacked Secondary Mockups (4 cols) */}
                       <div className="lg:col-span-4 grid grid-cols-2 lg:flex lg:flex-col lg:justify-between gap-4 sm:gap-5 lg:gap-6">
                         {/* Top Right Mockup */}
-                        <div className="relative w-full rounded-xl sm:rounded-2xl overflow-hidden border border-white/[0.08] shadow-xl group/top">
+                        <div className="relative w-full rounded-xl overflow-hidden border border-white/[0.08] shadow-xl group/top">
                           <Image
                             src={project.images.rightTop.src}
                             alt="Secondary Preview Top"
@@ -225,7 +225,7 @@ export default function FeatureWorksPage({
                         </div>
 
                         {/* Bottom Right Mockup */}
-                        <div className="relative w-full rounded-xl sm:rounded-2xl overflow-hidden border border-white/[0.08] shadow-xl group/bot">
+                        <div className="relative w-full rounded-xl overflow-hidden border border-white/[0.08] shadow-xl group/bot">
                           <Image
                             src={project.images.rightBottom.src}
                             alt="Secondary Preview Bottom"
@@ -280,7 +280,7 @@ export default function FeatureWorksPage({
                     <div className="grid grid-cols-3 gap-6 sm:gap-8 md:gap-12 mt-10 md:mt-14 lg:mt-16 w-full">
                       {project.metrics.map((metric, idx) => (
                         <div key={idx} className="flex flex-col items-start">
-                          <span className="text-xl md:text-2xl lg:text-[28px] font-bold text-[#ADADAD] tracking-tight">
+                          <span className="text-xl md:text-2xl font-bold text-[#ADADAD] tracking-tight">
                             {metric.value}
                           </span>
                           <span className="text-sm md:text-base lg:text-lg text-[#ADADAD] font-normal tracking-tight leading-tight mt-1.5">

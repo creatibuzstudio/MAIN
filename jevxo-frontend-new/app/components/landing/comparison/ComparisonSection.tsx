@@ -89,7 +89,7 @@ export default function ComparisonSection() {
 
         {/* CARD 3: Unlimited revision (col-span-3) */}
         <div className="md:col-span-3 relative p-[1px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col">
-          <div className="w-full h-full rounded-2xl overflow-hidden p-6 sm:p-7 relative flex flex-col justify-between min-h-[380px] md:min-h-[400px] bg-[#0E0E0E]">
+          <div className="w-full h-full rounded-2xl overflow-hidden p-6 sm:p-8 relative flex flex-col justify-between min-h-[380px] md:min-h-[400px] bg-[#0F1013]">
             {/* Subtle ambient amber warmth */}
             <div className="absolute -bottom-12 -left-12 w-56 h-56 bg-primary/10 blur-[60px] rounded-full pointer-events-none" />
 
@@ -105,131 +105,133 @@ export default function ComparisonSection() {
             </div>
 
             {/* Chat Box Widget */}
-            <div className="relative z-10 bg-[#141414] border border-white/[0.08] rounded-2xl p-3.5 sm:p-4 flex flex-col gap-3 shadow-xl">
-              {/* Header */}
-              <div className="flex items-center justify-between border-b border-white/[0.08] pb-2.5">
-                <span className="text-xs sm:text-sm font-semibold text-primary-text font-sans flex items-center gap-1.5">
-                  # Landing Animation Feedback
-                </span>
-                <div className="flex items-center gap-2">
-                  {/* Avatar stack */}
-                  <div className="flex items-center">
+            <div className="relative">
+              <div className="absolute -bottom-8 -right-8 z-10 bg-[#1A1A1A] border border-primary rounded-tl-xl scale-x-105 scale-y-103 flex flex-col gap-3 shadow-[0_0_20px_rgba(254,90,0,0.5)]">
+                {/* Header */}
+                <div className="flex items-center justify-between bg-[#0F1013] border-b border-white/[0.08] rounded-tl-xl p-4">
+                  <span className="text-xs sm:text-sm font-semibold text-primary-text font-sans flex items-center gap-1.5">
+                    # Landing Animation Feedback
+                  </span>
+                  <div className="flex items-center gap-2">
+                    {/* Avatar stack */}
+                    <div className="flex items-center">
+                      <Image
+                        src="https://randomuser.me/api/portraits/men/32.jpg"
+                        alt="Avatar 1"
+                        width={20}
+                        height={20}
+                        className="w-5 h-5 rounded-full border border-[#121212] object-cover"
+                      />
+                      <Image
+                        src="https://randomuser.me/api/portraits/women/44.jpg"
+                        alt="Avatar 2"
+                        width={20}
+                        height={20}
+                        className="w-5 h-5 rounded-full border border-[#121212] object-cover -ml-1.5"
+                      />
+                      <Image
+                        src="https://randomuser.me/api/portraits/men/45.jpg"
+                        alt="Avatar 3"
+                        width={20}
+                        height={20}
+                        className="w-5 h-5 rounded-full border border-[#121212] object-cover -ml-1.5"
+                      />
+                      <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center -ml-1.5 shrink-0 shadow-[0_0_30px_rgba(248,88,0,1)]">
+                        <Image
+                          src="/creatibuz-symbol.png"
+                          alt="Creatibuz"
+                          width={15}
+                          height={15}
+                          className="w-5 h-5 object-contain"
+                        />
+                      </div>
+                      <span className="text-[10px] font-bold text-foreground ml-1.5">
+                        5+
+                      </span>
+                    </div>
+                    <MoreVertical className="w-4 h-4 text-foreground cursor-pointer hover:text-primary-text transition-colors" />
+                  </div>
+                </div>
+
+                {/* Messages */}
+                <div className="space-y-8 font-sans p-4">
+                  {/* Message 1 */}
+                  <div className="flex items-start gap-5">
                     <Image
                       src="https://randomuser.me/api/portraits/men/32.jpg"
-                      alt="Avatar 1"
-                      width={20}
-                      height={20}
-                      className="w-5 h-5 rounded-full border border-[#121212] object-cover"
+                      alt="Abdul Ahad"
+                      width={32}
+                      height={32}
+                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/10 shrink-0 object-cover mt-0.5"
                     />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-xs font-semibold text-primary-text">
+                          Abdul Ahad
+                        </span>
+                        <span className="text-[10px] text-primary-text/60">
+                          — Today at 2:47 PM
+                        </span>
+                      </div>
+                      <p className="text-xs text-primary-text mt-0.5 leading-snug">
+                        Hey Team, is the landing feedback finalized?
+                      </p>
+                    </div>
+                    <MoreVertical className="w-4 h-4 text-primary-text shrink-0 mt-1 ml-2" />
+                  </div>
+
+                  {/* Message 2 */}
+                  <div className="flex items-start gap-2.5">
                     <Image
-                      src="https://randomuser.me/api/portraits/women/44.jpg"
-                      alt="Avatar 2"
-                      width={20}
-                      height={20}
-                      className="w-5 h-5 rounded-full border border-[#121212] object-cover -ml-1.5"
+                      src="https://randomuser.me/api/portraits/men/44.jpg"
+                      alt="Abdur Rahman"
+                      width={32}
+                      height={32}
+                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/10 shrink-0 object-cover mt-0.5"
                     />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-xs font-semibold text-primary-text">
+                          Abdur Rahman
+                        </span>
+                        <span className="text-[10px] text-primary-text/60">
+                          — Today at 2:47 PM
+                        </span>
+                      </div>
+                      <p className="text-xs text-primary-text mt-0.5 leading-snug">
+                        Yep, all set up read for{" "}
+                        <span className="text-[#3B82F6] font-medium">
+                          @Rubendao
+                        </span>
+                      </p>
+                    </div>
+                    <MoreVertical className="w-4 h-4 text-primary-text shrink-0 mt-1" />
+                  </div>
+
+                  {/* Message 3 */}
+                  <div className="flex items-start gap-2.5">
                     <Image
-                      src="https://randomuser.me/api/portraits/men/45.jpg"
-                      alt="Avatar 3"
-                      width={20}
-                      height={20}
-                      className="w-5 h-5 rounded-full border border-[#121212] object-cover -ml-1.5"
+                      src="https://randomuser.me/api/portraits/men/62.jpg"
+                      alt="Rifat Hasan"
+                      width={32}
+                      height={32}
+                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/10 shrink-0 object-cover mt-0.5"
                     />
-                    <div className="w-5 h-5 rounded-full bg-primary border border-[#121212] flex items-center justify-center -ml-1.5 shrink-0">
-                      <Image
-                        src="/creatibuz-symbol.png"
-                        alt="Creatibuz"
-                        width={10}
-                        height={10}
-                        className="w-2.5 h-2.5 object-contain"
-                      />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-xs font-semibold text-primary-text">
+                          Rifat Hasan
+                        </span>
+                        <span className="text-[10px] text-primary-text/60">
+                          Today at 2:47 PM
+                        </span>
+                      </div>
+                      <p className="text-xs text-primary-text mt-0.5 leading-snug">
+                        Very Exited to see the rolled out.
+                      </p>
                     </div>
-                    <span className="text-[10px] font-bold text-primary-text ml-1.5">
-                      5+
-                    </span>
+                    <MoreVertical className="w-4 h-4 text-primary-text shrink-0 mt-1" />
                   </div>
-                  <MoreVertical className="w-4 h-4 text-primary-text/60 cursor-pointer hover:text-primary-text transition-colors" />
-                </div>
-              </div>
-
-              {/* Messages */}
-              <div className="space-y-2.5 font-sans">
-                {/* Message 1 */}
-                <div className="flex items-start gap-2.5">
-                  <Image
-                    src="https://randomuser.me/api/portraits/men/32.jpg"
-                    alt="Abdul Ahad"
-                    width={32}
-                    height={32}
-                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/10 shrink-0 object-cover mt-0.5"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="text-xs font-semibold text-primary-text">
-                        Abdul Ahad
-                      </span>
-                      <span className="text-[10px] text-primary-text/60">
-                        — Today at 2:47 PM
-                      </span>
-                    </div>
-                    <p className="text-xs text-primary-text mt-0.5 leading-snug">
-                      Hey Team, is the landing feedback finalized?
-                    </p>
-                  </div>
-                  <MoreVertical className="w-3.5 h-3.5 text-primary-text/40 shrink-0 mt-1" />
-                </div>
-
-                {/* Message 2 */}
-                <div className="flex items-start gap-2.5">
-                  <Image
-                    src="https://randomuser.me/api/portraits/men/44.jpg"
-                    alt="Abdur Rahman"
-                    width={32}
-                    height={32}
-                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/10 shrink-0 object-cover mt-0.5"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="text-xs font-semibold text-primary-text">
-                        Abdur Rahman
-                      </span>
-                      <span className="text-[10px] text-primary-text/60">
-                        — Today at 2:47 PM
-                      </span>
-                    </div>
-                    <p className="text-xs text-primary-text mt-0.5 leading-snug">
-                      Yep, all set up read for{" "}
-                      <span className="text-[#3B82F6] font-medium">
-                        @Rubendao
-                      </span>
-                    </p>
-                  </div>
-                  <MoreVertical className="w-3.5 h-3.5 text-primary-text/40 shrink-0 mt-1" />
-                </div>
-
-                {/* Message 3 */}
-                <div className="flex items-start gap-2.5">
-                  <Image
-                    src="https://randomuser.me/api/portraits/men/62.jpg"
-                    alt="Rifat Hasan"
-                    width={32}
-                    height={32}
-                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/10 shrink-0 object-cover mt-0.5"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="text-xs font-semibold text-primary-text">
-                        Rifat Hasan
-                      </span>
-                      <span className="text-[10px] text-primary-text/60">
-                        Today at 2:47 PM
-                      </span>
-                    </div>
-                    <p className="text-xs text-primary-text mt-0.5 leading-snug">
-                      Very Exited to see the rolled out.
-                    </p>
-                  </div>
-                  <MoreVertical className="w-3.5 h-3.5 text-primary-text/40 shrink-0 mt-1" />
                 </div>
               </div>
             </div>
@@ -238,218 +240,235 @@ export default function ComparisonSection() {
 
         {/* CARD 4: Lifetime Support (col-span-3) */}
         <div className="md:col-span-3 relative p-[1px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col">
-          <div className="w-full h-full rounded-2xl overflow-hidden p-6 sm:p-7 relative flex flex-col justify-start min-h-[380px] md:min-h-[400px] bg-[#0E0E0E]">
+          <div className="w-full h-full rounded-2xl overflow-hidden p-6 sm:p-7 relative flex flex-col justify-start min-h-[380px] md:min-h-[400px] bg-[#191919]">
             {/* Content Top */}
             <div className="mb-4">
               <h3 className="text-primary-text text-xl sm:text-2xl font-bold font-sans tracking-tight">
                 Lifetime Support
               </h3>
-              <p className="text-primary-text text-xs sm:text-sm font-sans mt-1.5 leading-relaxed">
+              <p className="text-primary-text text-xs sm:text-sm mt-1.5 leading-relaxed">
                 Enjoy unlimited revisions and lifetime support, ensuring your
                 satisfaction at every stage.
               </p>
             </div>
 
             {/* List Container with Avatar Stack Header */}
-            <div className="bg-[#141414] border border-white/[0.08] rounded-2xl p-4 sm:p-4.5 flex flex-col gap-2.5 shadow-xl">
-              {/* Header Avatar Stack */}
-              <div className="flex items-center gap-1.5 mb-0.5">
-                <div className="flex items-center">
-                  <Image
-                    src="https://randomuser.me/api/portraits/men/32.jpg"
-                    alt="Avatar 1"
-                    width={24}
-                    height={24}
-                    className="w-6 h-6 rounded-full border-2 border-[#121212] object-cover"
-                  />
-                  <Image
-                    src="https://randomuser.me/api/portraits/women/44.jpg"
-                    alt="Avatar 2"
-                    width={24}
-                    height={24}
-                    className="w-6 h-6 rounded-full border-2 border-[#121212] object-cover -ml-2"
-                  />
-                  <Image
-                    src="https://randomuser.me/api/portraits/men/45.jpg"
-                    alt="Avatar 3"
-                    width={24}
-                    height={24}
-                    className="w-6 h-6 rounded-full border-2 border-[#121212] object-cover -ml-2"
-                  />
-                  <div className="w-6 h-6 rounded-full bg-primary border-2 border-[#121212] flex items-center justify-center -ml-2 shrink-0">
+            <div className="relative">
+              <div className="absolute -top-1 right-0 left-0 bg-[#191919] border-2 border-white/15 rounded-2xl flex flex-col gap-2.5 shadow-xl">
+                {/* Header Avatar Stack */}
+                <div className="flex items-center bg-[#0F1013] px-8 py-4 rounded-t-2xl gap-1.5 mb-0.5">
+                  <div className="flex items-center">
                     <Image
-                      src="/creatibuz-symbol.png"
-                      alt="Creatibuz"
-                      width={12}
-                      height={12}
-                      className="w-3 h-3 object-contain"
+                      src="https://randomuser.me/api/portraits/men/32.jpg"
+                      alt="Avatar 1"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 rounded-full border-2 border-[#121212] object-cover"
                     />
+                    <Image
+                      src="https://randomuser.me/api/portraits/women/44.jpg"
+                      alt="Avatar 2"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 rounded-full border-2 border-[#121212] object-cover -ml-2"
+                    />
+                    <Image
+                      src="https://randomuser.me/api/portraits/men/45.jpg"
+                      alt="Avatar 3"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 rounded-full border-2 border-[#121212] object-cover -ml-2"
+                    />
+                    <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center -ml-1.5 shrink-0 shadow-[0_0_30px_rgba(248,88,0,1)]">
+                      <Image
+                        src="/creatibuz-symbol.png"
+                        alt="Creatibuz"
+                        width={15}
+                        height={15}
+                        className="w-5 h-5 object-contain"
+                      />
+                    </div>
+                  </div>
+                  <span className="text-xs font-bold text-primary-text ml-1">
+                    5+
+                  </span>
+                </div>
+
+                {/* Feature 1 */}
+                <div className="space-y-4 px-8 py-2">
+                  <div className="bg-[#0F1013] rounded-lg px-6 py-4 flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-[5px] bg-[#00E676]/15 border border-[#00E676]/60 flex items-center justify-center text-[#00E676] shrink-0 shadow-[0_0_8px_rgba(0,230,118,0.25)]">
+                      <Check className="w-3.5 h-3.5 stroke-[3]" />
+                    </div>
+                    <span className="text-xs sm:text-sm font-medium text-primary-text font-sans">
+                      Ongoing updates
+                    </span>
+                  </div>
+
+                  {/* Feature 2 */}
+                  <div className="bg-[#0F1013] rounded-lg px-6 py-4 flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-[5px] bg-[#00E676]/15 border border-[#00E676]/60 flex items-center justify-center text-[#00E676] shrink-0 shadow-[0_0_8px_rgba(0,230,118,0.25)]">
+                      <Check className="w-3.5 h-3.5 stroke-[3]" />
+                    </div>
+                    <span className="text-xs sm:text-sm font-medium text-primary-text font-sans">
+                      Priority Response Handing
+                    </span>
+                  </div>
+
+                  {/* Feature 3 */}
+                  <div className="bg-[#0F1013] rounded-lg px-6 py-4 mb-5 flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-[5px] bg-[#00E676]/15 border border-[#00E676]/60 flex items-center justify-center text-[#00E676] shrink-0 shadow-[0_0_8px_rgba(0,230,118,0.25)]">
+                      <Check className="w-3.5 h-3.5 stroke-[3]" />
+                    </div>
+                    <span className="text-xs sm:text-sm font-medium text-primary-text font-sans">
+                      24/7 expert assistance
+                    </span>
                   </div>
                 </div>
-                <span className="text-xs font-bold text-primary-text ml-1">5+</span>
-              </div>
-
-              {/* Feature 1 */}
-              <div className="bg-[#181818] border border-white/[0.06] rounded-xl px-3.5 py-2.5 flex items-center gap-3">
-                <div className="w-5 h-5 rounded-[5px] bg-[#00E676]/15 border border-[#00E676]/60 flex items-center justify-center text-[#00E676] shrink-0 shadow-[0_0_8px_rgba(0,230,118,0.25)]">
-                  <Check className="w-3.5 h-3.5 stroke-[3]" />
-                </div>
-                <span className="text-xs sm:text-sm font-medium text-primary-text font-sans">
-                  Ongoing updates
-                </span>
-              </div>
-
-              {/* Feature 2 */}
-              <div className="bg-[#181818] border border-white/[0.06] rounded-xl px-3.5 py-2.5 flex items-center gap-3">
-                <div className="w-5 h-5 rounded-[5px] bg-[#00E676]/15 border border-[#00E676]/60 flex items-center justify-center text-[#00E676] shrink-0 shadow-[0_0_8px_rgba(0,230,118,0.25)]">
-                  <Check className="w-3.5 h-3.5 stroke-[3]" />
-                </div>
-                <span className="text-xs sm:text-sm font-medium text-primary-text font-sans">
-                  Priority Response Handing
-                </span>
-              </div>
-
-              {/* Feature 3 */}
-              <div className="bg-[#181818] border border-white/[0.06] rounded-xl px-3.5 py-2.5 flex items-center gap-3">
-                <div className="w-5 h-5 rounded-[5px] bg-[#00E676]/15 border border-[#00E676]/60 flex items-center justify-center text-[#00E676] shrink-0 shadow-[0_0_8px_rgba(0,230,118,0.25)]">
-                  <Check className="w-3.5 h-3.5 stroke-[3]" />
-                </div>
-                <span className="text-xs sm:text-sm font-medium text-primary-text font-sans">
-                  24/7 expert assistance
-                </span>
               </div>
             </div>
           </div>
         </div>
 
         {/* CARD 5: Diverse Skill Set & AI-Assisted Launches (col-span-5) */}
-        <div className="md:col-span-5 relative p-[1px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#FE5A00]/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col">
+        <div className="md:col-span-5 relative p-[1px] rounded-2xl overflow-hidden bg-gradient-to-br from-primary/85 via-white/10 to-white/[0.04] shadow-sm flex flex-col">
           <div className="w-full h-full rounded-2xl overflow-hidden relative min-h-[380px] md:min-h-[400px] bg-gradient-to-br from-[#191919] via-[#1a0c03] to-[#FE5A00]/65">
             {/* Warm rich radial gradient glow matching Figma screenshot */}
-            <div className="absolute -bottom-16 -right-16 w-80 h-80 rounded-full bg-[#FE5A00]/45 blur-[85px] pointer-events-none" />
-            <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-[#FE5A00]/20 blur-[70px] pointer-events-none" />
+            <div className="absolute -bottom-16 -right-16 w-80 h-80 rounded-full bg-primary/45 blur-[85px] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-primary/20 blur-[70px] pointer-events-none" />
 
             {/* Inner Panes Grid: Left (Diverse Skill Set) and Right (AI-Assisted Launches) */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 p-5 sm:p-6 relative z-10 h-full items-stretch">
               {/* Left Pane: Diverse Skill Set */}
-              <div className="lg:col-span-7 bg-[#121212]/90 border border-white/[0.08] rounded-2xl p-4 sm:p-5 flex flex-col justify-center shadow-xl">
-                <h4 className="text-primary-text text-lg sm:text-xl font-semibold font-sans tracking-tight mb-3 sm:mb-3.5">
-                  Diverse Skill Set
-                </h4>
+              <div className="lg:col-span-6 bg-[#171717] border border-white/[0.08] rounded-2xl flex flex-col justify-center shadow-xl overflow-hidden">
+                {/* Header Title */}
+                <div className="px-4 md:px-6 pt-7 pb-2">
+                  <h4 className="text-primary-text text-xl sm:text-2xl font-semibold tracking-tight">
+                    Diverse Skill Set
+                  </h4>
+                </div>
 
-                {/* Team Members List */}
-                <div className="space-y-3 font-sans">
+                {/* Team Members List with Full-Width Dividing Borders */}
+                <div className="font-sans flex flex-col">
                   {/* Member 1 */}
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      <Image
-                        src="https://randomuser.me/api/portraits/men/33.jpg"
-                        alt="Sourov Dhali"
-                        width={36}
-                        height={36}
-                        className="w-9 h-9 rounded-full border border-white/10 shrink-0 object-cover"
-                      />
+                  <div className="px-4 py-2 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3.5 min-w-0">
+                      <div className="relative shrink-0 w-10 h-10 rounded-full p-0.5 border border-white/20">
+                        <Image
+                          src="https://randomuser.me/api/portraits/men/33.jpg"
+                          alt="Sourov Dhali"
+                          width={30}
+                          height={30}
+                          className="w-full h-full rounded-full shrink-0 object-cover"
+                        />
+                      </div>
                       <div className="min-w-0">
-                        <p className="text-xs sm:text-sm font-semibold text-primary-text truncate">
+                        <p className="text-sm sm:text-base font-semibold text-primary-text truncate">
                           Sourov Dhali
                         </p>
-                        <p className="text-[11px] text-primary-text/60 truncate">
+                        <p className="text-xs text-primary-text/60 truncate mt-0.5">
                           Product Designer
                         </p>
                       </div>
                     </div>
-                    <div className="flex flex-col items-end shrink-0 gap-1">
-                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-primary-text whitespace-nowrap">
+                    <div className="flex flex-col items-end shrink-0 gap-1.5">
+                      <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
                         UX Specialist
                       </span>
-                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-primary-text whitespace-nowrap">
+                      <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E] text-foreground whitespace-nowrap">
                         Design System
                       </span>
                     </div>
                   </div>
 
                   {/* Member 2 */}
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      <Image
-                        src="https://randomuser.me/api/portraits/men/36.jpg"
-                        alt="Tanvir Ahmed"
-                        width={36}
-                        height={36}
-                        className="w-9 h-9 rounded-full border border-white/10 shrink-0 object-cover"
-                      />
+                  <div className="border-t border-white/[0.08] px-4 py-2 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3.5 min-w-0">
+                      <div className="relative shrink-0 w-10 h-10  rounded-full p-0.5 border border-white/20">
+                        <Image
+                          src="https://randomuser.me/api/portraits/men/36.jpg"
+                          alt="Tanvir Ahmed"
+                          width={56}
+                          height={56}
+                          className="w-full h-full rounded-full shrink-0 object-cover"
+                        />
+                      </div>
                       <div className="min-w-0">
-                        <p className="text-xs sm:text-sm font-semibold text-primary-text truncate">
+                        <p className="text-sm sm:text-base font-semibold text-primary-text truncate">
                           Tanvir Ahmed
                         </p>
-                        <p className="text-[11px] text-primary-text/60 truncate">
+                        <p className="text-xs text-primary-text/60 truncate mt-0.5">
                           Creative Director
                         </p>
                       </div>
                     </div>
-                    <div className="flex flex-col items-end shrink-0 gap-1">
-                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-primary-text whitespace-nowrap">
+                    <div className="flex flex-col items-end shrink-0 gap-1.5">
+                      <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
                         Brand Design
                       </span>
-                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-primary-text whitespace-nowrap">
+                      <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
                         Design Direction
                       </span>
                     </div>
                   </div>
 
                   {/* Member 3 */}
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      <Image
-                        src="https://randomuser.me/api/portraits/men/46.jpg"
-                        alt="Azaz Ahamed"
-                        width={36}
-                        height={36}
-                        className="w-9 h-9 rounded-full border border-white/10 shrink-0 object-cover"
-                      />
+                  <div className="border-t border-white/[0.08] px-4 py-2 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3.5 min-w-0">
+                      <div className="relative shrink-0 w-10 h-10 rounded-full p-0.5 border border-white/20">
+                        <Image
+                          src="https://randomuser.me/api/portraits/men/46.jpg"
+                          alt="Azaz Ahamed"
+                          width={56}
+                          height={56}
+                          className="w-full h-full rounded-full shrink-0 object-cover"
+                        />
+                      </div>
                       <div className="min-w-0">
-                        <p className="text-xs sm:text-sm font-semibold text-primary-text truncate">
+                        <p className="text-sm sm:text-base font-semibold text-primary-text truncate">
                           Azaz Ahamed
                         </p>
-                        <p className="text-[11px] text-primary-text/60 truncate">
+                        <p className="text-xs text-primary-text/60 truncate mt-0.5">
                           Sr Product Designer
                         </p>
                       </div>
                     </div>
-                    <div className="flex flex-col items-end shrink-0 gap-1">
-                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-primary-text whitespace-nowrap">
+                    <div className="flex flex-col items-end shrink-0 gap-1.5">
+                      <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
                         UX Consultant
                       </span>
-                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-primary-text whitespace-nowrap">
+                      <span className="text-[9px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
                         SaaS Product Design
                       </span>
                     </div>
                   </div>
 
                   {/* Member 4 */}
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      <Image
-                        src="https://randomuser.me/api/portraits/men/52.jpg"
-                        alt="Azaz Ahamed"
-                        width={36}
-                        height={36}
-                        className="w-9 h-9 rounded-full border border-white/10 shrink-0 object-cover"
-                      />
+                  <div className="border-t border-white/[0.08] px-4 py-2 pb-4 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3.5 min-w-0">
+                      <div className="relative shrink-0 w-10 h-10 rounded-full p-0.5 border border-white/20">
+                        <Image
+                          src="https://randomuser.me/api/portraits/men/52.jpg"
+                          alt="Azaz Ahamed"
+                          width={56}
+                          height={56}
+                          className="w-full h-full rounded-full shrink-0 object-cover"
+                        />
+                      </div>
                       <div className="min-w-0">
-                        <p className="text-xs sm:text-sm font-semibold text-primary-text truncate">
+                        <p className="text-sm sm:text-base font-semibold text-primary-text truncate">
                           Azaz Ahamed
                         </p>
-                        <p className="text-[11px] text-primary-text/60 truncate">
+                        <p className="text-xs text-primary-text/60 truncate mt-0.5">
                           Sr Product Designer
                         </p>
                       </div>
                     </div>
-                    <div className="flex flex-col items-end shrink-0 gap-1">
-                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-primary-text whitespace-nowrap">
+                    <div className="flex flex-col items-end shrink-0 gap-1.5">
+                      <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
                         Growth Marketing
                       </span>
-                      <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#1C1C1C] border border-white/10 text-primary-text whitespace-nowrap">
+                      <span className="text-[9px] sm:text-[10px] px-1.5 py-1 rounded-xs bg-[#2E2E2E]  text-foreground whitespace-nowrap">
                         SEO Strategy
                       </span>
                     </div>
@@ -458,7 +477,7 @@ export default function ComparisonSection() {
               </div>
 
               {/* Right Pane: AI-Assisted Launches (Heading and Paragraph keep text-white as requested) */}
-              <div className="lg:col-span-5 flex flex-col justify-center py-1">
+              <div className="lg:col-span-6 flex flex-col justify-center py-1">
                 {/* Content Top */}
                 <div>
                   <h3 className="text-white text-xl sm:text-2xl font-bold font-sans tracking-tight">
@@ -472,7 +491,7 @@ export default function ComparisonSection() {
                 </div>
 
                 {/* 8 AI Logos Grid (4x2) in exact Figma order */}
-                <div className="grid grid-cols-4 gap-2 sm:gap-2.5 mt-4 sm:mt-5">
+                <div className="grid grid-cols-4 gap-2 sm:gap-2.5 mt-4 sm:mt-8">
                   {[
                     "/whyChooseUs/aiLogo/08.png",
                     "/whyChooseUs/aiLogo/01.png",
